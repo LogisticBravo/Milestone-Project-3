@@ -1,20 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<meta name="Description" content="Enter your description here"/>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta1/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
-<link rel="stylesheet" href="assets/css/style.css">
-<title>Beanie Barista</title>
-</head>
-<body>
-    {% block content %}
-    {% endblock%}
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.5.4/umd/popper.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta1/js/bootstrap.min.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="Description" content="Enter your description here" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <title>The Trusted Barista</title>
+</head>
+
+<body>
+
+    <!--****** Header ******-->
+    <header>
+        <nav class="navbar navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">
+                    <img src="/docs/5.0/assets/brand/bootstrap-logo.svg" alt="" width="30" height="24"
+                        class="d-inline-block align-text-top">
+                    The Trusted Barista
+                </a>
+                <ul class="nav justify-content-end">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Active</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <!--****** End Header ******-->
+
+    <!--****** Main Content ******-->
+    <main>
+        {% block content %}
+        {% endblock%}
+    </main>
+    <!--****** End Main Content ******-->
+
+    <!--****** Footer ******-->
+    <footer>
+
+    </footer>
+    <!--****** End Footer ******-->
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.5.4/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta1/js/bootstrap.min.js"></script>
 </body>
+
 </html>
