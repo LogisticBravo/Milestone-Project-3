@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+
+<section class="page-section clearfix">
+    <div class="container mt-5">
+        <div class="callout">
+            <img class="hero-img img-fluid mb-3 rounded" src="{{ url_for('static', filename='assets/img/coffee_beans_hero.jpeg') }}" alt="..." />
+            <div class="callout-text text-center p-5 rounded">
+                <h2 class="section-heading mb-4">
+                    <span class="section-heading-upper">Find Coffee</span>
+                    <span class="section-heading-lower">Worth Drinking</span>
+                </h2>
+                <p class="mb-3">Every one enjoys a great cup of coffee! Though sourcing the right blend for you can be
+                    difficult! Luckily, The Trusted Barista is here to help you find that blissful addition to your
+                    morning routine. Every review is user written so come sip on the right roast for you, recommended by
+                    people like you!</p>
+                <div class="callout-button mx-auto"><a class="btn btn-primary" href="#">Read Reviews!</a></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
