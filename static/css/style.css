@@ -6,6 +6,10 @@
     height: 95px;
 }
 
+.login-form {
+    width: max-content;
+}
+
 .section-heading {
   text-transform: uppercase;
 }
