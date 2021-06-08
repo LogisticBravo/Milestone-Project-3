@@ -1,5 +1,45 @@
 {% extends "base.html" %}
 {% block content %}
+<div class="row">
+    <div class="col-8 offset-md-2 mt-5">
+        <div class="card text-center">
+  <div class="card-header">
+    Sign-Up Below!
+  </div>
+  <div class="card-body">
+    <div class="row">
+        <div class="col-8 offset-md-2">
+<form>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Email address</label>
+    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+  </div>
+  <div class="mb3">
+    <label for="username" class="form-label">Create a Username</label>
+    <input type="text" class="form-control" id="username" aria-describedby="usernameHelp">
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label">Create a Password</label>
+    <input type="password" class="form-control" id="exampleInputPassword1">
+  </div>
+  <div class="mb-3 form-check text-start">
+    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+    <label class="form-check-label" for="exampleCheck1">Check here to agree to our <a href="">Terms & Conditions.</a> </label>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
 
-
-    {% endblock %}
+        </div>
+    </div>
+  </div>
+  <div class="card-footer text-muted">
+    <div class="mb-3 form-check text-start">
+    <input type="checkbox" class="form-check-input" id="flexCheckChecked" checked>
+    <label class="form-check-label" for="exampleCheck1 flexCheckChecked">Subscribe me to The Trusted Barista Newsletter!</label>
+  </div>
+  </div>
+</div>
+    </div>
+</div>
+{% endblock %}
