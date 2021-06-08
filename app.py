@@ -34,6 +34,12 @@ def signup():
     return render_template("signup.html")
 
 
+@app.route("/reviews")
+def reviews():
+    beans = mongo.db.beans.find()
+    return render_template("reviews.html", beans=beans)
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
