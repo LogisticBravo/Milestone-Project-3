@@ -23,7 +23,41 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            This and the following modals will allow a review to be added
+                            <div class="row mb-2">
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="Coffee Name"
+                                        data-bs-toggle="tooltip" data-bs-placement="top"
+                                        title="Name of the coffee bean you are reviewing">
+                                </div>
+                            </div>
+                            <div class="row g-3 mb-2">
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="Coffee Roast"
+                                        data-bs-toggle="tooltip" data-bs-placement="left" title="Light/Medium/Dark">
+                                </div>
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="Coffee Rating"
+                                        aria-label="Rate the coffee" data-bs-toggle="tooltip" data-bs-placement="right"
+                                        title="Out of 5">
+                                </div>
+                            </div>
+                            <div class="row g-3 mb-2">
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="Coffee Origin"
+                                        data-bs-toggle="tooltip" data-bs-placement="left" title="THe magical land this coffee hails from">
+                                </div>
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="Brew Type"
+                                        aria-label="How this coffee is brewed" data-bs-toggle="tooltip" data-bs-placement="right"
+                                        title="Filter? Espresso Machine? Cafetiere?">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <textarea class="form-control" placeholder="Your Review of your chosen coffee" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                        title="If you needed this tooltip, then you need more coffee!" required></textarea>
+                                </div>
+                            </div>
                         </div>
                         <!--Next modal pop up button-->
                         <div class="modal-footer">
@@ -49,7 +83,7 @@
                 </div>
             </div>
             <!--End Modal-->
-            
+
             <div class="row mt-5">
                 <div class="col-sm-8 offset-sm-2 mt-5">
                     <div class="card w-75 mt-5">
