@@ -44,18 +44,21 @@
                             <div class="row g-3 mb-2">
                                 <div class="col">
                                     <input type="text" class="form-control" placeholder="Coffee Origin"
-                                        data-bs-toggle="tooltip" data-bs-placement="left" title="THe magical land this coffee hails from">
+                                        data-bs-toggle="tooltip" data-bs-placement="left"
+                                        title="The magical land this coffee hails from">
                                 </div>
                                 <div class="col">
                                     <input type="text" class="form-control" placeholder="Brew Type"
-                                        aria-label="How this coffee is brewed" data-bs-toggle="tooltip" data-bs-placement="right"
-                                        title="Filter? Espresso Machine? Cafetiere?">
+                                        aria-label="How this coffee is brewed" data-bs-toggle="tooltip"
+                                        data-bs-placement="right" title="Filter? Espresso Machine? Cafetiere?">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col">
-                                    <textarea class="form-control" placeholder="Your Review of your chosen coffee" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                        title="If you needed this tooltip, then you need more coffee!" required></textarea>
+                                    <textarea class="form-control" placeholder="Your Review of your chosen coffee"
+                                        data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                        title="If you needed this tooltip, then you need more coffee!"
+                                        required></textarea>
                                 </div>
                             </div>
                         </div>
@@ -76,7 +79,40 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            Modal continues the form for adding a review
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="productimagelink">Link to image: </span>
+                                <input type="text" class="form-control"
+                                    placeholder="Add a link to an image of this coffee" aria-label="product image URl"
+                                    aria-describedby="productimagelink">
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="purchaselink">Link to product: </span>
+                                <input type="text" class="form-control"
+                                    placeholder="Add a link to where this can be purchased" aria-label="purchase URl"
+                                    aria-describedby="purchaselink">
+                            </div>
+                        </div>
+                        <!--Next modal pop up button-->
+                        <div class="modal-footer">
+                            <button class="btn btn-primary" data-bs-target="#writeReviewToggle3" data-bs-toggle="modal"
+                                data-bs-dismiss="modal">Continue</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="writeReviewToggle3" aria-hidden="true" aria-labelledby="writeReviewToggleLabel3"
+                tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="writeReviewToggleLabel3">Confirm Your Review</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <h6 class="card-subtitle mb-2 text-muted">Confirm you're happy with your review or make
+                                changes!</h6>
+
                         </div>
                     </div>
 
