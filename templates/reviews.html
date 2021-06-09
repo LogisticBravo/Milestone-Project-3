@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 {% block content %}
-{% for bean in beans %}
 <main>
     <div class="container">
         <div class="row mt-5">
@@ -13,7 +12,7 @@
                     data-bs-target="#writeReviewToggle">Write
                     Review!</button>
             </div>
-            <form method="POST" action="">
+            <form method="POST" action="{{ url_for('add_review') }}">
                 <!--Modal pop up-->
                 <div class="modal fade" id="writeReviewToggle" aria-hidden="true"
                     aria-labelledby="writeReviewToggleLabel" tabindex="-1">
@@ -131,7 +130,10 @@
                                 <h6 class="card-subtitle mb-2 text-muted">Confirm you're happy with your review or make
                                     changes!</h6>
                                         <div class="row">
-                                            <div class="col-md-3">{{ bean.bean_name }}</div>
+                                            <div class="col-md-3">name here</div>
+                                             <div class="col-12">
+    <button type="submit" class="btn btn-primary">Submit Review</button>
+  </div>
                                         </div>
                             </div>
                         </div>
@@ -140,6 +142,7 @@
                 </div>
                 <!--End Modal-->
             </form>
+    {% for bean in beans %}
             <div class="row mt-5">
                 <div class="col-sm-8 offset-sm-2 mt-5">
                     <div class="card w-75 mt-5">
@@ -198,5 +201,5 @@
                     </div>
                 </div>
             </div>
-            {% endfor %}
-            {% endblock %}
+    {% endfor %}
+{% endblock %}

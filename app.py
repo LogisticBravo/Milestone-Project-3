@@ -34,10 +34,27 @@ def signup():
     return render_template("signup.html")
 
 
-@app.route("/reviews")
+@app.route("/reviews", methods=["GET", "POST"])
 def reviews():
     beans = mongo.db.beans.find()
     return render_template("reviews.html", beans=beans)
+
+
+@app.route("/add_review", methods=["GET", "POST"])
+def add_review():
+    if request.method == "POST":
+        bean = {
+            "bean_name": request.form.get("bean_name"),
+            "bean_roast": request.form.get("bean_roast"),
+            "bean_rating": request.form.get("bean_rating"),
+            "bean_description": request.form.get("bean_description"),
+            "bean_origin": request.form.get("bean_origin"),
+            "brew_type": request.form.get("brew_type"),
+            "bean_image": request.form.get("bean_image"),
+            "affialiate_link": request.form.get("affialiate_link")
+        }
+        mongo.db.beans.insert_one(bean)
+        return redirect(url_for("reviews"))
 
 
 if __name__ == "__main__":
