@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row mt-5">
             <div class="col-sm-8 ml-4">
-                <h1>Current Page</h1>
+                <h1>Reviews</h1>
             </div>
             <!--Write Review Modal Button-->
             <div class="col-sm-2 offset-md-2">
@@ -12,6 +12,7 @@
                     data-bs-target="#writeReviewToggle">Write
                     Review!</button>
             </div>
+            <!--POST form-->
             <form method="POST" action="{{ url_for('add_review') }}">
                 <!--Modal pop up-->
                 <div class="modal fade" id="writeReviewToggle" aria-hidden="true"
@@ -26,6 +27,7 @@
                             <div class="modal-body">
                                 <div class="row mb-2">
                                     <div class="col">
+                                        <!--title of coffee input-->
                                         <label for="bean_name">Review Title</label>
                                         <input type="text" id="bean_name" name="bean_name" class="form-control" placeholder="Coffee Name"
                                             data-bs-toggle="tooltip" data-bs-placement="top"
@@ -35,12 +37,14 @@
                                 </div>
                                 <div class="row g-3 mb-2">
                                     <div class="col">
+                                        <!--roast type input-->
                                         <label for="bean_roast">Roast Type</label>
                                         <input type="text" id="bean_roast" name="bean_roast" class="form-control"
                                             placeholder="Coffee Roast" data-bs-toggle="tooltip" data-bs-placement="left"
                                             title="Light/Medium/Dark">
                                     </div>
                                     <div class="col">
+                                        <!--rating input-->
                                         <label for="bean_rating">Rating</label>
                                         <input type="text" id="bean_rating" name="bean_rating" class="form-control"
                                             placeholder="Coffee Rating" aria-label="Rate the coffee"
@@ -49,12 +53,14 @@
                                 </div>
                                 <div class="row g-3 mb-2">
                                     <div class="col">
+                                        <!--coffee origin input-->
                                         <label for="bean_origin">Coffee Origin</label>
                                         <input type="text" id="bean_origin" name="bean_origin" class="form-control"
                                             placeholder="Coffee Origin" data-bs-toggle="tooltip"
                                             data-bs-placement="left" title="The magical land this coffee hails from">
                                     </div>
                                     <div class="col">
+                                        <!--brew selection input-->
                                         <label for="brew_type">Brew Type</label>
                                         <input type="text" id="brew_type" name="brew_type" class="form-control" placeholder="Brew Type"
                                             aria-label="How this coffee is brewed" data-bs-toggle="tooltip"
@@ -63,6 +69,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col">
+                                        <!--Description of coffee input-->
                                         <label for="bean_description">Tell us about this Coffee</label>
                                         <textarea class="form-control" id="bean_description" name="bean_description"
                                             placeholder="Your Review of your chosen coffee" data-bs-toggle="tooltip"
@@ -93,12 +100,13 @@
                             <div class="modal-body">
                                 <div class="input-group mb-3">
                                     <div class="row">
+                                        <!--Image link input-->
                                         <div class="col-md-12">
                                             <label for="bean_image" class="mb-1">Link an image of the coffee</label>
                                             <input type="text" id="bean_image" name="bean_image" class="form-control mb-3"
                                                 placeholder="Add a link to an image of this coffee"
                                                 aria-label="product image URl" aria-describedby="productimage"></div>
-
+                                                <!--Affialiate link input-->
                                         <div class="input-group">
                                             <div class="col-md-12">
                                                 <label for="affialiate_link">Purchase link for this Coffee</label>
@@ -144,21 +152,21 @@
             </form>
     {% for bean in beans %}
             <div class="row mt-5">
-                <div class="col-sm-8 offset-sm-2 mt-5">
-                    <div class="card w-75 mt-5">
+                <div class="col-sm-8 offset-sm-2">
+                    <div class="card w-75 mt-3">
                         <div class="card-header strong">
                             <h4>{{ bean.bean_name }}</h4>
                         </div>
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
                             <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab"
-                                data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home"
+                                data-bs-target="#nav-home-{{ bean._id }}" type="button" role="tab" aria-controls="nav-home"
                                 aria-selected="true">Review</button>
                             <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab"
-                                data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile"
+                                data-bs-target="#nav-profile-{{ bean._id }}" type="button" role="tab" aria-controls="nav-profile"
                                 aria-selected="false">Q & A</button>
                         </div>
                         <div class="tab-content" id="nav-tabContent">
-                            <div class="tab-pane fade show active pl-5" id="nav-home" role="tabpanel"
+                            <div class="tab-pane fade show active pl-5" id="nav-home-{{ bean._id }}" role="tabpanel"
                                 aria-labelledby="nav-home-tab">
                                 <div class="card">
                                     <div class="row g-0">
@@ -194,7 +202,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="nav-profile" role="tabpanel"
+                            <div class="tab-pane fade" id="nav-profile-{{ bean._id }}" role="tabpanel"
                                 aria-labelledby="nav-profile-tab">Comments
                                 here</div>
                         </div>
