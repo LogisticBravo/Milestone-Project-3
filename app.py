@@ -1,9 +1,11 @@
 import os
+import datetime
 from flask import (
     Flask, flash, render_template,
     redirect, request, session, url_for)
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
+from werkzeug.security import generate_password_hash, check_password_hash
 if os.path.exists("env.py"):
     import env
 
@@ -18,19 +20,33 @@ mongo = PyMongo(app)
 
 
 @app.route("/")
-@app.route("/get_coffee")
-def get_beans():
-    beans = mongo.db.beans.find()
-    return render_template("coffee.html", beans=beans)
-
-
 @app.route("/home")
 def home():
     return render_template("index.html")
 
 
-@app.route("/signup")
+@app.route("/signup", methods=["GET", "POST"])
 def signup():
+    if request.method == "POST":
+        user_exists = mongo.db.users.find_one(
+            {"username": request.form.get("username").lower()})
+
+        if user_exists:
+            flash("Username Not Available (It already exists)")
+            return redirect(url_for("signup"))
+
+        signup = {
+            "email": request.form.get("email").lower(),
+            "username": request.form.get("username").lower(),
+            "password": generate_password_hash(request.form.get("password")),
+            "is_admin": "off",
+            "signup_date": datetime.datetime.utcnow(),
+            "last_login": datetime.datetime.utcnow()
+        }
+        mongo.db.users.insert_one(signup)
+
+        session["user"] = request.form.get("username").lower()
+        flash("Sign-up Complete")
     return render_template("signup.html")
 
 
