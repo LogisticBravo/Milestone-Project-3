@@ -25,24 +25,24 @@
                             data-bs-toggle="dropdown" aria-expanded="false">
                             Login
                         </a>
-                        <form class="dropdown-menu p-4 login-form" aria-labelledby="navbarDropdown">
+                        <form class="dropdown-menu p-4 login-form" method="POST" action="{{ url_for('login') }}" aria-labelledby="navbarDropdown">
                             <div class="form-group">
-                                <label for="exampleDropdownFormEmail2">Username</label>
-                                <input type="email" class="form-control" id="exampleDropdownFormEmail2"
-                                    placeholder="email@example.com">
+                                <label for="username" class="form-label">Username</label>
+                                    <input type="text" class="form-control" minlength="5" maxlength="15" id="username"
+                                        pattern="^[a-zA-Z0-9]{5,15}$" name="username" aria-describedby="usernameHelp" placeholder="Username"
+                                        required>
                             </div>
                             <div class="form-group">
-                                <label for="exampleDropdownFormPassword2">Password</label>
-                                <input type="password" class="form-control" id="exampleDropdownFormPassword2"
-                                    placeholder="Password">
+                                <label for="password" class="form-label">Password</label>
+                                    <input type="password" class="form-control" minlength="8" maxlength="15"
+                                        id="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$"
+                                        title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters"
+                                        name="password" aria-describedby="passwordHelp" placeholder="Password" required>
                             </div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="dropdownCheck2">
-                                <label class="form-check-label" for="dropdownCheck2">
-                                    Remember me
-                                </label>
+                            <div class="card-body">
+                                Need an account? <a href="{{ url_for('signup')}}">Sign-up Here</a>
                             </div>
-                            <button type="submit" class="btn btn-primary">Sign in</button>
+                            <button type="submit" class="btn btn-primary">Login</button>
                         </form>
                     </li>
                 </ul>

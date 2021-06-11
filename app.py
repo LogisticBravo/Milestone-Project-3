@@ -50,6 +50,23 @@ def signup():
     return render_template("signup.html")
 
 
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        user_exists = mongo.db.users.find_one(
+            {"username": request.form.get("username").lower()})
+
+        if user_exists:
+            if check_password_hash(
+                user_exists["password"], request.form.get("password")):
+                session["user"] = request.form.get("username").lower()
+                flash("Welcome, {}".format(request.form.get("username")))
+            else:
+                flash("Incorrect Username and/or Password")
+                return redirect(request.referrer)
+    return reviews()
+
+
 @app.route("/reviews", methods=["GET", "POST"])
 def reviews():
     beans = mongo.db.beans.find()
