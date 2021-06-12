@@ -63,8 +63,7 @@ def login():
                 session["user"] = request.form.get("username").lower()
                 flash("Welcome, {}".format(
                     request.form.get("username")))
-                return redirect(url_for(
-                    "profile", username=session["user"]))
+                return redirect(request.referrer)
             else:
                 flash("Incorrect Username and/or Password")
                 return redirect(request.referrer)
@@ -75,7 +74,18 @@ def login():
 def profile(username):
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
-    return render_template("profile.html", username=username)
+
+    if session["user"]:
+        return render_template("profile.html", username=username)
+
+    return redirect(url_for("home"))
+
+
+@app.route("/logout")
+def logout():
+    flash("Successfully logged out")
+    session.pop("user")
+    return redirect(url_for("home"))
 
 
 @app.route("/reviews", methods=["GET", "POST"])

@@ -7,8 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="Description" content="Enter your description here" />
     <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta1/css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" type="text/css">
+        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta1/css/bootstrap.min.css"
+        type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+        type="text/css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
     <title>The Trusted Barista</title>
 </head>
@@ -18,26 +20,29 @@
     <!--****** Header ******-->
     <header>
         <nav class="navbar navbar-light bg-light">
-            <div class="container-fluid">
+            <div class="container">
                 <ul class="nav">
+                    {% if session.user %}
+                    {% else %}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
                             Login
                         </a>
-                        <form class="dropdown-menu p-4 login-form" method="POST" action="{{ url_for('login') }}" aria-labelledby="navbarDropdown">
+                        <form class="dropdown-menu p-4 login-form" method="POST" action="{{ url_for('login') }}"
+                            aria-labelledby="navbarDropdown">
                             <div class="form-group">
                                 <label for="username" class="form-label">Username</label>
-                                    <input type="text" class="form-control" minlength="5" maxlength="15" id="username"
-                                        pattern="^[a-zA-Z0-9]{5,15}$" name="username" aria-describedby="usernameHelp" placeholder="Username"
-                                        required>
+                                <input type="text" class="form-control" minlength="5" maxlength="15" id="username"
+                                    pattern="^[a-zA-Z0-9]{5,15}$" name="username" aria-describedby="usernameHelp"
+                                    placeholder="Username" required>
                             </div>
                             <div class="form-group">
                                 <label for="password" class="form-label">Password</label>
-                                    <input type="password" class="form-control" minlength="8" maxlength="15"
-                                        id="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$"
-                                        title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters"
-                                        name="password" aria-describedby="passwordHelp" placeholder="Password" required>
+                                <input type="password" class="form-control" minlength="8" maxlength="15" id="password"
+                                    pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$"
+                                    title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters"
+                                    name="password" aria-describedby="passwordHelp" placeholder="Password" required>
                             </div>
                             <div class="card-body">
                                 Need an account? <a href="{{ url_for('signup')}}">Sign-up Here</a>
@@ -45,6 +50,7 @@
                             <button type="submit" class="btn btn-primary">Login</button>
                         </form>
                     </li>
+                    {% endif %}
                 </ul>
                 <a class="navbar-brand" href="#">
                     <img src="#" alt="#" width="30" height="24" class="d-inline-block align-text-top">
@@ -57,13 +63,44 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('reviews') }}">Reviews</a>
                     </li>
-                    
+                    {% if session.user %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Account
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <div class="row text-end">
+                                <div class="col-12">
+                                    <li class="nav-item p-3 pb-0 pt-0">
+                                        <strong>{{ username }}</strong>
+                                    </li>
+                                </div>
+                                <div class="col-12">
+                                    <li class="nav-item p-3 pb-0 pt-0">
+                                        <small class="text-muted">{{ email }}</small>
+                                    </li>
+                                </div>
+                                <div class="col-12">
+                                    <li class="nav-item">
+                                        <a class="nav-link"
+                                            href="{{ url_for('profile', username=session['user']) }}">Profile</a>
+                                    </li>
+                                </div>
+                            </div>
+
+                            <hr class="dropdown-divider">
+                    </li>
+                            <li class="text-end">
+                                <a class="dropdown-item" href="{{ url_for('logout') }}"> <small>Sign Out</small> </a>
+                            </li>
+                    {% else %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('signup') }}">Sign-up</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('profile', username=session['user']) }}">Profile</a>
-                    </li>
+                    {% endif %}
+                </ul>
+                </li>
                 </ul>
             </div>
         </nav>
@@ -72,27 +109,27 @@
     <section>
         <!-- Flash messages -->
         {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                {% for message in messages %}
-                <div class="toast-container position-sticky top-50 start-50 translate-middle-x">
-                <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
-                    <div class="toast-header">
-                        <img src="..." class="rounded me-2" alt="...">
-                        <strong class="me-auto">The Trusted Barista</strong>
-                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                    </div>
-                    <div class="toast-body">
-                        {{ message }}
-                    </div>
+        {% if messages %}
+        {% for message in messages %}
+        <div class="toast-container position-sticky top-50 start-50 translate-middle-x">
+            <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                    <img src="..." class="rounded me-2" alt="...">
+                    <strong class="me-auto">The Trusted Barista</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
                 </div>
+                <div class="toast-body">
+                    {{ message }}
                 </div>
-                {% endfor %}
-            {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+        {% endif %}
         {% endwith %}
     </section>
     <!--****** Main Content ******-->
-        {% block content %}
-        {% endblock%}
+    {% block content %}
+    {% endblock%}
     </main>
     <!--****** End Main Content ******-->
 
