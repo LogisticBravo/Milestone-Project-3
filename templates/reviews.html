@@ -30,8 +30,8 @@
                                     <div class="col">
                                         <!--title of coffee input-->
                                         <label for="bean_name">Review Title</label>
-                                        <input type="text" id="bean_name" name="bean_name" class="form-control" placeholder="Coffee Name"
-                                            data-bs-toggle="tooltip" data-bs-placement="top"
+                                        <input type="text" id="bean_name" name="bean_name" class="form-control"
+                                            placeholder="Coffee Name" data-bs-toggle="tooltip" data-bs-placement="top"
                                             title="Name of the coffee bean you are reviewing">
 
                                     </div>
@@ -63,9 +63,10 @@
                                     <div class="col">
                                         <!--brew selection input-->
                                         <label for="brew_type">Brew Type</label>
-                                        <input type="text" id="brew_type" name="brew_type" class="form-control" placeholder="Brew Type"
-                                            aria-label="How this coffee is brewed" data-bs-toggle="tooltip"
-                                            data-bs-placement="right" title="Filter? Espresso Machine? Cafetiere?">
+                                        <input type="text" id="brew_type" name="brew_type" class="form-control"
+                                            placeholder="Brew Type" aria-label="How this coffee is brewed"
+                                            data-bs-toggle="tooltip" data-bs-placement="right"
+                                            title="Filter? Espresso Machine? Cafetiere?">
                                     </div>
                                 </div>
                                 <div class="row">
@@ -104,14 +105,16 @@
                                         <!--Image link input-->
                                         <div class="col-md-12">
                                             <label for="bean_image" class="mb-1">Link an image of the coffee</label>
-                                            <input type="text" id="bean_image" name="bean_image" class="form-control mb-3"
+                                            <input type="text" id="bean_image" name="bean_image"
+                                                class="form-control mb-3"
                                                 placeholder="Add a link to an image of this coffee"
                                                 aria-label="product image URl" aria-describedby="productimage"></div>
-                                                <!--Affialiate link input-->
+                                        <!--Affialiate link input-->
                                         <div class="input-group">
                                             <div class="col-md-12">
                                                 <label for="affialiate_link">Purchase link for this Coffee</label>
-                                                <input type="text" id="affialiate_link" name="affialiate_link" class="form-control mb-1"
+                                                <input type="text" id="affialiate_link" name="affialiate_link"
+                                                    class="form-control mb-1"
                                                     placeholder="Add a link to where this can be purchased"
                                                     aria-label="purchase URl" aria-describedby="purchaselink"></div>
                                         </div>
@@ -138,12 +141,12 @@
                             <div class="modal-body">
                                 <h6 class="card-subtitle mb-2 text-muted">Confirm you're happy with your review or make
                                     changes!</h6>
-                                        <div class="row">
-                                            <div class="col-md-3">name here</div>
-                                             <div class="col-12">
-    <button type="submit" class="btn btn-primary">Submit Review</button>
-  </div>
-                                        </div>
+                                <div class="row">
+                                    <div class="col-md-3">name here</div>
+                                    <div class="col-12">
+                                        <button type="submit" class="btn btn-primary">Submit Review</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -152,7 +155,7 @@
                 <!--End Modal-->
             </form>
             {% endif %}
-    {% for bean in beans %}
+            {% for bean in beans %}
             <div class="row mt-5">
                 <div class="col-sm-8 offset-sm-2">
                     <div class="card w-75 mt-3">
@@ -161,11 +164,11 @@
                         </div>
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
                             <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab"
-                                data-bs-target="#nav-home-{{ bean._id }}" type="button" role="tab" aria-controls="nav-home"
-                                aria-selected="true">Review</button>
+                                data-bs-target="#nav-home-{{ bean._id }}" type="button" role="tab"
+                                aria-controls="nav-home" aria-selected="true">Review</button>
                             <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab"
-                                data-bs-target="#nav-profile-{{ bean._id }}" type="button" role="tab" aria-controls="nav-profile"
-                                aria-selected="false">Q & A</button>
+                                data-bs-target="#nav-profile-{{ bean._id }}" type="button" role="tab"
+                                aria-controls="nav-profile" aria-selected="false">Q & A</button>
                         </div>
                         <div class="tab-content" id="nav-tabContent">
                             <div class="tab-pane fade show active pl-5" id="nav-home-{{ bean._id }}" role="tabpanel"
@@ -211,5 +214,5 @@
                     </div>
                 </div>
             </div>
-    {% endfor %}
-{% endblock %}
+            {% endfor %}
+            {% endblock %}

@@ -22,7 +22,16 @@ mongo = PyMongo(app)
 @app.route("/")
 @app.route("/home")
 def home():
-    return render_template("index.html")
+    try:
+        if session["user"]:
+            email = mongo.db.users.find_one(
+                {"username": session["user"]})["email"]
+            username = mongo.db.users.find_one(
+                {"username": session["user"]})["username"]
+            return render_template(
+                "index.html", username=username, email=email)
+    except Exception:
+        return render_template("index.html")
 
 
 @app.route("/signup", methods=["GET", "POST"])
@@ -74,9 +83,9 @@ def login():
 def profile(username):
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
-
     if session["user"]:
-        return render_template("profile.html", username=username)
+        email = mongo.db.users.find_one({"username": session["user"]})["email"]
+        return render_template("profile.html", username=username, email=email)
 
     return redirect(url_for("home"))
 
@@ -91,7 +100,16 @@ def logout():
 @app.route("/reviews", methods=["GET", "POST"])
 def reviews():
     beans = mongo.db.beans.find()
-    return render_template("reviews.html", beans=beans)
+    try:
+        if session["user"]:
+            email = mongo.db.users.find_one(
+                {"username": session["user"]})["email"]
+            username = mongo.db.users.find_one(
+                {"username": session["user"]})["username"]
+            return render_template(
+                "reviews.html", username=username, email=email, beans=beans)
+    except Exception:
+        return render_template("reviews.html", beans=beans)
 
 
 @app.route("/add_review", methods=["GET", "POST"])
