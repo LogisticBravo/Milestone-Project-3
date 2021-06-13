@@ -24,12 +24,9 @@ mongo = PyMongo(app)
 def home():
     try:
         if session["user"]:
-            email = mongo.db.users.find_one(
-                {"username": session["user"]})["email"]
-            username = mongo.db.users.find_one(
-                {"username": session["user"]})["username"]
+            username = mongo.db.users.find_one({"username": session["user"]})
             return render_template(
-                "index.html", username=username, email=email)
+                "index.html", username=username)
     except Exception:
         return render_template("index.html")
 
@@ -70,9 +67,12 @@ def login():
             if check_password_hash(
                 user_exists["password"], request.form.get("password")):
                 session["user"] = request.form.get("username").lower()
-                flash("Welcome, {}".format(
-                    request.form.get("username")))
-                return redirect(request.referrer)
+                if session["user"]:
+                    username = mongo.db.users.find_one(
+                        {"username": session["user"]})
+                    flash("Welcome, {}".format(
+                        request.form.get("username")))
+                    return render_template("profile.html", username=username)
             else:
                 flash("Incorrect Username and/or Password")
                 return redirect(request.referrer)
@@ -84,8 +84,8 @@ def profile(username):
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
     if session["user"]:
-        email = mongo.db.users.find_one({"username": session["user"]})["email"]
-        return render_template("profile.html", username=username, email=email)
+        username = mongo.db.users.find_one({"username": session["user"]})
+        return render_template("profile.html", username=username)
 
     return redirect(url_for("home"))
 
@@ -102,12 +102,9 @@ def reviews():
     beans = mongo.db.beans.find()
     try:
         if session["user"]:
-            email = mongo.db.users.find_one(
-                {"username": session["user"]})["email"]
-            username = mongo.db.users.find_one(
-                {"username": session["user"]})["username"]
+            username = mongo.db.users.find_one({"username": session["user"]})
             return render_template(
-                "reviews.html", username=username, email=email, beans=beans)
+                "reviews.html", username=username, beans=beans)
     except Exception:
         return render_template("reviews.html", beans=beans)
 

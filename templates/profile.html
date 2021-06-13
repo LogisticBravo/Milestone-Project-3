@@ -16,11 +16,11 @@
                     class="rounded img-fluid card-img-top" alt="...">
                 <div class="card-body row">
                     <div class="col-md-6 col-sm-6">
-                        <h5 class="card-title">{{ username }}'s Profile</h5>
+                        <h5 class="card-title">{{ username.username }}'s Profile</h5>
                     </div>
                     <div class="col-md-6 col-sm-6">
-                        <p class="mb-0"><small class="text-muted">Sign-up:</small></p>
-                        <p><small class="text-muted">Last Login:</small></p>
+                        <p class="mb-0"><small class="text-muted">Sign-up: {{ username.signup_date }}</small></p>
+                        <p><small class="text-muted">Last Login: {{ username.last_login }}</small></p>
                     </div>
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" placeholder="Existing username"
