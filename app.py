@@ -41,11 +41,15 @@ def signup():
             flash("Username Not Available (It already exists)")
             return redirect(url_for("signup"))
 
+        newsletter_check = "on" if request.form.get(
+            "newsletter_check") else "off"
         signup = {
             "email": request.form.get("email").lower(),
             "username": request.form.get("username").lower(),
             "password": generate_password_hash(request.form.get("password")),
+            "tandc": "on",
             "is_admin": "off",
+            "newsletter_check": newsletter_check,
             "signup_date": datetime.datetime.utcnow(),
             "last_login": datetime.datetime.utcnow()
         }
