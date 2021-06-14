@@ -124,10 +124,19 @@ def add_review():
             "bean_origin": request.form.get("bean_origin"),
             "brew_type": request.form.get("brew_type"),
             "bean_image": request.form.get("bean_image"),
-            "affialiate_link": request.form.get("affialiate_link")
+            "affialiate_link": request.form.get("affialiate_link"),
+            "created_by": session["user"],
+            "created_date": datetime.datetime.utcnow()
         }
         mongo.db.beans.insert_one(bean)
         return redirect(url_for("reviews"))
+
+
+@app.route("/edit_review/<bean_id>", methods=["GET", "POST"])
+def edit_review(bean_id):
+    bean = mongo.db.beans.find_one({"_id": ObjectId(bean_id)})
+
+    return render_template("reviews.html", bean=bean)
 
 
 if __name__ == "__main__":
