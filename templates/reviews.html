@@ -161,6 +161,10 @@
                     <div class="card w-75 mt-3">
                         <div class="card-header strong">
                             <h4>{{ bean.bean_name }}</h4>
+                            {% if session.user|lower == bean.created_by|lower %}
+                                <a class="btn btn-primary" href="{{ url_for('edit_review', bean_id=bean._id) }}" role="button" data-bs-toggle="modal" data-bs-target="#edit_review-{{ bean._id }}">Edit</a>
+                                <button type="button" class="btn btn-warning">Delete</button>
+                            {% endif %}
                         </div>
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
                             <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab"
@@ -170,31 +174,85 @@
                                 data-bs-target="#nav-profile-{{ bean._id }}" type="button" role="tab"
                                 aria-controls="nav-profile" aria-selected="false">Q & A</button>
                         <div class="nav nav-tabs col-md-6 justify-content-end" id="nav-tab" role="tablist">
-                            <a class="btn btn-primary" href="{{ url_for('edit_review', bean_id=bean._id) }}" role="button" data-bs-toggle="modal" data-bs-target="#edit_review-{{ bean._id }}">Edit</a>
-                            
                             <!--Edit Review Modal-->
+                            <form method="POST" action="{{ url_for('edit_review', bean_id=bean._id) }}">
                                 <div class="modal fade" id="edit_review-{{ bean._id }}" tabindex="-1"
                                     aria-labelledby="edit_reviewLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="edit_reviewLabel">Edit Your Review for {{ bean.bean_name }}</h5>
+                                                <label for="bean_name" class="card-title strong">Edit Your Review for </label>
+                                        <input type="text" id="bean_name" name="bean_name" class="form-control-plaintext card-title strong"
+                                            placeholder="Coffee Name" data-bs-toggle="tooltip" data-bs-placement="top"
+                                            title="Name of the coffee bean you are reviewing" value="{{ bean.bean_name }}">
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                     aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                Here's the edit body
+                                                <div class="card">
+                                    <div class="row g-0">
+                                        <div class="col-md-4 card-body">
+                                            <img src="{{ bean.bean_image }}" class="rounded img-fluid"
+                                                alt="An image of {{ bean.bean_name }} coffee">
+                                            <p>
+                                                <label for="affialiate_link"><small>Available to buy: </small></label>
+                                                <input type="text" id="affialiate_link" name="affialiate_link"
+                                                    class="form-control mb-1"
+                                                    placeholder="Add a link to where this can be purchased"
+                                                    aria-label="purchase URl" aria-describedby="purchaselink" value="{{ bean.affialiate_link }}">
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="row card-body">
+                                                <div class="col-md-6 mb-1">
+                                                    <label for="bean_rating"><strong>Rating: </strong></label>
+                                        <input type="text" id="bean_rating" name="bean_rating" class="form-control-plaintext"
+                                            placeholder="Coffee Rating" aria-label="Rate the coffee"
+                                            data-bs-toggle="tooltip" data-bs-placement="top" title="Out of 5" value="{{ bean.bean_rating }}">
+                                                    </div>
+                                                <div class="col-md-6 mb-1">
+                                                    <label for="bean_roast"> <strong>Roast: </strong></label>
+                                                        <input type="text" id="bean_roast" name="bean_roast" class="form-control-plaintext" 
+                                                        value="{{ bean.bean_roast }}" data-bs-toggle="tooltip" data-bs-placement="right"
+                                                        title="Light/Medium/Dark">
+                                                </div>
+                                                <div class="col-md-6 mb-1"><label for="brew_type"><strong>Brew Type: </strong></label>
+                                        <input type="text" id="brew_type" name="brew_type" class="form-control-plaintext"
+                                            placeholder="Brew Type" aria-label="How this coffee is brewed"
+                                            data-bs-toggle="tooltip" data-bs-placement="left"
+                                            title="Filter? Espresso Machine? Cafetiere?" value="{{ bean.brew_type }}">
+                                                </div>
+                                                <div class="col-md-6 mb-1"><strong>Type: </strong>{{ bean.origin_type }}
+                                                </div>
+                                                <div class="col-md-6"><label for="bean_origin"><strong>Coffee Origin: </strong></label>
+                                        <input type="text" id="bean_origin" name="bean_origin" class="form-control-plaintext"
+                                            placeholder="Coffee Origin" data-bs-toggle="tooltip"
+                                            data-bs-placement="left" title="The magical land this coffee hails from" value="{{ bean.bean_origin }}">
+                                                </div>
                                             </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-bs-dismiss="modal">Exit without Saving</button>
-                                                <button type="button" class="btn btn-primary">Save changes</button>
+                                            <div class="card-body">
+                                                <label for="bean_description"><h6><strong>Description</strong></h6></label>
+                                        <textarea class="form-control-plaintext" id="bean_description" name="bean_description"
+                                            placeholder="Your Review of your chosen coffee" data-bs-toggle="tooltip"
+                                            data-bs-placement="bottom"
+                                            title="Resize this box from the bottom right"
+                                            required>{{ bean.bean_description }}</textarea>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                            </div>
+                                            
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Exit without Saving</button>
+                                                <button type="Submit" class="btn btn-primary">Save changes</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </form>
                             <!--End Edit Review Modal-->
-                                <button type="button" class="btn btn-warning">Delete</button>
+                                
                             </div>
                         <div class="tab-content" id="nav-tabContent">
                             <div class="tab-pane fade show active pl-5" id="nav-home-{{ bean._id }}" role="tabpanel"

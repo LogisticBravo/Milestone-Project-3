@@ -129,14 +129,37 @@ def add_review():
             "created_date": datetime.datetime.utcnow()
         }
         mongo.db.beans.insert_one(bean)
+        flash("Review Added!")
         return redirect(url_for("reviews"))
 
 
 @app.route("/edit_review/<bean_id>", methods=["GET", "POST"])
 def edit_review(bean_id):
-    bean = mongo.db.beans.find_one({"_id": ObjectId(bean_id)})
+    beans = mongo.db.beans.find()
+    try:
+        if session["user"]:
+            username = mongo.db.users.find_one({"username": session["user"]})
+            if request.method == "POST":
+                edit = {
+                    "bean_name": request.form.get("bean_name"),
+                    "bean_roast": request.form.get("bean_roast"),
+                    "bean_rating": request.form.get("bean_rating"),
+                    "bean_description": request.form.get("bean_description"),
+                    "bean_origin": request.form.get("bean_origin"),
+                    "brew_type": request.form.get("brew_type"),
+                    "bean_image": request.form.get("bean_image"),
+                    "affialiate_link": request.form.get("affialiate_link"),
+                    "created_by": session["user"],
+                    "created_date": datetime.datetime.utcnow()
+                }
+                mongo.db.beans.update({"_id": ObjectId(bean_id)}, edit)
+                flash("Review Updated!")
+            bean = mongo.db.beans.find_one({"_id": ObjectId(bean_id)})
 
-    return render_template("reviews.html", bean=bean)
+            return render_template(
+                "reviews.html", bean=bean, username=username, beans=beans)
+    except Exception:
+        return render_template("reviews.html")
 
 
 if __name__ == "__main__":
