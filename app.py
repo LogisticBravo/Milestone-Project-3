@@ -169,6 +169,27 @@ def delete_review(bean_id):
     return redirect(url_for("reviews"))
 
 
+@app.route("/favourite/<bean_id>")
+def favourite(bean_id):
+    try:
+        if session["user"]:
+            username = mongo.db.users.find_one({"username": session["user"]})
+            bean = mongo.db.beans.find_one(
+                {"_id": ObjectId(bean_id)})["bean_name"]
+            favourite = {
+                    "coffee_id": ObjectId(bean_id),
+                    "coffee_name": bean
+                }
+            mongo.db.users.update_one(
+                    {"_id": ObjectId(username["_id"])},
+                    {"$push": {"favourites": favourite}}
+                )
+            return redirect(url_for(
+                "reviews", bean=bean, username=username))
+    except Exception:
+        return render_template("reviews.html")
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
