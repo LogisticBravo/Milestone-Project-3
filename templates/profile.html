@@ -53,7 +53,21 @@
                     <p class="card-text">Users reviews will be generated here</p>
                 </div>
             </div>
+        
+        <div class="col-md-12">
+            <div class="card mb-3">
+                <div class="card-header">
+                   <h5 class="card-title">My Favourites</h5>
+                </div>
+                {% for favourite in username.favourites %}
+                <div class="card-body">
+                    <p class="card-text">{{ favourite.coffee_name }}</p>
+                </div>
+                {% endfor %}
+            </div>
         </div>
+        
+    </div>
     </div>
 </div>
 {% endblock %}
