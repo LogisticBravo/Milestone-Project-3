@@ -89,7 +89,9 @@ def profile(username):
         {"username": session["user"]})["username"]
     if session["user"]:
         username = mongo.db.users.find_one({"username": session["user"]})
-        return render_template("profile.html", username=username)
+        my_reviews = list(mongo.db.beans.find(
+            {"created_by": session["user"]}))
+        return render_template("profile.html", username=username, my_reviews=my_reviews)
 
     return redirect(url_for("home"))
 

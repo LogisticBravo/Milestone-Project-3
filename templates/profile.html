@@ -49,9 +49,11 @@
                 <div class="card-header">
                    <h5 class="card-title">My Reviews</h5>
                 </div>
+                {% for reviews in my_reviews %}
                 <div class="card-body">
-                    <p class="card-text">Users reviews will be generated here</p>
+                    <p class="card-text">{{ reviews.bean_name }}</p>
                 </div>
+                {% endfor %}
             </div>
         
         <div class="col-md-12">
