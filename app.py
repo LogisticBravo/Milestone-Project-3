@@ -103,7 +103,7 @@ def logout():
 
 @app.route("/reviews", methods=["GET", "POST"])
 def reviews():
-    beans = mongo.db.beans.find()
+    beans = list(mongo.db.beans.find())
     try:
         if session["user"]:
             username = mongo.db.users.find_one({"username": session["user"]})
@@ -167,6 +167,19 @@ def delete_review(bean_id):
     mongo.db.beans.remove({"_id": ObjectId(bean_id)})
     flash("Review Deleted")
     return redirect(url_for("reviews"))
+
+
+@app.route("/search", methods=["GET", "POST"])
+def search():
+    query = request.form.get("query")
+    beans = list(mongo.db.beans.find({"$text": {"$search": query}}))
+    try:
+        if session["user"]:
+            username = mongo.db.users.find_one({"username": session["user"]})
+            return render_template(
+                "reviews.html", username=username, beans=beans)
+    except Exception:
+        return render_template("reviews.html", beans=beans)
 
 
 @app.route("/favourite/<bean_id>")
