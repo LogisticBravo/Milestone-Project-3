@@ -51,7 +51,7 @@
                 </div>
                 {% for reviews in my_reviews %}
                 <div class="card-body">
-                    <p class="card-text">{{ reviews.bean_name }}</p>
+                    <p class="card-text"><a href="{{ url_for('reviews') }}#nav-home-{{ reviews._id }}">{{ reviews.bean_name }}</a></p>
                 </div>
                 {% endfor %}
             </div>
@@ -63,7 +63,7 @@
                 </div>
                 {% for favourite in username.favourites %}
                 <div class="card-body">
-                    <p class="card-text">{{ favourite.coffee_name }}</p>
+                    <p class="card-text"><a href="{{ url_for('reviews') }}#nav-home-{{ favourite.coffee_id }}">{{ favourite.coffee_name }}</a></p>
                 </div>
                 {% endfor %}
             </div>
