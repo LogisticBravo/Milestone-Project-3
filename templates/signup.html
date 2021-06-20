@@ -22,18 +22,26 @@
                                 </div>
                                 <div class="mb3">
                                     <!--Username input-->
-                                    <label for="username" class="form-label">Create a Username</label>
-                                    <input type="text" class="form-control" minlength="5" maxlength="15" id="username"
-                                        pattern="^[a-zA-Z0-9]{5,15}$" name="username" aria-describedby="usernameHelp"
+                                    <label for="new_username" class="form-label">Create a Username</label>
+                                    <input type="text" class="form-control" minlength="5" maxlength="15" id="new_username"
+                                        pattern="^[a-zA-Z0-9]{5,15}$" name="new_username" aria-describedby="usernameHelp"
                                         required>
                                 </div>
                                 <div class="mb-3">
                                     <!--Password input-->
-                                    <label for="password" class="form-label">Create a Password</label>
+                                    <label for="new_password" class="form-label">Create a Password</label>
                                     <input type="password" class="form-control" minlength="8" maxlength="15"
-                                        id="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$"
+                                        id="new_password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$"
                                         title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters"
-                                        name="password" aria-describedby="passwordHelp" required>
+                                        name="new_password" aria-describedby="passwordHelp" required>
+                                </div>
+                                <div class="mb-3">
+                                    <!--Password input-->
+                                    <label for="confirm_password" class="form-label">Confirm Password</label>
+                                    <input type="password" class="form-control" minlength="8" maxlength="15"
+                                        id="confirm_password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$"
+                                        title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters"
+                                        name="confirm_password" aria-describedby="passwordHelp" required>
                                 </div>
                                 <div class="mb-3 form-check text-start">
                                     <!--Terms & Conditions check box-->
@@ -42,7 +50,7 @@
                                             href="">Terms & Conditions.</a> </label>
                                 </div>
                                 <!--Submit form button-->
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-primary" id="submit">Submit</button>
                         </div>
                     </div>
                 </div>
@@ -60,5 +68,8 @@
             </div>
         </div>
     </div>
-
+    {% block scripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="{{ url_for('static', filename='js/signup.js') }}"></script>
+    {% endblock %}
     {% endblock %}

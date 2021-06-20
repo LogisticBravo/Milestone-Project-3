@@ -35,7 +35,7 @@ def home():
 def signup():
     if request.method == "POST":
         user_exists = mongo.db.users.find_one(
-            {"username": request.form.get("username").lower()})
+            {"username": request.form.get("new_username").lower()})
 
         if user_exists:
             flash("Username Not Available (It already exists)")
@@ -45,8 +45,9 @@ def signup():
             "newsletter_check") else "off"
         signup = {
             "email": request.form.get("email").lower(),
-            "username": request.form.get("username").lower(),
-            "password": generate_password_hash(request.form.get("password")),
+            "username": request.form.get("new_username").lower(),
+            "password": generate_password_hash(
+                request.form.get("new_password")),
             "tandc": "on",
             "is_admin": "off",
             "newsletter_check": newsletter_check,
@@ -55,7 +56,7 @@ def signup():
         }
         mongo.db.users.insert_one(signup)
 
-        session["user"] = request.form.get("username").lower()
+        session["user"] = request.form.get("new_username").lower()
         flash("Sign-up Complete")
         return redirect(url_for("profile", username=session["user"]))
     return render_template("signup.html")
@@ -91,7 +92,8 @@ def profile(username):
         username = mongo.db.users.find_one({"username": session["user"]})
         my_reviews = list(mongo.db.beans.find(
             {"created_by": session["user"]}))
-        return render_template("profile.html", username=username, my_reviews=my_reviews)
+        return render_template(
+            "profile.html", username=username, my_reviews=my_reviews)
 
     return redirect(url_for("home"))
 
