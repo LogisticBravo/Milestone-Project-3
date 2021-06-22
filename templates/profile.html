@@ -79,12 +79,18 @@
                 <div class="card-header">
                     <h5 class="card-title">My Reviews</h5>
                 </div>
+                {% if my_reviews|length > 0 %}
                 {% for reviews in my_reviews %}
                 <div class="card-body">
                     <p class="card-text"><a
                             href="{{ url_for('reviews') }}#nav-home-{{ reviews._id }}">{{ reviews.bean_name }}</a></p>
                 </div>
                 {% endfor %}
+                {% else %}
+                <div class="card-body">
+                    <p class="card-text">You haven't left any reviews yet! Why not <a href="{{ url_for('reviews') }}#writeReviewToggle">add one now?</a></p>
+                </div>
+                {% endif %}
             </div>
 
             <div class="col-md-12">
@@ -92,6 +98,7 @@
                     <div class="card-header">
                         <h5 class="card-title">My Favourites</h5>
                     </div>
+                    {% if username.favourites|length > 0 %}
                     {% for favourite in username.favourites %}
                     <div class="card-body">
                         <p class="card-text"><a
@@ -99,6 +106,11 @@
                         </p>
                     </div>
                     {% endfor %}
+                    {% else %}
+                    <div class="card-body">
+                    <p class="card-text">You haven't added any favourite reviews yet! Check out some <a href="{{ url_for('reviews') }}">Reviews</a> now to add one!</p>
+                </div>
+                    {% endif %}
                 </div>
             </div>
 
