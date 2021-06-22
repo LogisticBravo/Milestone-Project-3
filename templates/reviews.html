@@ -170,8 +170,9 @@
                                 <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                                 data-bs-target="#delete_review-{{ bean._id }}">Delete</button>
                                 </div>
+                                {% endif %}
                                 <div class="col d-grid gap-2 d-md-flex justify-content-md-end"><a class="btn btn-primary" href="{{ url_for('favourite', bean_id=bean._id) }}" role="button">Fav</a></div>
-                            {% endif %}
+                            
                         </div>
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
                             <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab"
