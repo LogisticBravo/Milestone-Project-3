@@ -107,17 +107,35 @@ def update():
             {"username": session["user"]})
 
         if user_exists and user_exists != username:
-            flash("Username Not Available (It already exists)")
-            return render_template("profile.html", username=username)
+            if check_password_hash(
+                    user_exists["password"], request.form.get(
+                        "current_password")):
+                flash("Username Not Available (It already exists)")
+                return render_template("profile.html", username=username)
+            else:
+                flash("Incorrect Password")
+                return render_template("profile.html", username=username)
         elif user_exists == username:
-            flash("That is already your username!")
-            return render_template("profile.html", username=username)
+            if check_password_hash(
+                    user_exists["password"], request.form.get(
+                        "current_password")):
+                flash("That is already your username!")
+                return render_template("profile.html", username=username)
+            else:
+                flash("Incorrect Password")
+                return render_template("profile.html", username=username)
         else:
-            mongo.db.users.update_one(
+            if check_password_hash(
+                username["password"], request.form.get(
+                    "current_password")):
+                mongo.db.users.update_one(
                     {"_id": username["_id"]},
                     {"$set": {"username": request.form.get(
                         "current_username").lower()}}
-                )
+                        )
+            else:
+                flash("Incorrect Password")
+                return render_template("profile.html", username=username)
             flash("Username updated succesffully")
             session["user"] = request.form.get("current_username").lower()
             return profile(username)
