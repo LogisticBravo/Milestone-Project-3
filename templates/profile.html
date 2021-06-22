@@ -9,7 +9,9 @@
                 <a class="btn btn-secondary" href="{{ url_for('logout') }}" role="button">Logout</a>
             </div>
     </div>
+    <form method="POST" action="{{ url_for('update') }}">
     <div class="row mt-5">
+        
         <div class="col-md-5 col-sm-12 offset-md-1">
             <div class="card">
                 <img src="https://www.hpnutrition.ie/image/cache/catalog/Costa%20Coffee/Costa-Coffee-Beans-Signature-Blend-DARK-Roast-500G-350x350.jpg"
@@ -23,14 +25,19 @@
                         <p><small class="text-muted">Last Login: {{ username.last_login }}</small></p>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Existing username"
-                            aria-label="Recipient's username" aria-describedby="button-addon2">
-                        <button class="btn btn-outline-secondary" type="button" id="button-addon2">Edit</button>
+                        <input type="text" id="current_username" name="current_username" class="form-control" placeholder="Existing username"
+                            aria-label="current username" aria-describedby="edit-current-username" value="{{ username.username }}">
+                        <button class="btn btn-outline-secondary" type="button" id="edit-current-username">Edit</button>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Existing Password"
-                            aria-label="Recipient's username" aria-describedby="button-addon2">
-                        <button class="btn btn-outline-secondary" type="button" id="button-addon2">Edit</button>
+                        <input type="password" id="current_password" name="current_password" class="form-control" placeholder="Enter Existing Password"
+                            aria-label="Current Password" aria-describedby="edit-current-password">
+                        <button class="btn btn-outline-secondary" type="button" id="edit-current-password">Edit</button>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="password" id="new_password" name="new_password" class="form-control" placeholder="New Password"
+                            aria-label="New Password" aria-describedby="set-new-password">
+                        <button class="btn btn-outline-secondary" type="button" id="set-new-password">Edit</button>
                     </div>
                     <div class="form-check form-switch row mb-2">
                         <div class="col-md-8 offset-md-2">
@@ -40,8 +47,9 @@
                                 checked>
                         </div>
                     </div>
-                    <a href="#" class="rounded btn btn-secondary">Save Changes</a>
+                    <button type="submit" class="rounded btn btn-secondary" id="submit">Save Changes</button>
                 </div>
+            </form>
             </div>
         </div>
         <div class="col-md-4">

@@ -98,6 +98,31 @@ def profile(username):
     return redirect(url_for("home"))
 
 
+@app.route("/update", methods=["GET", "POST"])
+def update():
+    if request.method == "POST":
+        user_exists = mongo.db.users.find_one(
+            {"username": request.form.get("current_username").lower()})
+        username = mongo.db.users.find_one(
+            {"username": session["user"]})
+
+        if user_exists and user_exists != username:
+            flash("Username Not Available (It already exists)")
+            return render_template("profile.html", username=username)
+        elif user_exists == username:
+            flash("That is already your username!")
+            return render_template("profile.html", username=username)
+        else:
+            mongo.db.users.update_one(
+                    {"_id": username["_id"]},
+                    {"$set": {"username": request.form.get(
+                        "current_username").lower()}}
+                )
+            flash("Username updated succesffully")
+            session["user"] = request.form.get("current_username").lower()
+            return profile(username)
+
+
 @app.route("/logout")
 def logout():
     flash("Successfully logged out")
