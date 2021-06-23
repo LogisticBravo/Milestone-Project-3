@@ -7,6 +7,7 @@ clearButton.onclick = function (){
    preview = []
    $("#clear").find('input:text, textarea').each(function(){
        $(this).val("");
+       $(this).removeClass("is-invalid").removeClass("is-valid");
     });
 }
 //Creates the function that takes the input from the add review form and pushes it to the preview array
@@ -35,6 +36,17 @@ button.onclick = function () {
     print("brew_type",4)
     document.getElementById("bean_description").innerText = preview[5] //Print function couldn't be used as it relies on populating the value attribute.
 }
+
+function validate(){
+$("#clear").find('input:text, textarea').each(function(){
+       if($(this).val() == ""){
+           $(this).addClass("is-invalid")
+        }
+        else {$(this).removeClass("is-invalid").addClass("is-valid")};
+    });
+}
+
+document.getElementById("continueModal1").onmouseover = function(){validate()};
 //continuation of above as the image and affiatiate link inputs are in a different modal
 var continueButton = document.getElementById("continueModal2")
 
