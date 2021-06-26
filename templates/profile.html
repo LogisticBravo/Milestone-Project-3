@@ -99,10 +99,10 @@
                         <h5 class="card-title">My Favourites</h5>
                     </div>
                     {% if username.favourites|length > 0 %}
-                    {% for favourite in username.favourites %}
+                    {% for favourite in favourites %}
                     <div class="card-body">
                         <p class="card-text"><a
-                                href="{{ url_for('reviews') }}#nav-home-{{ favourite.coffee_id }}">{{ favourite.coffee_name }}</a>
+                                href="{{ url_for('reviews') }}#nav-home-{{ favourite._id }}">{{ favourite.bean_name }}</a>
                         </p>
                     </div>
                     {% endfor %}

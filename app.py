@@ -92,8 +92,12 @@ def profile(username):
         username = mongo.db.users.find_one({"username": session["user"]})
         my_reviews = list(mongo.db.beans.find(
             {"created_by": session["user"]}))
+        favourites = list(mongo.db.beans.find(
+            {"favoured_by": {"$elemMatch": {"username": session["user"]}}}
+        ))
         return render_template(
-            "profile.html", username=username, my_reviews=my_reviews)
+            "profile.html", username=username,
+            my_reviews=my_reviews, favourites=favourites)
 
     return redirect(url_for("home"))
 
@@ -244,6 +248,10 @@ def favourite(bean_id):
                     {"_id": ObjectId(username["_id"])},
                     {"$push": {"favourites": favourite}}
                 )
+            mongo.db.beans.update_one(
+                {"_id": ObjectId(bean_id)},
+                {"$push": {"favoured_by": {"username": username["username"]}}}
+            )
             return redirect(url_for(
                 "reviews", bean=bean, username=username))
     except Exception:
