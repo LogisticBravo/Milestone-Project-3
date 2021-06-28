@@ -41,7 +41,7 @@ def signup():
             flash("Username Not Available (It already exists)")
             return redirect(url_for("signup"))
 
-        newsletter_check = "on" if request.form.get(
+        newsletter_check = "checked" if request.form.get(
             "newsletter_check") else "off"
         signup = {
             "email": request.form.get("email").lower(),
@@ -162,6 +162,20 @@ def update_pw():
                         request.form.get("new_password"))}})
                 flash("Password Updated Successfully!")
             return profile(username)
+
+
+@app.route("/newsletter_sub", methods=["GET", "POST"])
+def newsletter_sub():
+    username = mongo.db.users.find_one(
+            {"username": session["user"]})
+    newsletter_check = "checked" if request.form.get(
+            "subscription") else "off"
+    if request.method == "POST":
+        if session["user"]:
+            mongo.db.users.update_one(
+                    {"_id": username["_id"]},
+                    {"$set": {"newsletter_check": newsletter_check}})
+        return profile(username)
 
 
 @app.route("/logout")
