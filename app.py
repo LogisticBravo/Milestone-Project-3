@@ -77,7 +77,7 @@ def login():
                         {"username": session["user"]})
                     flash("Welcome, {}".format(
                         request.form.get("username")))
-                    return render_template("profile.html", username=username)
+                    return profile(username)
             else:
                 flash("Incorrect Username and/or Password")
                 return redirect(request.referrer)
@@ -142,6 +142,25 @@ def update():
                 return render_template("profile.html", username=username)
             flash("Username updated succesffully")
             session["user"] = request.form.get("current_username").lower()
+            return profile(username)
+
+
+@app.route("/update_pw", methods=["GET", "POST"])
+def update_pw():
+    username = mongo.db.users.find_one(
+            {"username": session["user"]})
+    if request.method == "POST":
+        if session["user"]:
+            if check_password_hash(
+                username["password"], request.form.get(
+                    "new_password")):
+                flash("That's already your password!")
+            else:
+                mongo.db.users.update_one(
+                    {"_id": username["_id"]},
+                    {"$set": {"password": generate_password_hash(
+                        request.form.get("new_password"))}})
+                flash("Password Updated Successfully!")
             return profile(username)
 
 

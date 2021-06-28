@@ -56,12 +56,13 @@
                         </div>
                     </div>
                     </form>
-
+                    <form method="POST" action="{{ url_for('update_pw') }}">
                     <div class="input-group mb-3">
                         <input type="password" id="new_password" name="new_password" class="form-control"
                             placeholder="New Password" aria-label="New Password" aria-describedby="set-new-password">
-                        <button class="btn btn-outline-secondary" type="button" id="set-new-password">Edit</button>
+                        <button class="btn btn-outline-secondary" type="submit" id="submit">Edit</button>
                     </div>
+                    </form>
                     <div class="form-check form-switch row mb-2">
                         <div class="col-md-8 offset-md-2">
                             <label class="form-check-label" for="flexSwitchCheckChecked">Newsletter Subscription:
