@@ -63,15 +63,61 @@
                         <button class="btn btn-outline-secondary" type="submit" id="submit">Edit</button>
                     </div>
                     </form>
+                    <form method="POST" action="{{ url_for('newsletter_sub') }}">
                     <div class="form-check form-switch row mb-2">
                         <div class="col-md-8 offset-md-2">
-                            <label class="form-check-label" for="flexSwitchCheckChecked">Newsletter Subscription:
+                            <label class="form-check-label" for="subscription">Newsletter Subscription:
                             </label>
-                            <input class="form-check-input float-end" type="checkbox" id="flexSwitchCheckChecked"
-                                checked>
+                            <input class="form-check-input float-end" type="checkbox" id="subscription" name="subscription" data-bs-toggle="modal" data-bs-target="#unsubscribe"
+                                 {{ username.newsletter_check }}>
                         </div>
                     </div>
-                    <button type="button" class="rounded btn btn-secondary">Save Changes</button>
+
+                    <div class="modal fade" id="unsubscribe" tabindex="-1" aria-labelledby="confirmUnsubscribeLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="confirmUnsubscribeLabel">Confirm Your Password to Make
+                                        Changes</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body input-group">
+                                    <p>Are you sure you want to turn <strong>off</strong> your Newsletter Subscription?</p>
+                                    <p>Doing so may cause you to loose out on special offers only available to subscribers of The Trusted Barista Newsletter!</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-success" data-bs-dismiss="modal">Cancel</button>
+                                    <button type="submit" class="btn btn-danger" id="submit">Save
+                                        changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal fade" id="subscribe" tabindex="-1" aria-labelledby="confirmSubscribeLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="confirmSubscribeLabel">Confirm Your Password to Make
+                                        Changes</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body input-group">
+                                    <p>Awesome!! Hit <strong>Save</strong> below to subscribe and avail of special offers only available to subscribers of The Trusted Barista Newsletter!</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+                                    <button type="submit" class="btn btn-success" id="submit">Save
+                                        changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
                 </div>
             </div>
         </div>
@@ -118,4 +164,7 @@
         </div>
     </div>
 </div>
+{% block scripts %}
+                <script src="{{ url_for('static', filename='js/profile.js') }}"></script>
+                {% endblock %}
 {% endblock %}
