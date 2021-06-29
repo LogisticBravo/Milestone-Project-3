@@ -69,6 +69,16 @@
                                             title="Filter? Espresso Machine? Cafetiere?">
                                     </div>
                                 </div>
+                                <div class="row g-3 mb-2">
+                                    <div class="col">
+                                        <select class="form-select form-select-md" id="origin-type" aria-label=".form-select-sm example">
+                                            <option selected>Choose Origin Type</option>
+                                            {% for origin in origins %}
+                                            <option value="{{ origin.origin_type }}">{{ origin.origin_type }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
                                 <div class="row">
                                     <div class="col">
                                         <!--Description of coffee input-->
@@ -212,6 +222,13 @@
                                                             <!--coffee type input-->
                                                             <div class="col-md-6 mb-1"><strong>Type:
                                                                 </strong>
+                                                                
+                                        <select class="form-select form-select-md" id="origin_type" name="origin_type" aria-label=".form-select-sm example">
+                                        {% for origin in origins %}
+                                                    <option value="{{ origin.origin_type }}">{{ origin.origin_type }}</option>
+                                        {% endfor %}
+                                        </select>
+                                    
                                                             </div>
                                                             <!--coffee origin input-->
                                                             <div class="col-md-6"><label

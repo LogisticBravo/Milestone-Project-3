@@ -187,12 +187,14 @@ def logout():
 
 @app.route("/reviews", methods=["GET", "POST"])
 def reviews():
+    origins = list(mongo.db.origin.find().sort("origin_type", 1))
     beans = list(mongo.db.beans.find())
     try:
         if session["user"]:
             username = mongo.db.users.find_one({"username": session["user"]})
             return render_template(
-                "reviews.html", username=username, beans=beans)
+                "reviews.html", username=username,
+                beans=beans, origins=origins)
     except Exception:
         return render_template("reviews.html", beans=beans)
 
@@ -207,6 +209,7 @@ def add_review():
             "bean_description": request.form.get("bean_description"),
             "bean_origin": request.form.get("bean_origin"),
             "brew_type": request.form.get("brew_type"),
+            "origin_type": request.form.get("origin_type"),
             "bean_image": request.form.get("bean_image"),
             "affialiate_link": request.form.get("affialiate_link"),
             "created_by": session["user"],

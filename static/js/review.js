@@ -29,12 +29,14 @@ button.onclick = function () {
     editReview("bean-origin")
     editReview("brew-type")
     editReview("bean-description")
+    preview.push($("#origin-type").prop("value"))
     print("bean_name",0)
     print("bean_roast",1)
     print("bean_rating",2)
     print("bean_origin",3)
     print("brew_type",4)
     document.getElementById("bean_description").innerText = preview[5] //Print function couldn't be used as it relies on populating the value attribute.
+    $("#origin_type").prop("value", preview[6])
 }
 
 function validate(){
@@ -53,6 +55,6 @@ var continueButton = document.getElementById("continueModal2")
 continueButton.onclick = function () {
     editReview("bean-image")
     editReview("affialiate-link")
-    print("bean_image",6)
-    print("affialiate_link",7)
+    print("bean_image",7)
+    print("affialiate_link",8)
 }
