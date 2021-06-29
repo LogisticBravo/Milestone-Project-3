@@ -137,6 +137,11 @@ def update():
                     {"$set": {"username": request.form.get(
                         "current_username").lower()}}
                         )
+                mongo.db.beans.update_many(
+                    {"created_by_id": username["_id"]},
+                    {"$set": {"created_by": request.form.get(
+                        "current_username").lower()}}
+                )
             else:
                 flash("Incorrect Password")
                 return render_template("profile.html", username=username)
