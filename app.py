@@ -91,9 +91,9 @@ def profile(username):
     if session["user"]:
         username = mongo.db.users.find_one({"username": session["user"]})
         my_reviews = list(mongo.db.beans.find(
-            {"created_by": session["user"]}))
+            {"created_by_id": username["_id"]}))
         favourites = list(mongo.db.beans.find(
-            {"favoured_by": {"$elemMatch": {"username": session["user"]}}}
+            {"favoured_by": {"$elemMatch": {"username": username["_id"]}}}
         ))
         return render_template(
             "profile.html", username=username,
@@ -202,6 +202,7 @@ def reviews():
 @app.route("/add_review", methods=["GET", "POST"])
 def add_review():
     if request.method == "POST":
+        username = mongo.db.users.find_one({"username": session["user"]})
         bean = {
             "bean_name": request.form.get("bean_name"),
             "bean_roast": request.form.get("bean_roast"),
@@ -213,6 +214,7 @@ def add_review():
             "bean_image": request.form.get("bean_image"),
             "affialiate_link": request.form.get("affialiate_link"),
             "created_by": session["user"],
+            "created_by_id": username["_id"],
             "created_date": datetime.datetime.utcnow()
         }
         mongo.db.beans.insert_one(bean)
@@ -286,7 +288,7 @@ def favourite(bean_id):
                 )
             mongo.db.beans.update_one(
                 {"_id": ObjectId(bean_id)},
-                {"$push": {"favoured_by": {"username": username["username"]}}}
+                {"$push": {"favoured_by": {"username": username["_id"]}}}
             )
             return redirect(url_for(
                 "reviews", bean=bean, username=username))
