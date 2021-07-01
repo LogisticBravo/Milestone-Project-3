@@ -71,7 +71,8 @@
                                 </div>
                                 <div class="row g-3 mb-2">
                                     <div class="col">
-                                        <select class="form-select form-select-md" id="origin-type" aria-label=".form-select-sm example">
+                                        <select class="form-select form-select-md" id="origin-type"
+                                            aria-label=".form-select-sm example">
                                             <option selected>Choose Origin Type</option>
                                             {% for origin in origins %}
                                             <option value="{{ origin.origin_type }}">{{ origin.origin_type }}</option>
@@ -160,14 +161,14 @@
                                         <div class="modal-body">
                                             <div class="card">
                                                 <div class="row g-0">
-                                                    <div class="col-md-12 card-body"> 
+                                                    <div class="col-md-12 card-body">
                                                         <!--title of coffee input-->
                                                         <label for="bean_name">Review Title</label>
                                                         <input type="text" id="bean_name" name="bean_name"
                                                             class="form-control" placeholder="Coffee Name"
                                                             data-bs-toggle="tooltip" data-bs-placement="top"
                                                             title="Name of the coffee bean you are reviewing" value="">
-                                                            <!--image link of coffee input-->
+                                                        <!--image link of coffee input-->
                                                         <label for="bean_image" class="mb-1">Link an image of the
                                                             coffee</label>
                                                         <input type="text" id="bean_image" name="bean_image"
@@ -175,7 +176,7 @@
                                                             placeholder="Add a link to an image of this coffee"
                                                             aria-label="product image URl"
                                                             aria-describedby="productimage" value="">
-                                                            <!--affialiate link input-->
+                                                        <!--affialiate link input-->
                                                         <label for="affialiate_link"><small>Available to
                                                                 buy: </small></label>
                                                         <input type="text" id="affialiate_link" name="affialiate_link"
@@ -222,13 +223,16 @@
                                                             <!--coffee type input-->
                                                             <div class="col-md-6 mb-1"><strong>Type:
                                                                 </strong>
-                                                                
-                                        <select class="form-select form-select-md" id="origin_type" name="origin_type" aria-label=".form-select-sm example">
-                                        {% for origin in origins %}
-                                                    <option value="{{ origin.origin_type }}">{{ origin.origin_type }}</option>
-                                        {% endfor %}
-                                        </select>
-                                    
+
+                                                                <select class="form-select form-select-md"
+                                                                    id="origin_type" name="origin_type"
+                                                                    aria-label=".form-select-sm example">
+                                                                    {% for origin in origins %}
+                                                                    <option value="{{ origin.origin_type }}">
+                                                                        {{ origin.origin_type }}</option>
+                                                                    {% endfor %}
+                                                                </select>
+
                                                             </div>
                                                             <!--coffee origin input-->
                                                             <div class="col-md-6"><label
@@ -299,7 +303,7 @@
                                 aria-controls="nav-home" aria-selected="true">Review</button>
                             <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab"
                                 data-bs-target="#nav-profile-{{ bean._id }}" type="button" role="tab"
-                                aria-controls="nav-profile" aria-selected="false">Q & A</button>
+                                aria-controls="nav-profile" aria-selected="false">Comments</button>
                             <div class="nav nav-tabs col-md-6 justify-content-end" id="nav-tab" role="tablist">
                                 <!--Delete Review Modal-->
                                 <div class="modal fade" id="delete_review-{{ bean._id }}" tabindex="-1"
@@ -485,17 +489,53 @@
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="nav-profile-{{ bean._id }}" role="tabpanel"
-                                    aria-labelledby="nav-profile-tab">Comments
-                                    here</div>
+                                    aria-labelledby="nav-profile-tab">
+                                    <div class="card">
+                                        <div class="row g-0">
+
+
+
+                                            <!--User comments generated for each review-->
+                                            {% for comment in bean.comments %}
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <blockquote class="blockquote mb-0">
+                                                        <p>{{ comment.comment }}</p>
+                                                        <footer class="blockquote-footer">Added by: <cite
+                                                                title="Source Title">{{ comment.username }}</cite>
+                                                        </footer>
+
+                                                    </blockquote>
+                                                </div>
+
+                                            </div>
+                                            {% endfor %}
+
+                                            <!--Add comments to review-->
+                                            <form method="POST" action="{{ url_for('add_comment', bean_id=bean._id) }}">
+                                                <div class="col-md-12 card-body">
+                                                    <div class="input-group mb-3">
+                                                        <input type="text" class="form-control" id="comment"
+                                                            name="comment" placeholder="Questions"
+                                                            aria-label="Recipient's username"
+                                                            aria-describedby="button-addon2">
+                                                        <button class="btn btn-success" type="submit"
+                                                            id="add-comment">Add</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                {% endfor %}
-                {% else %}
-                <h3>Your search returned no results</h3>
-                {% endif %}
-                {% block scripts %}
-                <script src="{{ url_for('static', filename='js/review.js') }}"></script>
-                {% endblock %}
-                {% endblock %}
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <h3>Your search returned no results</h3>
+        {% endif %}
+        {% block scripts %}
+        <script src="{{ url_for('static', filename='js/review.js') }}"></script>
+        {% endblock %}
+        {% endblock %}
