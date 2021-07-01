@@ -294,7 +294,8 @@
                             {% endif %}
                             {% if session.user %}
                             <div class="col d-grid gap-2 d-md-flex justify-content-md-end"><a class="btn btn-primary"
-                                    href="{{ url_for('favourite', bean_id=bean._id) }}" role="button">Fav</a></div>
+                                    href="{{ url_for('favourite', bean_id=bean._id) }}" role="button">Fav</a><a class="btn btn-primary"
+                                    href="{{ url_for('remove_favourite', bean_id=bean._id) }}" role="button">Unfav</a></div>
                             {% endif %}
                         </div>
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">

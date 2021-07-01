@@ -93,7 +93,7 @@ def profile(username):
         my_reviews = list(mongo.db.beans.find(
             {"created_by_id": username["_id"]}))
         favourites = list(mongo.db.beans.find(
-            {"favoured_by": {"$elemMatch": {"username": username["_id"]}}}
+            {"favoured_by": {"$elemMatch": {"username": username["username"]}}}
         ))
         return render_template(
             "profile.html", username=username,
@@ -322,12 +322,28 @@ def favourite(bean_id):
                 )
             mongo.db.beans.update_one(
                 {"_id": ObjectId(bean_id)},
-                {"$push": {"favoured_by": {"username": username["_id"]}}}
+                {"$push": {"favoured_by": {"user_id": username["_id"], "username": username["username"]}}}
             )
             return redirect(url_for(
                 "reviews", bean=bean, username=username))
     except Exception:
         return render_template("reviews.html")
+
+
+@app.route("/remove_favourite/<bean_id>")
+def remove_favourite(bean_id):
+    if session["user"]:
+        username = mongo.db.users.find_one({"username": session["user"]})
+        mongo.db.beans.update_one(
+            {"_id": ObjectId(bean_id)},
+            {"$pull": {"favoured_by": {"user_id": username["_id"]}}}
+        )
+        mongo.db.users.update_one(
+            {"_id": ObjectId(username["_id"])},
+            {"$pull": {"favourites": {"coffee_id": ObjectId(bean_id)}}}
+        )
+        flash("Yikes! Left a bad taste?!")
+    return redirect(url_for("reviews"))
 
 
 if __name__ == "__main__":
