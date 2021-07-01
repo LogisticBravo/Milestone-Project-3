@@ -263,6 +263,23 @@ def delete_review(bean_id):
     return redirect(url_for("reviews"))
 
 
+@app.route("/add_comment/<bean_id>", methods=["GET", "POST"])
+def add_comment(bean_id):
+    if session["user"]:
+        username = mongo.db.users.find_one({"username": session["user"]})
+        if request.method == "POST":
+            comments = {
+                    "user_id": username["_id"],
+                    "username": username["username"],
+                    "comment": request.form.get("comment")
+                }
+            mongo.db.beans.update_one(
+                {"_id": ObjectId(bean_id)},
+                {"$push": {"comments": comments}})
+            flash("Added Comment!")
+        return reviews()
+
+
 @app.route("/search", methods=["GET", "POST"])
 def search():
     query = request.form.get("query")
