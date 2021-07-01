@@ -269,6 +269,7 @@ def add_comment(bean_id):
         username = mongo.db.users.find_one({"username": session["user"]})
         if request.method == "POST":
             comments = {
+                    "comment_id": ObjectId(),
                     "user_id": username["_id"],
                     "username": username["username"],
                     "comment": request.form.get("comment")
@@ -278,6 +279,17 @@ def add_comment(bean_id):
                 {"$push": {"comments": comments}})
             flash("Added Comment!")
         return reviews()
+
+
+@app.route("/delete_comment/<bean_id>/<comment_id>")
+def delete_comment(bean_id, comment_id):
+    if session["user"]:
+        mongo.db.beans.update_one(
+            {"_id": ObjectId(bean_id)},
+            {"$pull": {"comments": {"comment_id": ObjectId(comment_id)}}}
+        )
+        flash("comment removed")
+    return redirect(url_for("reviews"))
 
 
 @app.route("/search", methods=["GET", "POST"])
