@@ -43,6 +43,7 @@ def signup():
 
         newsletter_check = "checked" if request.form.get(
             "newsletter_check") else "off"
+        fav = [{"fav_id": ObjectId(), "favshown": False}]
         signup = {
             "email": request.form.get("email").lower(),
             "username": request.form.get("new_username").lower(),
@@ -52,7 +53,8 @@ def signup():
             "is_admin": "off",
             "newsletter_check": newsletter_check,
             "signup_date": datetime.datetime.utcnow(),
-            "last_login": datetime.datetime.utcnow()
+            "last_login": datetime.datetime.utcnow(),
+            "favourites": fav
         }
         mongo.db.users.insert_one(signup)
 
@@ -197,9 +199,10 @@ def reviews():
     try:
         if session["user"]:
             username = mongo.db.users.find_one({"username": session["user"]})
+            favourites = list(username["favourites"])
             return render_template(
                 "reviews.html", username=username,
-                beans=beans, origins=origins)
+                beans=beans, origins=origins, favourites=favourites)
     except Exception:
         return render_template("reviews.html", beans=beans)
 
@@ -220,7 +223,8 @@ def add_review():
             "affialiate_link": request.form.get("affialiate_link"),
             "created_by": session["user"],
             "created_by_id": username["_id"],
-            "created_date": datetime.datetime.utcnow()
+            "created_date": datetime.datetime.utcnow(),
+            "favshown": True
         }
         mongo.db.beans.insert_one(bean)
         flash("Review Added!")
@@ -314,7 +318,8 @@ def favourite(bean_id):
                 {"_id": ObjectId(bean_id)})["bean_name"]
             favourite = {
                     "coffee_id": ObjectId(bean_id),
-                    "coffee_name": bean
+                    "coffee_name": bean,
+                    "favshown": True
                 }
             mongo.db.users.update_one(
                     {"_id": ObjectId(username["_id"])},
@@ -324,6 +329,7 @@ def favourite(bean_id):
                 {"_id": ObjectId(bean_id)},
                 {"$push": {"favoured_by": {"user_id": username["_id"], "username": username["username"]}}}
             )
+            flash("Added to your Favourites!")
             return redirect(url_for(
                 "reviews", bean=bean, username=username))
     except Exception:
