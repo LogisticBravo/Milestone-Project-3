@@ -40,7 +40,7 @@ button.onclick = function () {
 }
 
 function validate(){
-$("#clear").find('input:text, textarea').each(function(){
+$("#validate").find('input:text, textarea').each(function(){
        if($(this).val() == ""){
            $(this).addClass("is-invalid")
         }
@@ -58,3 +58,10 @@ continueButton.onclick = function () {
     print("bean_image",7)
     print("affialiate_link",8)
 }
+
+/*Fixes bug where favourite button was still displaying on favourited reviews to user. 
+Identifies an element wthat contains 'remove-favourite' in id and selects the next element, in this case the favourite button.
+Adds bootstraps disabled and d-none class to hide and disable the button.  */
+$(document).ready(function(){
+    $("a[id*='remove-favourite']").next().addClass("disabled d-none")
+})
