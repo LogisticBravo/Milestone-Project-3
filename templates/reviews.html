@@ -25,7 +25,7 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
-                            <div class="modal-body" id="clear">
+                            <div class="modal-body" id="validate">
                                 <div class="row mb-2">
                                     <div class="col">
                                         <!--title of coffee input-->
@@ -293,9 +293,27 @@
                             </div>
                             {% endif %}
                             {% if session.user %}
-                            <div class="col d-grid gap-2 d-md-flex justify-content-md-end"><a class="btn btn-primary"
-                                    href="{{ url_for('favourite', bean_id=bean._id) }}" role="button">Fav</a><a class="btn btn-primary"
-                                    href="{{ url_for('remove_favourite', bean_id=bean._id) }}" role="button">Unfav</a></div>
+                            <!-- Remove favourite button and logic for showing -->
+                            <div class="col d-grid gap-2 d-md-flex justify-content-md-end">
+                                {% for fav in username.favourites %}
+                                {% if bean._id == fav.coffee_id %}
+                                <a class="btn btn-primary" href="{{ url_for('remove_favourite', bean_id=bean._id) }}"
+                                    id="remove-favourite-{{ bean.bean_name }}" role="button">Unfav</a>
+                                {% endif %}
+                                {% endfor %}
+                                <!-- Add favourite button. Logic has bug where fav buttons till shows after favourited review. Fixed with JS script. -->
+                                {% for fav in favourites %}
+                                {% if bean.favshown != fav.favshown %}
+                                {% if bean._id != fav.coffee_id %}
+                                {% if bean.bean_name != fav.coffee_name %}
+                                <a class="btn btn-primary" href="{{ url_for('favourite', bean_id=bean._id) }}"
+                                    id="favourite-{{ bean.bean_name }}" role="button">Fav</a>
+                                {% endif %}
+                                {% endif %}
+                                {% endif %}
+                                {% endfor %}
+                            </div>
+                            <!-- End favourite/remove favourite buttons -->
                             {% endif %}
                         </div>
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -502,8 +520,8 @@
                                                 <div class="card-body">
                                                     <blockquote class="blockquote mb-0">
                                                         <p>{{ comment.comment }}</p><a class="btn btn-danger"
-                                        href="{{ url_for('delete_comment', comment_id=comment.comment_id, bean_id=bean._id) }}"
-                                        role="button">Delete Comment</a>
+                                                            href="{{ url_for('delete_comment', comment_id=comment.comment_id, bean_id=bean._id) }}"
+                                                            role="button">Delete Comment</a>
                                                         <footer class="blockquote-footer">Added by: <cite
                                                                 title="Source Title">{{ comment.username }}</cite>
                                                         </footer>
