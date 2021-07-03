@@ -25,97 +25,107 @@
                         <p><small class="text-muted">Last Login: {{ username.last_login }}</small></p>
                     </div>
                     <form method="POST" action="{{ url_for('update') }}">
-                    <div class="input-group mb-3">
-                        <input type="text" id="current_username" name="current_username" class="form-control"
-                            placeholder="Existing username" aria-label="current username"
-                            aria-describedby="edit-current-username" value="{{ username.username }}">
-                        <button class="btn btn-outline-secondary" type="button" id="edit-current-username"
-                            data-bs-toggle="modal" data-bs-target="#confirmPassword">Edit</button>
-                    </div>
-                    <div class="modal fade" id="confirmPassword" tabindex="-1" aria-labelledby="confirmPasswordLabel"
-                        aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="confirmPasswordLabel">Confirm Your Password to Make
-                                        Changes</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body input-group">
-                                    <input type="password" id="current_password" name="current_password"
-                                        class="form-control" placeholder="Enter Existing Password"
-                                        aria-label="Current Password" aria-describedby="edit-current-password" required>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
-                                    <button type="submit" class="btn btn-success" id="submit">Save
-                                        changes</button>
+                        <div class="input-group mb-3">
+                            <input type="text" id="current_username" name="current_username" class="form-control"
+                                placeholder="Existing username" aria-label="current username"
+                                aria-describedby="edit-current-username" value="{{ username.username }}">
+                            <button class="btn btn-outline-secondary" type="button" id="edit-current-username"
+                                data-bs-toggle="modal" data-bs-target="#confirmPassword">Edit</button>
+                        </div>
+                        <div class="modal fade" id="confirmPassword" tabindex="-1"
+                            aria-labelledby="confirmPasswordLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="confirmPasswordLabel">Confirm Your Password to Make
+                                            Changes</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body input-group">
+                                        <input type="password" id="current_password" name="current_password"
+                                            class="form-control" placeholder="Enter Existing Password"
+                                            aria-label="Current Password" aria-describedby="edit-current-password"
+                                            required>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger"
+                                            data-bs-dismiss="modal">Cancel</button>
+                                        <button type="submit" class="btn btn-success" id="submit">Save
+                                            changes</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                     </form>
                     <form method="POST" action="{{ url_for('update_pw') }}">
-                    <div class="input-group mb-3">
-                        <input type="password" id="new_password" name="new_password" class="form-control"
-                            placeholder="New Password" aria-label="New Password" aria-describedby="set-new-password">
-                        <button class="btn btn-outline-secondary" type="submit" id="submit">Edit</button>
-                    </div>
+                        <div class="input-group mb-3">
+                            <input type="password" id="new_password" name="new_password" class="form-control"
+                                placeholder="New Password" aria-label="New Password"
+                                aria-describedby="set-new-password">
+                            <button class="btn btn-outline-secondary" type="submit" id="submit">Edit</button>
+                        </div>
                     </form>
                     <form method="POST" action="{{ url_for('newsletter_sub') }}">
-                    <div class="form-check form-switch row mb-2">
-                        <div class="col-md-8 offset-md-2">
-                            <label class="form-check-label" for="subscription">Newsletter Subscription:
-                            </label>
-                            <input class="form-check-input float-end" type="checkbox" id="subscription" name="subscription" data-bs-toggle="modal" data-bs-target="#unsubscribe"
-                                 {{ username.newsletter_check }}>
+                        <div class="form-check form-switch row mb-2">
+                            <div class="col-md-8 offset-md-2">
+                                <label class="form-check-label" for="subscription">Newsletter Subscription:
+                                </label>
+                                <input class="form-check-input float-end" type="checkbox" id="subscription"
+                                    name="subscription" data-bs-toggle="modal" data-bs-target="#unsubscribe"
+                                    {{ username.newsletter_check }}>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="modal fade" id="unsubscribe" data-bs-backdrop="static" tabindex="-1" aria-labelledby="confirmUnsubscribeLabel"
-                        aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="confirmUnsubscribeLabel">Unsubscribe from Newsletter</h5>
-                                    <button type="button" class="btn-close" id="unsubClose" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body input-group">
-                                    <p>Are you sure you want to turn <strong>off</strong> your Newsletter Subscription?</p>
-                                    <p>Doing so may cause you to loose out on special offers only available to subscribers of The Trusted Barista Newsletter!</p>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-success" id="unsubCancel" data-bs-dismiss="modal">Cancel</button>
-                                    <button type="submit" class="btn btn-danger" id="submit">Save
-                                        changes</button>
+                        <div class="modal fade" id="unsubscribe" data-bs-backdrop="static" tabindex="-1"
+                            aria-labelledby="confirmUnsubscribeLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="confirmUnsubscribeLabel">Unsubscribe from Newsletter
+                                        </h5>
+                                        <button type="button" class="btn-close" id="unsubClose" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body input-group">
+                                        <p>Are you sure you want to turn <strong>off</strong> your Newsletter
+                                            Subscription?</p>
+                                        <p>Doing so may cause you to loose out on special offers only available to
+                                            subscribers of The Trusted Barista Newsletter!</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-success" id="unsubCancel"
+                                            data-bs-dismiss="modal">Cancel</button>
+                                        <button type="submit" class="btn btn-danger" id="submit">Save
+                                            changes</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="modal fade" id="subscribe" data-bs-backdrop="static" tabindex="-1" aria-labelledby="confirmSubscribeLabel"
-                        aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="confirmSubscribeLabel">Subscribe to Newsletter</h5>
-                                    <button type="button" class="btn-close" id="subClose" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body input-group">
-                                    <p>Awesome!! Hit <strong>Save</strong> below to subscribe and avail of special offers only available to subscribers of The Trusted Barista Newsletter!</p>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger" id="subCancel" data-bs-dismiss="modal">Cancel</button>
-                                    <button type="submit" class="btn btn-success" id="submit">Save
-                                        changes</button>
+                        <div class="modal fade" id="subscribe" data-bs-backdrop="static" tabindex="-1"
+                            aria-labelledby="confirmSubscribeLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="confirmSubscribeLabel">Subscribe to Newsletter</h5>
+                                        <button type="button" class="btn-close" id="subClose" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body input-group">
+                                        <p>Awesome!! Hit <strong>Save</strong> below to subscribe and avail of special
+                                            offers only available to subscribers of The Trusted Barista Newsletter!</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" id="subCancel"
+                                            data-bs-dismiss="modal">Cancel</button>
+                                        <button type="submit" class="btn btn-success" id="submit">Save
+                                            changes</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
                 </div>
             </div>
         </div>
@@ -133,7 +143,8 @@
                 {% endfor %}
                 {% else %}
                 <div class="card-body">
-                    <p class="card-text">You haven't left any reviews yet! Why not <a href="{{ url_for('reviews') }}#writeReviewToggle">add one now?</a></p>
+                    <p class="card-text">You haven't left any reviews yet! Why not <a
+                            href="{{ url_for('reviews') }}#writeReviewToggle">add one now?</a></p>
                 </div>
                 {% endif %}
             </div>
@@ -143,7 +154,7 @@
                     <div class="card-header">
                         <h5 class="card-title">My Favourites</h5>
                     </div>
-                    {% if username.favourites|length > 0 %}
+                    {% if username.favourites|length > 1 %}
                     {% for favourite in favourites %}
                     <div class="card-body">
                         <p class="card-text"><a
@@ -153,8 +164,9 @@
                     {% endfor %}
                     {% else %}
                     <div class="card-body">
-                    <p class="card-text">You haven't added any favourite reviews yet! Check out some <a href="{{ url_for('reviews') }}">Reviews</a> now to add one!</p>
-                </div>
+                        <p class="card-text">You haven't added any favourite reviews yet! Check out some <a
+                                href="{{ url_for('reviews') }}">Reviews</a> now to add one!</p>
+                    </div>
                     {% endif %}
                 </div>
             </div>
@@ -163,6 +175,6 @@
     </div>
 </div>
 {% block scripts %}
-                <script src="{{ url_for('static', filename='js/profile.js') }}"></script>
-                {% endblock %}
+<script src="{{ url_for('static', filename='js/profile.js') }}"></script>
+{% endblock %}
 {% endblock %}
