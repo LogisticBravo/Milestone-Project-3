@@ -22,13 +22,14 @@ mongo = PyMongo(app)
 @app.route("/")
 @app.route("/home")
 def home():
+    reviews = list(mongo.db.beans.aggregate([{"$sort": {"created_date": -1}}, {"$limit": 5}]))
     try:
         if session["user"]:
             username = mongo.db.users.find_one({"username": session["user"]})
             return render_template(
-                "index.html", username=username)
+                "index.html", username=username, reviews=reviews)
     except Exception:
-        return render_template("index.html")
+        return render_template("index.html", reviews=reviews)
 
 
 @app.route("/signup", methods=["GET", "POST"])

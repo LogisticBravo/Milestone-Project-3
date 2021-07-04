@@ -20,4 +20,58 @@
     </div>
 </section>
 
+<section class="page-section clearfix mb-5">
+    <h1 class="pl-5 mx-5">Latest Reviews</h1>
+    <div class="container-fluid mt-5">
+    <div class="row mb-3 pt-5 scroll-div">
+        {% for review in reviews %}
+        {% if loop.index == 1 %}
+        <div class="col-sm-6">
+            <div class="card mb-3">
+                <div class="row g-0">
+                  <div class="col-md-4">
+                    <img src="{{ review.bean_image }}" class="img-fluid rounded-start" alt="Image of {{ review.bean_name }}">
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <h5 class="card-title">{{ review.bean_name|title }}</h5>
+                      <p class="card-text">{{ review.bean_description }}</p>
+                      <p class="card-text">Added:<small class="text-muted"> {{ review.created_date }}</small></p>
+                      <a href="{{ url_for('reviews') }}#nav-home-{{ review._id }}" class="btn btn-primary">Read More</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+        {% elif loop.index == 2 %}
+        <div class="col-sm-4">
+            <div class="card mb-3">
+              <div class="card-body">
+                <h5 class="card-title">{{ review.bean_name|title }}</h5>
+                <p class="card-text">{{ review.bean_description }}</p>
+                <a href="{{ url_for('reviews') }}#nav-home-{{ review._id }}" class="btn btn-primary">Read More</a>
+              </div>
+            </div>
+          </div>
+            {% else %}
+            <div class="col-sm-4 pb-5 scroll-div-2">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">{{ review.bean_name|title }}</h5>
+                    <p class="card-text">{{ review.bean_description }}</p>
+                    <p class="card-text">Added:<small class="text-muted"> {{ review.created_date }}</small></p>
+                    <a href="{{ url_for('reviews') }}#nav-home-{{ review._id }}" class="btn btn-primary">Read More</a>
+                  </div>
+                </div>
+              </div>
+        
+        {% endif %}
+        {% endfor %}
+      </div>
+        
+        </div>
+        
+    
+</section>
+
 {% endblock %}
