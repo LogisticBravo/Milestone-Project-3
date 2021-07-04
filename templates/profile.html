@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% set active_page = "profile" %}
 {% block content %}
 <div class="container">
     <div class="row mt-5">
@@ -6,13 +7,13 @@
             <h1>My Profile</h1>
         </div>
         <div class="col-sm-2 offset-md-2">
-            <a class="btn btn-secondary" href="{{ url_for('logout') }}" role="button">Logout</a>
+            <a class="btn btn-orange" href="{{ url_for('logout') }}" role="button">Logout</a>
         </div>
     </div>
 
     <div class="row mt-5">
 
-        <div class="col-md-5 col-sm-12 offset-md-1">
+        <div class="col-md-5 col-sm-12 offset-md-1 mb-3">
             <div class="card">
                 <img src="https://www.hpnutrition.ie/image/cache/catalog/Costa%20Coffee/Costa-Coffee-Beans-Signature-Blend-DARK-Roast-500G-350x350.jpg"
                     class="rounded img-fluid card-img-top" alt="...">
@@ -69,7 +70,7 @@
                     <form method="POST" action="{{ url_for('newsletter_sub') }}">
                         <div class="form-check form-switch row mb-2">
                             <div class="col-md-8 offset-md-2">
-                                <label class="form-check-label" for="subscription">Newsletter Subscription:
+                                <label class="form-check-label pe-3" for="subscription">Newsletter Subscription:
                                 </label>
                                 <input class="form-check-input float-end" type="checkbox" id="subscription"
                                     name="subscription" data-bs-toggle="modal" data-bs-target="#unsubscribe"
@@ -130,8 +131,8 @@
             </div>
         </div>
         <div class="col-md-4">
-            <div class="card mb-3">
-                <div class="card-header">
+            <div class="card mb-3 mh">
+                <div class="card-header sticky-top">
                     <h5 class="card-title">My Reviews</h5>
                 </div>
                 {% if my_reviews|length > 0 %}
@@ -150,8 +151,8 @@
             </div>
 
             <div class="col-md-12">
-                <div class="card mb-3">
-                    <div class="card-header">
+                <div class="card mb-3 mh">
+                    <div class="card-header sticky-top">
                         <h5 class="card-title">My Favourites</h5>
                     </div>
                     {% if username.favourites|length > 1 %}

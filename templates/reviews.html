@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% set active_page = "reviews" %}
 {% block content %}
 <main>
     <div class="container">
@@ -282,7 +283,7 @@
                 <div class="col-sm-12 col-md-7 offset-md-2 mx-3 w-100">
                     <div class="card mt-3 card-border">
                         <div class="card-header strong row">
-                            <h4>{{ bean.bean_name }}</h4>
+                            <h4>{{ bean.bean_name|title }}</h4>
                             {% if session.user|lower == bean.created_by|lower %}
                             <div class="col-6">
                                 <a class="btn" href="{{ url_for('edit_review', bean_id=bean._id) }}"
@@ -521,9 +522,12 @@
                                                     <blockquote class="blockquote mb-0 ">
                                                         <p>{{ comment.comment }}</p>
                                                         <footer class="blockquote-footer text-end">Added by: <cite
-                                                                title="Source Title" class="pe-3">{{ comment.username }}</cite><a class="btn btn-danger"
+                                                                title="Source Title" class="pe-3">{{ comment.username }}</cite>
+                                                                {% if session.user|lower == comment.username|lower %}
+                                                                <a class="btn btn-danger"
                                                                 href="{{ url_for('delete_comment', comment_id=comment.comment_id, bean_id=bean._id) }}"
                                                                 role="button"><i class="fa-trash-alt fa-lg fas"></i></a>
+                                                                {% endif %}
                                                         </footer>
 
                                                     </blockquote>
@@ -534,7 +538,8 @@
 
                                            
                                         </div>
-                                        <div class="row g-0">
+                                        <div class="row g-0 text-end">
+                                            {% if session.user %}
                                             <!--Add comments to review-->
                                             <form method="POST" action="{{ url_for('add_comment', bean_id=bean._id) }}">
                                                 <div class="col-md-12 card-body">
@@ -546,6 +551,9 @@
                                                         <button class="btn btn-success" type="submit"
                                                             id="add-comment">Add</button>
                                             </form>
+                                            {% else %}
+                                            <p class="mt-2 pe-3">You must be logged in to post comments</p>
+                                            {% endif %}
                                         </div>
                                     </div>
                                 </div>
