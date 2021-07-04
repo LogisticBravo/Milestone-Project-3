@@ -63,5 +63,10 @@ continueButton.onclick = function () {
 Identifies an element wthat contains 'remove-favourite' in id and selects the next element, in this case the favourite button.
 Adds bootstraps disabled and d-none class to hide and disable the button.  */
 $(document).ready(function(){
-    $("a[id*='remove-favourite']").next().addClass("disabled d-none")
+    $("a[id*='remove-favourite']").next().addClass("disabled d-none");
+    //Changes class on FA icon on hover
+    $('.fas, .far').hover(
+        function(){ $(this).toggleClass('far').toggleClass('fas') }
+    )
 })
+

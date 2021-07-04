@@ -9,7 +9,7 @@
             <!--Write Review Modal Button-->
             {% if session.user %}
             <div class="col-sm-2 offset-md-2">
-                <button type="button" class="btn btn-primary" id="write-review" data-bs-toggle="modal"
+                <button type="button" class="btn btn-orange" id="write-review" data-bs-toggle="modal"
                     data-bs-target="#writeReviewToggle">Write
                     Review!</button>
             </div>
@@ -279,17 +279,17 @@
             {% if beans|length > 0 %}
             {% for bean in beans %}
             <div class="row mt-5">
-                <div class="col-sm-8 offset-sm-2">
-                    <div class="card w-75 mt-3">
+                <div class="col-sm-12 col-md-7 offset-md-2 mx-3 w-100">
+                    <div class="card mt-3 card-border">
                         <div class="card-header strong row">
                             <h4>{{ bean.bean_name }}</h4>
                             {% if session.user|lower == bean.created_by|lower %}
                             <div class="col-6">
-                                <a class="btn btn-primary" href="{{ url_for('edit_review', bean_id=bean._id) }}"
+                                <a class="btn" href="{{ url_for('edit_review', bean_id=bean._id) }}"
                                     role="button" data-bs-toggle="modal"
-                                    data-bs-target="#edit_review-{{ bean._id }}">Edit</a>
-                                <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                    data-bs-target="#delete_review-{{ bean._id }}">Delete</button>
+                                    data-bs-target="#edit_review-{{ bean._id }}"><i class="far fa-edit fa-lg"></i></a>
+                                <button type="button" class="btn" data-bs-toggle="modal"
+                                    data-bs-target="#delete_review-{{ bean._id }}"><i class="fas fa-trash-alt fa-lg"></i></button>
                             </div>
                             {% endif %}
                             {% if session.user %}
@@ -297,8 +297,8 @@
                             <div class="col d-grid gap-2 d-md-flex justify-content-md-end">
                                 {% for fav in username.favourites %}
                                 {% if bean._id == fav.coffee_id %}
-                                <a class="btn btn-primary" href="{{ url_for('remove_favourite', bean_id=bean._id) }}"
-                                    id="remove-favourite-{{ bean.bean_name }}" role="button">Unfav</a>
+                                <a class="btn" href="{{ url_for('remove_favourite', bean_id=bean._id) }}"
+                                    id="remove-favourite-{{ bean.bean_name }}" role="button"><i class="fas fa-star fa-lg"></i></a>
                                 {% endif %}
                                 {% endfor %}
                                 <!-- Add favourite button. Logic has bug where fav buttons till shows after favourited review. Fixed with JS script. -->
@@ -306,8 +306,8 @@
                                 {% if bean.favshown != fav.favshown %}
                                 {% if bean._id != fav.coffee_id %}
                                 {% if bean.bean_name != fav.coffee_name %}
-                                <a class="btn btn-primary" href="{{ url_for('favourite', bean_id=bean._id) }}"
-                                    id="favourite-{{ bean.bean_name }}" role="button">Fav</a>
+                                <a class="btn" href="{{ url_for('favourite', bean_id=bean._id) }}"
+                                    id="favourite-{{ bean.bean_name }}" role="button"><i class="far fa-star fa-lg"></i></a>
                                 {% endif %}
                                 {% endif %}
                                 {% endif %}
@@ -319,10 +319,10 @@
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
                             <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab"
                                 data-bs-target="#nav-home-{{ bean._id }}" type="button" role="tab"
-                                aria-controls="nav-home" aria-selected="true">Review</button>
+                                aria-controls="nav-home" aria-selected="true"><i class="fab fa-readme fa-lg"></i></button>
                             <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab"
                                 data-bs-target="#nav-profile-{{ bean._id }}" type="button" role="tab"
-                                aria-controls="nav-profile" aria-selected="false">Comments</button>
+                                aria-controls="nav-profile" aria-selected="false"><i class="far fa-comments fa-lg"></i></button>
                             <div class="nav nav-tabs col-md-6 justify-content-end" id="nav-tab" role="tablist">
                                 <!--Delete Review Modal-->
                                 <div class="modal fade" id="delete_review-{{ bean._id }}" tabindex="-1"
@@ -465,7 +465,7 @@
                                 <!--End Edit Review Modal-->
 
                             </div>
-                            <div class="tab-content" id="nav-tabContent">
+                            <div class="tab-content w-100" id="nav-tabContent">
                                 <div class="tab-pane fade show active pl-5" id="nav-home-{{ bean._id }}" role="tabpanel"
                                     aria-labelledby="nav-home-tab">
                                     <div class="card">
@@ -510,20 +510,20 @@
                                 <div class="tab-pane fade" id="nav-profile-{{ bean._id }}" role="tabpanel"
                                     aria-labelledby="nav-profile-tab">
                                     <div class="card">
-                                        <div class="row g-0">
+                                        <div class="row g-0 comment-section">
 
 
 
                                             <!--User comments generated for each review-->
                                             {% for comment in bean.comments %}
-                                            <div class="card">
+                                            <div class="card border-0">
                                                 <div class="card-body">
-                                                    <blockquote class="blockquote mb-0">
-                                                        <p>{{ comment.comment }}</p><a class="btn btn-danger"
-                                                            href="{{ url_for('delete_comment', comment_id=comment.comment_id, bean_id=bean._id) }}"
-                                                            role="button">Delete Comment</a>
-                                                        <footer class="blockquote-footer">Added by: <cite
-                                                                title="Source Title">{{ comment.username }}</cite>
+                                                    <blockquote class="blockquote mb-0 ">
+                                                        <p>{{ comment.comment }}</p>
+                                                        <footer class="blockquote-footer text-end">Added by: <cite
+                                                                title="Source Title" class="pe-3">{{ comment.username }}</cite><a class="btn btn-danger"
+                                                                href="{{ url_for('delete_comment', comment_id=comment.comment_id, bean_id=bean._id) }}"
+                                                                role="button"><i class="fa-trash-alt fa-lg fas"></i></a>
                                                         </footer>
 
                                                     </blockquote>
@@ -532,6 +532,9 @@
                                             </div>
                                             {% endfor %}
 
+                                           
+                                        </div>
+                                        <div class="row g-0">
                                             <!--Add comments to review-->
                                             <form method="POST" action="{{ url_for('add_comment', bean_id=bean._id) }}">
                                                 <div class="col-md-12 card-body">
