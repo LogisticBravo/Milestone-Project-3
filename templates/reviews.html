@@ -51,9 +51,22 @@
                                     <div class="col">
                                         <!--rating input-->
                                         <label for="bean-rating">Rating</label>
-                                        <input type="text" id="bean-rating" name="bean-rating" class="form-control"
+                                        <input type="text" id="bean-rating" name="bean-rating" class="form-control disabled d-none"
                                             placeholder="Coffee Rating" aria-label="Rate the coffee"
                                             data-bs-toggle="tooltip" data-bs-placement="right" title="Out of 5">
+                                            <p>
+                                            <i class="fa-coffee fas" id="one-rating"><input id="rating-1" class="disabled d-none" type="checkbox" /></i>
+                                            <label for="rating-1" class="disabled d-none">1</label>
+                                            <i class="fa-coffee fas" id="two-rating"><input id="rating-2" class="disabled d-none" type="checkbox" /></i>
+                                            <label for="rating-2" class="disabled d-none">2</label>
+                                            <i class="fa-coffee fas" id="three-rating"><input id="rating-3" class="disabled d-none" type="checkbox" /></i>
+                                            <label for="rating-3" class="disabled d-none">3</label>
+                                            <i class="fa-coffee fas" id="four-rating"><input id="rating-4" class="disabled d-none" type="checkbox" /></i>
+                                            <label for="rating-4" class="disabled d-none">4</label>
+                                            <i class="fa-coffee fas" id="five-rating"><input id="rating-5" class="disabled d-none" type="checkbox" /></i>
+                                            <label for="rating-5" class="disabled d-none">5</label>
+                                            <small class="text-muted fw-lighter block">You <strong>can't</strong> change this later!</small>
+                                        </p>
                                     </div>
                                 </div>
                                 <div class="row g-3 mb-2">
@@ -196,11 +209,12 @@
                                                                 <label for="bean_rating"><strong>Rating:
                                                                     </strong></label>
                                                                 <input type="text" id="bean_rating" name="bean_rating"
-                                                                    class="form-control-plaintext"
+                                                                    class="form-control-plaintext disabled d-none"
                                                                     placeholder="Coffee Rating"
                                                                     aria-label="Rate the coffee"
                                                                     data-bs-toggle="tooltip" data-bs-placement="top"
                                                                     title="Out of 5" value="">
+                                                                    <p id="icon-rating"></p>
                                                             </div>
                                                             <div class="col-md-6 mb-1">
                                                                 <!--roast type input-->

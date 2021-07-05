@@ -22,8 +22,8 @@
                         <h5 class="card-title">{{ username.username }}'s Profile</h5>
                     </div>
                     <div class="col-md-6 col-sm-6">
-                        <p class="mb-0"><small class="text-muted">Sign-up: {{ username.signup_date }}</small></p>
-                        <p><small class="text-muted">Last Login: {{ username.last_login }}</small></p>
+                        <p class="mb-0"><small class="text-muted">Sign-up: {{ username.signup_date.strftime("%d %B, %Y") }}</small></p>
+                        <p><small class="text-muted">Last Login: {{ username.last_login.strftime("%d %B, %Y") }}</small></p>
                     </div>
                     <form method="POST" action="{{ url_for('update') }}">
                         <div class="input-group mb-3">

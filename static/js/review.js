@@ -23,6 +23,20 @@ function print(elementId, index){
 var button = document.getElementById("continueModal1");
 //takes all inputs from the input form and prints it back to the user to allow for changes to be made before submitting reveiw.
 button.onclick = function () {
+    if($("#rating-1").prop("checked") == true && $("#rating-2").prop("checked") == false){
+        $("#bean-rating").val("1")
+    }
+    else if ($("#rating-2").prop("checked") == true && $("#rating-3").prop("checked") == false){
+        $("#bean-rating").val("2")
+    }
+    else if ($("#rating-3").prop("checked") == true && $("#rating-4").prop("checked") == false){
+        $("#bean-rating").val("3")
+    }
+    else if ($("#rating-4").prop("checked") == true && $("#rating-5").prop("checked") == false){
+        $("#bean-rating").val("4")
+    }
+    else {$("#bean-rating").val("5")}
+
     editReview("bean-name")
     editReview("bean-roast")
     editReview("bean-rating")
@@ -57,6 +71,12 @@ continueButton.onclick = function () {
     editReview("affialiate-link")
     print("bean_image",7)
     print("affialiate_link",8)
+    fai = parseFloat(preview[2])
+    let i = 0;
+    while (i < fai ){
+        $("#icon-rating").after('<i class="fas fa-coffee rating"></i>');
+        i++;}
+
 }
 
 /*Fixes bug where favourite button was still displaying on favourited reviews to user. 
@@ -65,8 +85,99 @@ Adds bootstraps disabled and d-none class to hide and disable the button.  */
 $(document).ready(function(){
     $("a[id*='remove-favourite']").next().addClass("disabled d-none");
     //Changes class on FA icon on hover
-    $('.fas, .far').hover(
+    $('.fa-star, .fa-trash-alt, .fa-comments, .fa-edit').hover(
         function(){ $(this).toggleClass('far').toggleClass('fas') }
     )
 })
+
+//Used as part of the click function to use FA icon to checkbox
+function rating(checkId){
+    if ($('#'+checkId).prop("checked") == false){
+        $('#'+checkId).prop("checked", true)
+    } 
+    else if ($('#'+checkId).prop("checked") == true){
+        $('#'+checkId).prop("checked", false)}
+}
+
+//Controls the color of the icon based on the checkbox being checked or not by controlling .rating class
+function checkIcon(thisCheckId,thisIconid){
+    if($("#"+thisCheckId).prop("checked")==true){
+        $("#"+thisIconid).addClass("rating")}
+    else{$("#"+thisIconid).toggleClass("rating")}
+}
+
+//Controls the checkboxes that preceed and ensure they remain checked
+function prevCheck(thisCheckId,prevCheckId,prevIconId){
+    if ($("#"+thisCheckId).prop("checked") == true){
+        $("#"+prevCheckId).prop("checked", true);
+        checkIcon(prevCheckId,prevIconId);
+    }
+    else {$("#"+prevCheckId).prop("checked", false);$("#"+prevIconId).removeClass('rating');}
+}
+
+/*Controls the checkboxes that come after a checked checkbox to ensure they are false e.g. if 3 is checked make sure 4 is off.
+Also rechecks itself and checks that the icon color is turned on*/
+function check(nextCheckId,nextIconId,thisCheckId,thisIconid){
+    if($("#"+nextCheckId).prop("checked")==true){
+        $("#"+nextCheckId).prop("checked",false);
+        checkIcon(nextCheckId,nextIconId)
+        rating(thisCheckId)
+        checkIcon(thisCheckId,thisIconid)
+    }
+}
+
+//Checks other icons to ensure they're checked correctly according to the currently checked box
+function checkOther(nextCheckId,nextIconId,thisCheckId,thisIconid){
+    if($("#"+nextCheckId).prop("checked")==true){
+        $("#"+nextCheckId).prop("checked",false);
+        checkIcon(nextCheckId,nextIconId)
+        checkIcon(thisCheckId,thisIconid)
+    }
+}
+
+//click functions for each text box
+$("#one-rating").click(function(){
+    $(this).toggleClass('rating')
+    rating("rating-1")
+    check("rating-2","two-rating","rating-1","one-rating")
+    checkOther("rating-3","three-rating","rating-1","one-rating")
+    checkOther("rating-4","four-rating","rating-1","one-rating")
+    checkOther("rating-5","five-rating","rating-1","one-rating")
+    })
+
+$("#two-rating").click(function(){
+    $(this).toggleClass('rating')
+    rating("rating-2")
+    check("rating-3","three-rating","rating-2","two-rating")
+    prevCheck("rating-2","rating-1","one-rating")
+    checkOther("rating-4","four-rating","rating-2","two-rating")
+    checkOther("rating-5","five-rating","rating-2","two-rating")
+    })
+
+$("#three-rating").click(function(){
+    $(this).toggleClass('rating')
+    rating("rating-3")
+    check("rating-4","four-rating","rating-3","three-rating")
+    prevCheck("rating-3","rating-2","two-rating")
+    prevCheck("rating-2","rating-1","one-rating")
+    checkOther("rating-5","five-rating","rating-2","two-rating")
+    })
+
+$("#four-rating").click(function(){
+    $(this).toggleClass('rating')
+    rating("rating-4")
+    check("rating-5","five-rating","rating-4","four-rating")
+    prevCheck("rating-4","rating-3","three-rating")
+    prevCheck("rating-3","rating-2","two-rating")
+    prevCheck("rating-2","rating-1","one-rating")
+    })
+
+$("#five-rating").click(function(){
+    $(this).toggleClass('rating')
+    rating("rating-5")
+    prevCheck("rating-5","rating-4","four-rating")
+    prevCheck("rating-4","rating-3","three-rating")
+    prevCheck("rating-3","rating-2","two-rating")
+    prevCheck("rating-2","rating-1","one-rating")
+    })
 

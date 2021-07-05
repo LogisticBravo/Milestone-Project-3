@@ -85,7 +85,16 @@
                                             href="{{ url_for('profile', username=session['user']) }}">Profile</a>
                                     </li>
                                 </div>
+                                {% if username.is_admin == True %}
+                                <div class="col-12">
+                                    <li class="nav-item">
+                                        <a class="nav-link"
+                                            href="#">Admin Panel</a>
+                                    </li>
+                                </div>
+                                {% endif %}
                             </div>
+                            
 
                             <hr class="dropdown-divider">
                     </li>
