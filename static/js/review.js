@@ -74,6 +74,13 @@ imgFallback.onclick = function () {
     $("#bean-image-label").after("<p>We'll add our own ;-)</p>")
 }
 
+$("input[id*='imageUrl-']").on("click", function(){
+var editImg = $(this).attr("id"); 
+beanId = editImg.slice(9,33);   
+$("#bean_imageEdit-"+beanId).toggleClass("disabled d-none")
+$("#bean_imageLabel-"+beanId).toggleClass("disabled d-none")
+})
+
 //continuation of above as the image and affiatiate link inputs are in a different modal
 var continueButton = document.getElementById("continueModal2")
 
