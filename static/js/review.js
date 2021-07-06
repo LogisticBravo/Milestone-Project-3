@@ -6,7 +6,7 @@ var clearButton = document.getElementById("write-review")
 clearButton.onclick = function (){
    preview = []
    $("#clear").find('input:text, textarea').each(function(){
-       $(this).val("");
+       $(this).val(" ");
        $(this).removeClass("is-invalid").removeClass("is-valid");
     });
 }
@@ -57,12 +57,23 @@ function validate(){
 $("#validate").find('input:text, textarea').each(function(){
        if($(this).val() == ""){
            $(this).addClass("is-invalid")
+           $("#continueModal1").addClass("disabled")
         }
-        else {$(this).removeClass("is-invalid").addClass("is-valid")};
+        else {$(this).removeClass("is-invalid").addClass("is-valid");
+        $("#continueModal1").removeClass("disabled")};
     });
 }
 
-document.getElementById("continueModal1").onmouseover = function(){validate()};
+document.getElementById("disableContinue").onmouseover = function(){validate()};
+
+var imgFallback = document.getElementById("imageLinkCheck")
+
+imgFallback.onclick = function () {
+    $("#bean-image").val("https://cdn.pixabay.com/photo/2013/08/11/19/46/coffee-171653_960_720.jpg")
+    $("#bean-image").addClass("disabled d-none")
+    $("#bean-image-label").after("<p>We'll add our own ;-)</p>")
+}
+
 //continuation of above as the image and affiatiate link inputs are in a different modal
 var continueButton = document.getElementById("continueModal2")
 
@@ -71,13 +82,22 @@ continueButton.onclick = function () {
     editReview("affialiate-link")
     print("bean_image",7)
     print("affialiate_link",8)
+    /*Takes the value from rating selection and floats it.
+     A while loop prints FA icons for equating to the value of 'fai' (font awesome icon) to form submission modal */
     fai = parseFloat(preview[2])
     let i = 0;
     while (i < fai ){
         $("#icon-rating").after('<i class="fas fa-coffee rating"></i>');
         i++;}
-
+    purchase = preview[0].replace(/ /,"+")
+    $("#affialiate_link").val("https://www.google.ie/search?q="+purchase)
+    if ($("#imageLinkCheck").prop("checked") == true){
+    $("#bean_image").addClass("disabled d-none")
+    $("#bean_image").after("<p>Default Trusted Barista Image</p>")
 }
+}
+
+
 
 /*Fixes bug where favourite button was still displaying on favourited reviews to user. 
 Identifies an element wthat contains 'remove-favourite' in id and selects the next element, in this case the favourite button.

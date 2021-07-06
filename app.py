@@ -196,6 +196,7 @@ def logout():
 @app.route("/reviews", methods=["GET", "POST"])
 def reviews():
     origins = list(mongo.db.origin.find().sort("origin_type", 1))
+    roasts = list(mongo.db.roast.find())
     beans = list(mongo.db.beans.find())
     try:
         if session["user"]:
@@ -203,7 +204,7 @@ def reviews():
             favourites = list(username["favourites"])
             return render_template(
                 "reviews.html", username=username,
-                beans=beans, origins=origins, favourites=favourites)
+                beans=beans, origins=origins, favourites=favourites, roasts=roasts)
     except Exception:
         return render_template("reviews.html", beans=beans)
 
@@ -255,8 +256,7 @@ def edit_review(bean_id):
                 flash("Review Updated!")
             bean = mongo.db.beans.find_one({"_id": ObjectId(bean_id)})
 
-            return render_template(
-                "reviews.html", bean=bean, username=username, beans=beans)
+            return redirect(url_for("reviews", bean=bean, username=username, beans=beans))
     except Exception:
         return render_template("reviews.html")
 
