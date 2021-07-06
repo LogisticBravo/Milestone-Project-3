@@ -186,6 +186,30 @@ def newsletter_sub():
         return profile(username)
 
 
+@app.route("/newsletter_form", methods=["GET", "POST"])
+def newsletter_form():
+    if request.method == "POST":
+        try:
+            if session["user"]:
+                username = mongo.db.users.find_one(
+                    {"username": session["user"]})
+                newsletter_check = "checked" if request.form.get(
+                    "newsletterSub") else "off"
+                mongo.db.users.update_one(
+                        {"_id": username["_id"]},
+                        {"$set": {"newsletter_check": newsletter_check}})
+                flash("Thanks for updating your Subscription!")
+                return redirect(url_for("reviews"))
+        except Exception:
+            newsletter = {
+                    "name": request.form.get("user_name"),
+                    "email": request.form.get("user_email")
+                    }
+            mongo.db.newsletters.insert_one(newsletter)
+            flash("Thanks for subscribing! Why not Create an Account?")
+            return redirect(url_for("signup"))
+
+
 @app.route("/logout")
 def logout():
     flash("Successfully logged out")
