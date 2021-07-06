@@ -4,6 +4,7 @@
 <i class="fas fa-coffee rating"></i>
 {% endset %}
 {% block content %}
+{% include 'includes/search.html' ignore missing %}
 <main>
     <div class="container">
         <div class="row mt-5">
@@ -320,7 +321,7 @@
             {% if beans|length > 0 %}
             {% for bean in beans %}
             <div class="row mt-5">
-                <div class="col-sm-12 col-md-12 col-lg-8 offset-lg-2 mx-3 w-100">
+                <div class="col-sm-12 col-md-12 col-lg-8 offset-lg-2 mx-3 pb-2 w-100">
                     <div class="card mt-3 card-border">
                         <div class="card-header strong row">
                             <h4>{{ bean.bean_name|title }}</h4>
@@ -360,8 +361,8 @@
                                 {% endfor %}
                             </div>
                             <!-- End favourite/remove favourite buttons -->
-                            {% endif %}
                         </div>
+                            {% endif %}
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
                             <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab"
                                 data-bs-target="#nav-home-{{ bean._id }}" type="button" role="tab"
@@ -567,7 +568,7 @@
                                                             class="text-muted">{{ bean.created_by }}</small></p>
                                                     <p class="card-text"><strong><small>Last Updated:
                                                             </small></strong><small
-                                                            class="text-muted">{{ bean.created_date }}</small></p>
+                                                            class="text-muted">{{ bean.created_date.strftime("%d %B, %Y") }}</small></p>
                                                 </div>
                                             </div>
                                         </div>
@@ -604,8 +605,8 @@
 
 
                                         </div>
+                                        {% if session.user %}
                                         <div class="row g-0 text-end">
-                                            {% if session.user %}
                                             <!--Add comments to review-->
                                             <form method="POST" action="{{ url_for('add_comment', bean_id=bean._id) }}">
                                                 <div class="col-md-12 card-body">
@@ -618,9 +619,9 @@
                                                             id="add-comment">Add</button>
                                             </form>
                                             {% else %}
-                                            <p class="mt-2 pe-3">You must be logged in to post comments</p>
-                                            {% endif %}
+                                            <p class="mt-2 pe-3 text-light">You must be logged in to post comments</p>
                                         </div>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </div>
