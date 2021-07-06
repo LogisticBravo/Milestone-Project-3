@@ -1,3 +1,16 @@
+var newsletterModal = new bootstrap.Modal(document.getElementById('newsletter'), {
+    keyboard: false
+  })
+
+//triggers newsletter modal. Code from: https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_onscroll3
+window.onscroll = function(){newsletter()}
+newsletterCount = 0;
+function newsletter() {
+    if ((document.body.scrollTop > 1000 || document.documentElement.scrollTop > 1000) && newsletterCount == 0) {
+        newsletterModal.show(); newsletterCount ++;
+      }
+}
+
 var preview = [];
 //Sets up an array called Preview that input fields are pushed to.
 var clearButton = document.getElementById("write-review")
@@ -74,6 +87,7 @@ imgFallback.onclick = function () {
     $("#bean-image-label").after("<p>We'll add our own ;-)</p>")
 }
 
+//Dynamically sets the button for editing image url on edit review as each id is dynmaically unique.
 $("input[id*='imageUrl-']").on("click", function(){
 var editImg = $(this).attr("id"); 
 beanId = editImg.slice(9,33);   
