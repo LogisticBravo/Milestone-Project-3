@@ -346,12 +346,14 @@
                                 {% endfor %}
                                 <!-- Add favourite button. Logic has bug where fav buttons till shows after favourited review. Fixed with JS script. -->
                                 {% for fav in favourites %}
+                                {% if loop.index == 1 %}
                                 {% if bean.favshown != fav.favshown %}
                                 {% if bean._id != fav.coffee_id %}
                                 {% if bean.bean_name != fav.coffee_name %}
                                 <a class="btn" href="{{ url_for('favourite', bean_id=bean._id) }}"
                                     id="favourite-{{ bean.bean_name }}" role="button"><i
                                         class="far fa-star fa-lg"></i></a>
+                                {% endif %}
                                 {% endif %}
                                 {% endif %}
                                 {% endif %}
