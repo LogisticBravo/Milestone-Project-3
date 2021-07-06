@@ -12,7 +12,7 @@ h1 {
   text-decoration: #f99459 underline;
 }
 
-p, span, .card-body > div > strong {
+p, span, input, select, textarea {
   font-family: 'Stardos Stencil', cursive;
   font-size: large;
 }
@@ -62,7 +62,7 @@ a.nav-link.active {
   text-shadow: 5px -1px 5px #f99459;
 }
 
-.col-12 > li > a {
+.col-12 > li > a, .modal-body > div.card {
   color: #3C3A43;
 }
 
@@ -133,7 +133,7 @@ a.nav-link.active {
   }
 }
 
-.container-fluid, div.row > .col-sm-12{
+.container-fluid, div.row > .col-sm-12, .modal-content {
   background-color: rgba(60, 58, 67, 0.8);
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 100 100'%3E%3Crect x='0' y='0' width='15' height='15' fill-opacity='0.6' fill='%23ffffff'/%3E%3C/svg%3E"); 
   /* background image styled using SVGBackgrounds.com */
@@ -176,17 +176,26 @@ a.nav-link.active {
   /* background image styled using SVGBackgrounds.com */
 }
 
-.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active, .tab-pane > .card, .nav-tabs {
   border:none;
 }
 
-.tab-pane > .card, .nav-tabs {
-  border: none;
+.card-border {
+  border: 2px solid #f99459;
+  border-top: none;
 }
 
-.card-border {
-  border: 1px solid #f99459;
-  border-top: none;
+.modal-content {
+  border: 2px solid #f99459;
+  color: #fff;
+}
+
+.modal-header {
+  border-bottom: 2px solid #f99459
+}
+
+.modal-footer {
+  border-top: 2px solid #f99459
 }
 
 button.nav-link.active:focus, button.nav-link:focus, button.nav-link:focus-visible, input:focus, input:focus-visible{
@@ -218,17 +227,13 @@ button.nav-link.active:focus, button.nav-link:focus, button.nav-link:focus-visib
   text-decoration: none; 
 }
 
-.card-text > a:hover {
+.card-text > a:hover, .fa-star, .rating {
   color: #F99459;
 }
 
 .mh{
   max-height: 28vh;
   overflow: scroll;
-}
-
-.fa-star {
-  color: #F99459;
 }
 
 .fas.fa-star {
@@ -245,8 +250,4 @@ button.nav-link.active:focus, button.nav-link:focus, button.nav-link:focus-visib
 
 .fa-comments.fas {
   color: #5cb85c;
-}
-
-.rating {
-  color: #f99459;
 }

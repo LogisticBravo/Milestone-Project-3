@@ -5,6 +5,7 @@
 {% endset %}
 {% block content %}
 {% include 'includes/search.html' ignore missing %}
+{% include 'includes/newsletter.html' ignore missing %}
 <main>
     <div class="container">
         <div class="row mt-5">
@@ -77,7 +78,7 @@
                                             <i class="fa-coffee fas" id="five-rating"><input id="rating-5"
                                                     class="disabled d-none" type="checkbox" /></i>
                                             <label for="rating-5" class="disabled d-none">5</label>
-                                            <small class="text-muted fw-lighter block">You <strong>can't</strong> change
+                                            <small class="text-light fw-lighter block">You <strong>can't</strong> change
                                                 this later!</small>
                                         </p>
                                     </div>
@@ -190,7 +191,7 @@
                                 The contents of the input elements are ultimately what's submitted to the DB. 
                             -->
                             <div class="modal-body">
-                                <h6 class="card-subtitle mb-2 text-muted">Confirm you're happy with your review or make
+                                <h6 class="card-subtitle mb-2 text-light">Confirm you're happy with your review or make
                                     changes!</h6>
                                 <div class="row">
                                     <div class="col-md-12">
@@ -378,13 +379,13 @@
                                     aria-labelledby="delete_reviewLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
-                                            <div class="modal-header">
+                                            <div class="modal-header border-0">
                                                 <h5 class="modal-title strong">Are you sure you want to Delete your
                                                     review for:</h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                     aria-label="Close"></button>
                                             </div>
-                                            <div class="modal-body"><strong>{{ bean.bean_name }}</strong></div>
+                                            <div class="modal-body"><h3><strong>{{ bean.bean_name }}</strong></h3></div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
                                                     data-bs-dismiss="modal">Cancel</button>
@@ -406,7 +407,7 @@
                                                     <label for="bean_name" class="card-title strong">Edit Your Review
                                                         for </label>
                                                     <input type="text" id="bean_name" name="bean_name"
-                                                        class="form-control-plaintext card-title strong"
+                                                        class="form-control-plaintext card-title strong text-light"
                                                         placeholder="Coffee Name" data-bs-toggle="tooltip"
                                                         data-bs-placement="top"
                                                         title="Name of the coffee bean you are reviewing"
@@ -415,7 +416,7 @@
                                                         aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <div class="card">
+                                                    <div class="card border-0">
                                                         <div class="row g-0">
                                                             <div class="col-md-4 card-body">
                                                                 <img src="{{ bean.bean_image }}"
@@ -517,7 +518,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="modal-footer">
+                                                <div class="modal-footer border-0">
                                                     <button type="button" class="btn btn-secondary"
                                                         data-bs-dismiss="modal">Exit without Saving</button>
                                                     <button type="Submit" class="btn btn-primary">Save changes</button>
