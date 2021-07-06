@@ -246,6 +246,7 @@ def edit_review(bean_id):
                     "bean_rating": request.form.get("bean_rating"),
                     "bean_description": request.form.get("bean_description"),
                     "bean_origin": request.form.get("bean_origin"),
+                    "origin_type": request.form.get("origin_type"),
                     "brew_type": request.form.get("brew_type"),
                     "bean_image": request.form.get("bean_image"),
                     "affialiate_link": request.form.get("affialiate_link"),
