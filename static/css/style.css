@@ -66,7 +66,7 @@ a.nav-link.active {
   color: #3C3A43;
 }
 
-.col-12 > li > a:hover, a.dropdown-item:hover {
+.col-12 > li > a:hover, a.dropdown-item:hover, .footer {
   color: #fff;
   background-color: #3C3A43;
 }

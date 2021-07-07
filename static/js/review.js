@@ -2,14 +2,17 @@ var newsletterModal = new bootstrap.Modal(document.getElementById('newsletter'),
     keyboard: false
   })
 
-//triggers newsletter modal. Code from: https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_onscroll3
+//triggers newsletter modal. Code partially from: https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_onscroll3
+// Session storage code from https://stackoverflow.com/questions/8123032/how-do-i-make-a-count-variable-persistent-across-sessions
 window.onscroll = function(){newsletter()}
-newsletterCount = 0;
+var newsletterCount = 0;
+var sessionCount = localStorage.getItem("sessionCount")
 function newsletter() {
-    if ((document.body.scrollTop > 1000 || document.documentElement.scrollTop > 1000) && newsletterCount == 0) {
-        newsletterModal.show(); newsletterCount ++;
+    if ((document.body.scrollTop > 1000 || document.documentElement.scrollTop > 1000) && newsletterCount == 0 && sessionCount != 1) {
+        newsletterModal.show(); newsletterCount ++; sessionCount++; localStorage.setItem(parseFloat("newsletterCount"), sessionCount)
       }
 }
+
 
 var preview = [];
 //Sets up an array called Preview that input fields are pushed to.
