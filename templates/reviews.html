@@ -6,15 +6,16 @@
 {% block content %}
 {% include 'includes/search.html' ignore missing %}
 {% include 'includes/newsletter.html' ignore missing %}
-<main>
     <div class="container">
         <div class="row mt-5">
             <div class="col-sm-8 ml-4">
                 <h1>Reviews</h1>
             </div>
-            <!--Write Review Modal Button-->
-            {% if session.user %}
-            <div class="col-sm-2 offset-md-2">
+        </div>
+        <!--Write Review Modal Button-->
+        {% if session.user %}
+        <div class="row">
+            <div class="col-sm-2 offset-md-10">
                 <button type="button" class="btn btn-orange" id="write-review" data-bs-toggle="modal"
                     data-bs-target="#writeReviewToggle">Write
                     Review!</button>
@@ -318,11 +319,14 @@
                 </div>
                 <!--End Modal-->
             </form>
-            {% endif %}
-            {% if beans|length > 0 %}
-            {% for bean in beans %}
+        </div>
+    </div>
+        {% endif %}
+        {% if beans|length > 0 %}
+        {% for bean in beans %}
+        <div class="container">
             <div class="row mt-5">
-                <div class="col-sm-12 col-md-12 col-lg-8 offset-lg-2 mx-3 pb-2 w-100">
+                <div class="col-sm-12 col-md-10 pb-2 w-100">
                     <div class="card mt-3 card-border">
                         <div class="card-header strong row">
                             <h4>{{ bean.bean_name|title }}</h4>
@@ -362,8 +366,8 @@
                                 {% endfor %}
                             </div>
                             <!-- End favourite/remove favourite buttons -->
-                        </div>
                             {% endif %}
+                        </div>
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
                             <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab"
                                 data-bs-target="#nav-home-{{ bean._id }}" type="button" role="tab"
@@ -385,7 +389,9 @@
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                     aria-label="Close"></button>
                                             </div>
-                                            <div class="modal-body"><h3><strong>{{ bean.bean_name }}</strong></h3></div>
+                                            <div class="modal-body">
+                                                <h3><strong>{{ bean.bean_name }}</strong></h3>
+                                            </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
                                                     data-bs-dismiss="modal">Cancel</button>
@@ -422,48 +428,60 @@
                                                                 <img src="{{ bean.bean_image }}"
                                                                     class="rounded img-fluid"
                                                                     alt="An image of {{ bean.bean_name }} coffee">
-                                                                <p><label for="bean_image" class="mb-1 disbaled d-none" id="bean_imageLabel-{{ bean._id }}">Link an image of the
-                                                                    coffee</label>
-                                                                <input type="text" id="bean_imageEdit-{{ bean._id }}" name="bean_image"
-                                                                    class="form-control mb-3 disabled d-none"
-                                                                    placeholder="Add a link to an image of this coffee"
-                                                                    aria-label="product image URl"
-                                                                    aria-describedby="productimage" value="{{ bean.bean_image }}">
-                                                                    <input class="form-check-input" type="checkbox" id="imageUrl-{{ bean._id }}">
-                                                                    <label class="form-check-label" for="imageUrl">Tick here if you have an image link</label></p>
-                                                                    <label for="affialiate_link" class="disabled d-none"><small>Available to
-                                                                            buy: </small></label>
-                                                                    <input type="text" id="affialiate_link"
-                                                                        name="affialiate_link" class="form-control mb-1 disabled d-none"
-                                                                        placeholder="Add a link to where this can be purchased"
-                                                                        aria-label="purchase URl"
-                                                                        aria-describedby="purchaselink"
-                                                                        value="{{ bean.affialiate_link }}">
+                                                                <p><label for="bean_image" class="mb-1 disbaled d-none"
+                                                                        id="bean_imageLabel-{{ bean._id }}">Link an
+                                                                        image of the
+                                                                        coffee</label>
+                                                                    <input type="text"
+                                                                        id="bean_imageEdit-{{ bean._id }}"
+                                                                        name="bean_image"
+                                                                        class="form-control mb-3 disabled d-none"
+                                                                        placeholder="Add a link to an image of this coffee"
+                                                                        aria-label="product image URl"
+                                                                        aria-describedby="productimage"
+                                                                        value="{{ bean.bean_image }}">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        id="imageUrl-{{ bean._id }}">
+                                                                    <label class="form-check-label" for="imageUrl">Tick
+                                                                        here if you have an image link</label>
+                                                                </p>
+                                                                <label for="affialiate_link"
+                                                                    class="disabled d-none"><small>Available to
+                                                                        buy: </small></label>
+                                                                <input type="text" id="affialiate_link"
+                                                                    name="affialiate_link"
+                                                                    class="form-control mb-1 disabled d-none"
+                                                                    placeholder="Add a link to where this can be purchased"
+                                                                    aria-label="purchase URl"
+                                                                    aria-describedby="purchaselink"
+                                                                    value="{{ bean.affialiate_link }}">
                                                             </div>
                                                             <div class="col-md-8">
                                                                 <div class="row card-body">
                                                                     <div class="col-md-6 mb-1">
                                                                         <label for="bean_rating"><strong>Rating:
                                                                             </strong></label>
-                                                                            <span class="block">
-                                                                                {% for count in range(bean.bean_rating|int) %} {{ rating }}
-                                                                                {% endfor %}
-                                                                            </span>
+                                                                        <span class="block">
+                                                                            {% for count in range(bean.bean_rating|int)
+                                                                            %} {{ rating }}
+                                                                            {% endfor %}
+                                                                        </span>
                                                                     </div>
                                                                     <div class="col-md-6 mb-1">
                                                                         <label for="bean_roast"> <strong>Roast:
                                                                             </strong></label>
-                                                                        
-                                                                <select class="form-select form-select-md"
-                                                                    id="bean_roast" name="bean_roast"
-                                                                    aria-label="bean roast selection"
-                                                                    data-bs-toggle="tooltip" data-bs-placement="left"
-                                                                    title="Light/Medium/Dark" required>
-                                                                    {% for roast in roasts %}
-                                                                    <option value="{{ bean.bean_roast }}">
-                                                                        {{ roast.bean_roast }}</option>
-                                                                    {% endfor %}
-                                                                </select>
+
+                                                                        <select class="form-select form-select-md"
+                                                                            id="bean_roast" name="bean_roast"
+                                                                            aria-label="bean roast selection"
+                                                                            data-bs-toggle="tooltip"
+                                                                            data-bs-placement="left"
+                                                                            title="Light/Medium/Dark" required>
+                                                                            {% for roast in roasts %}
+                                                                            <option value="{{ bean.bean_roast }}">
+                                                                                {{ roast.bean_roast }}</option>
+                                                                            {% endfor %}
+                                                                        </select>
                                                                     </div>
                                                                     <div class="col-md-6 mb-1"><label
                                                                             for="brew_type"><strong>Brew Type:
@@ -479,14 +497,15 @@
                                                                             value="{{ bean.brew_type }}">
                                                                     </div>
                                                                     <div class="col-md-6 mb-1"><strong>Type:
-                                                                        <select class="form-select form-select-md"
-                                                                    id="origin_type" name="origin_type"
-                                                                    aria-label="origin type selection" required>
-                                                                    {% for origin in origins %}
-                                                                    <option value="{{ bean.origin_type }}">
-                                                                        {{ origin.origin_type }}</option>
-                                                                    {% endfor %}
-                                                                </select>
+                                                                            <select class="form-select form-select-md"
+                                                                                id="origin_type" name="origin_type"
+                                                                                aria-label="origin type selection"
+                                                                                required>
+                                                                                {% for origin in origins %}
+                                                                                <option value="{{ bean.origin_type }}">
+                                                                                    {{ origin.origin_type }}</option>
+                                                                                {% endfor %}
+                                                                            </select>
                                                                     </div>
                                                                     <div class="col-md-6"><label
                                                                             for="bean_origin"><strong>Coffee Origin:
@@ -565,11 +584,11 @@
                                                     <h6><strong>Description</strong></h6>
                                                     <p class="card-text">{{ bean.bean_description }}</p>
                                                     <p class="card-text"><strong><small>Reviewed by:
-                                                            </small></strong><small
-                                                            class="text-muted">{{ bean.created_by }}</small></p>
+                                                            </small></strong><small class="text-muted">{{
+                                                            bean.created_by }}</small></p>
                                                     <p class="card-text"><strong><small>Last Updated:
-                                                            </small></strong><small
-                                                            class="text-muted">{{ bean.created_date.strftime("%d %B, %Y") }}</small></p>
+                                                            </small></strong><small class="text-muted">{{
+                                                            bean.created_date.strftime("%d %B, %Y") }}</small></p>
                                                 </div>
                                             </div>
                                         </div>
@@ -589,8 +608,8 @@
                                                     <blockquote class="blockquote mb-0 ">
                                                         <p>{{ comment.comment }}</p>
                                                         <footer class="blockquote-footer text-end">Added by: <cite
-                                                                title="Source Title"
-                                                                class="pe-3">{{ comment.username }}</cite>
+                                                                title="Source Title" class="pe-3">{{ comment.username
+                                                                }}</cite>
                                                             {% if session.user|lower == comment.username|lower %}
                                                             <a class="btn btn-danger"
                                                                 href="{{ url_for('delete_comment', comment_id=comment.comment_id, bean_id=bean._id) }}"
@@ -599,31 +618,30 @@
                                                         </footer>
 
                                                     </blockquote>
-                                                </div></div>
-                                                {% endfor %}
+                                                </div>
                                             </div>
-                                            
+                                            {% endfor %}
+                                        </div>
 
 
-                                        </div>
-                                        {% if session.user %}
-                                        <div class="row g-0 text-end">
-                                            <!--Add comments to review-->
-                                            <form method="POST" action="{{ url_for('add_comment', bean_id=bean._id) }}">
-                                                <div class="col-md-12 card-body">
-                                                    <div class="input-group mb-3">
-                                                        <input type="text" class="form-control" id="comment"
-                                                            name="comment" placeholder="Comments"
-                                                            aria-label="Recipient's username"
-                                                            aria-describedby="button-addon2">
-                                                        <button class="btn btn-success" type="submit"
-                                                            id="add-comment">Add</button>
-                                            </form>
-                                            {% else %}
-                                            <p class="mt-2 pe-3 text-light">You must be logged in to post comments</p>
-                                        </div>
-                                        {% endif %}
+
                                     </div>
+                                    {% if session.user %}
+                                    <div class="row g-0 text-end">
+                                        <!--Add comments to review-->
+                                        <form method="POST" action="{{ url_for('add_comment', bean_id=bean._id) }}">
+                                            <div class="col-md-12 card-body">
+                                                <div class="input-group mb-3">
+                                                    <input type="text" class="form-control" id="comment" name="comment"
+                                                        placeholder="Comments" aria-label="Recipient's username"
+                                                        aria-describedby="button-addon2">
+                                                    <button class="btn btn-success" type="submit"
+                                                        id="add-comment">Add</button>
+                                        </form>
+                                        {% else %}
+                                        <p class="mt-2 pe-3">You must be logged in to post comments</p>
+                                    </div>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
@@ -631,11 +649,19 @@
                 </div>
             </div>
         </div>
-        {% endfor %}
-        {% else %}
-        <h3>Your search returned no results</h3>
-        {% endif %}
-        {% block scripts %}
-        <script src="{{ url_for('static', filename='js/review.js') }}"></script>
-        {% endblock %}
-        {% endblock %}
+        <!--These three closing divs don't appear to be connected to anything.
+            However after carefully going through every div tag on this page and
+            the base.html to ensure it wasn't inherited from the template, removing them causes a cascading
+            effect within the reviews page for each review. Additionally, I have carefully gone over the jinja loops
+            and if statements to check if the fault lies there. I can only assume that I have missed something to cause such effect.-->
+    </div>
+    </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <h3>Your search returned no results</h3>
+    {% endif %}
+    {% block scripts %}
+    <script src="{{ url_for('static', filename='js/review.js') }}"></script>
+    {% endblock %}
+    {% endblock %}
