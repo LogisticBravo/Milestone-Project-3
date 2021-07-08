@@ -6,10 +6,10 @@ var newsletterModal = new bootstrap.Modal(document.getElementById('newsletter'),
 // Session storage code from https://stackoverflow.com/questions/8123032/how-do-i-make-a-count-variable-persistent-across-sessions
 window.onscroll = function(){newsletter()}
 var newsletterCount = 0;
-var sessionCount = localStorage.getItem("sessionCount")
+
 function newsletter() {
-    if ((document.body.scrollTop > 1000 || document.documentElement.scrollTop > 1000) && newsletterCount == 0 && sessionCount != 1) {
-        newsletterModal.show(); newsletterCount ++; sessionCount++; localStorage.setItem(parseFloat("newsletterCount"), sessionCount)
+    if ((document.body.scrollTop > 1000 || document.documentElement.scrollTop > 1000) && newsletterCount == 0) {
+        newsletterModal.show(); newsletterCount ++;
       }
 }
 

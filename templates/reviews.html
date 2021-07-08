@@ -11,7 +11,7 @@
         <div class="col-sm-8 ml-4">
             <h1>Reviews</h1>
         </div>
-    </div></div>
+    </div>
     <!--Write Review Modal Button-->
     {% if session.user %}
     <div class="row">
@@ -313,317 +313,327 @@
         </form>
     </div>
 
-{% endif %}
-{% if beans|length > 0 %}
-{% for bean in beans %}
-<div class="container">
-    <div class="row mt-5">
-        <div class="col-sm-12 col-md-10 pb-2 w-100">
-            <div class="card mt-3 card-border">
-                <div class="card-header strong row">
-                    <h4>{{ bean.bean_name|title }}</h4>
-                    {% if session.user|lower == bean.created_by|lower %}
-                    <div class="col-6">
-                        <a class="btn" href="{{ url_for('edit_review', bean_id=bean._id) }}" role="button"
-                            data-bs-toggle="modal" data-bs-target="#edit_review-{{ bean._id }}"><i
-                                class="far fa-edit fa-lg"></i></a>
-                        <button type="button" class="btn" data-bs-toggle="modal"
-                            data-bs-target="#delete_review-{{ bean._id }}"><i
-                                class="fas fa-trash-alt fa-lg"></i></button>
-                    </div>
-                    {% endif %}
-                    {% if session.user %}
-                    <!-- Remove favourite button and logic for showing -->
-                    <div class="col d-grid gap-2 d-md-flex justify-content-md-end">
-                        {% for fav in username.favourites %}
-                        {% if bean._id == fav.coffee_id %}
-                        <a class="btn" href="{{ url_for('remove_favourite', bean_id=bean._id) }}"
-                            id="remove-favourite-{{ bean.bean_name }}" role="button"><i
-                                class="fas fa-star fa-lg"></i></a>
-                        {% endif %}
-                        {% endfor %}
-                        <!-- Add favourite button. Logic has bug where fav buttons till shows after favourited review. Fixed with JS script. -->
-                        {% for fav in favourites %}
-                        {% if loop.index == 1 %}
-                        {% if bean.favshown != fav.favshown %}
-                        {% if bean._id != fav.coffee_id %}
-                        {% if bean.bean_name != fav.coffee_name %}
-                        <a class="btn" href="{{ url_for('favourite', bean_id=bean._id) }}"
-                            id="favourite-{{ bean.bean_name }}" role="button"><i class="far fa-star fa-lg"></i></a>
-                        {% endif %}
-                        {% endif %}
-                        {% endif %}
-                        {% endif %}
-                        {% endfor %}
-                    </div>
-                    <!-- End favourite/remove favourite buttons -->
-                    {% endif %}
-                </div>
-                <div class="nav nav-tabs" id="nav-tab2" role="tablist">
-                    <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab"
-                        data-bs-target="#nav-home-{{ bean._id }}" type="button" role="tab" aria-controls="nav-home-tab"
-                        aria-selected="true"><i class="fab fa-readme fa-lg"></i></button>
-                    <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab"
-                        data-bs-target="#nav-profile-{{ bean._id }}" type="button" role="tab"
-                        aria-controls="nav-profile-tab" aria-selected="false"><i
-                            class="far fa-comments fa-lg"></i></button>
-                    <div class="nav nav-tabs col-md-6 justify-content-end" id="nav-tab" role="tablist">
-                        <!--Delete Review Modal-->
-                        <div class="modal fade" id="delete_review-{{ bean._id }}" tabindex="-1"
-                            aria-labelledby="delete_review-{{ bean._id }}" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header border-0">
-                                        <h5 class="modal-title strong">Are you sure you want to Delete your
-                                            review for:</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <h3><strong>{{ bean.bean_name }}</strong></h3>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Cancel</button>
-                                        <a class="btn btn-danger"
-                                            href="{{ url_for('delete_review', bean_id=bean._id) }}"
-                                            role="button">Delete</a>
-                                    </div>
-                                </div>
-                            </div>
+    {% endif %}
+    {% if beans|length > 0 %}
+    {% for bean in beans %}
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-sm-12 col-md-10 pb-2 w-100">
+                <div class="card mt-3 card-border">
+                    <div class="card-header strong row">
+                        <h4>{{ bean.bean_name|title }}</h4>
+                        {% if session.user|lower == bean.created_by|lower %}
+                        <div class="col-6">
+                            <a class="btn" href="{{ url_for('edit_review', bean_id=bean._id) }}" role="button"
+                                data-bs-toggle="modal" data-bs-target="#edit_review-{{ bean._id }}"><i
+                                    class="far fa-edit fa-lg"></i></a>
+                            <button type="button" class="btn" data-bs-toggle="modal"
+                                data-bs-target="#delete_review-{{ bean._id }}"><i
+                                    class="fas fa-trash-alt fa-lg"></i></button>
                         </div>
-                        <!--End Delete Review Modal-->
-                        <!--Edit Review Modal-->
-                        <form method="POST" action="{{ url_for('edit_review', bean_id=bean._id) }}">
-                            <div class="modal fade" id="edit_review-{{ bean._id }}" tabindex="-1"
-                                aria-labelledby="edit_review-{{ bean._id }}" aria-hidden="true">
+                        {% endif %}
+                        {% if session.user %}
+                        <!-- Remove favourite button and logic for showing -->
+                        <div class="col d-grid gap-2 d-md-flex justify-content-md-end">
+                            {% for fav in username.favourites %}
+                            {% if bean._id == fav.coffee_id %}
+                            <a class="btn" href="{{ url_for('remove_favourite', bean_id=bean._id) }}"
+                                id="remove-favourite-{{ bean.bean_name }}" role="button"><i
+                                    class="fas fa-star fa-lg"></i></a>
+                            {% endif %}
+                            {% endfor %}
+                            <!-- Add favourite button. Logic has bug where fav buttons till shows after favourited review. Fixed with JS script. -->
+                            {% for fav in favourites %}
+                            {% if loop.index == 1 %}
+                            {% if bean.favshown != fav.favshown %}
+                            {% if bean._id != fav.coffee_id %}
+                            {% if bean.bean_name != fav.coffee_name %}
+                            <a class="btn" href="{{ url_for('favourite', bean_id=bean._id) }}"
+                                id="favourite-{{ bean.bean_name }}" role="button"><i class="far fa-star fa-lg"></i></a>
+                            {% endif %}
+                            {% endif %}
+                            {% endif %}
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                        <!-- End favourite/remove favourite buttons -->
+                        {% endif %}
+                    </div>
+                    <div class="nav nav-tabs" id="nav-tab2" role="tablist">
+                        <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab"
+                            data-bs-target="#nav-home-{{ bean._id }}" type="button" role="tab"
+                            aria-controls="nav-home-tab" aria-selected="true"><i
+                                class="fab fa-readme fa-lg"></i></button>
+                        <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab"
+                            data-bs-target="#nav-profile-{{ bean._id }}" type="button" role="tab"
+                            aria-controls="nav-profile-tab" aria-selected="false"><i
+                                class="far fa-comments fa-lg"></i></button>
+                        <div class="nav nav-tabs col-md-6 justify-content-end" id="nav-tab" role="tablist">
+                            <!--Delete Review Modal-->
+                            <div class="modal fade" id="delete_review-{{ bean._id }}" tabindex="-1"
+                                aria-labelledby="delete_review-{{ bean._id }}" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
-                                        <div class="modal-header">
-                                            <label for="bean_name" class="card-title strong">Edit Your Review
-                                                for </label>
-                                            <input type="text" id="bean_name-{{ bean._id }}" name="bean_name"
-                                                class="form-control-plaintext card-title strong text-light"
-                                                placeholder="Coffee Name" data-bs-toggle="tooltip"
-                                                data-bs-placement="top"
-                                                title="Name of the coffee bean you are reviewing"
-                                                value="{{ bean.bean_name }}">
+                                        <div class="modal-header border-0">
+                                            <h5 class="modal-title strong">Are you sure you want to Delete your
+                                                review for:</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                 aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <div class="card border-0">
-                                                <div class="row g-0">
-                                                    <div class="col-md-4 card-body">
-                                                        <img src="{{ bean.bean_image }}" class="rounded img-fluid"
-                                                            alt="An image of {{ bean.bean_name }} coffee">
-                                                        <p><label for="bean_image" class="mb-1 disbaled d-none"
-                                                                id="bean_imageLabel-{{ bean._id }}">Link an
-                                                                image of the
-                                                                coffee</label>
-                                                            <input type="text" id="bean_imageEdit-{{ bean._id }}"
-                                                                name="bean_image"
-                                                                class="form-control mb-3 disabled d-none"
-                                                                placeholder="Add a link to an image of this coffee"
-                                                                aria-label="bean_image" aria-describedby="bean_image"
-                                                                value="{{ bean.bean_image }}">
-                                                            <input class="form-check-input" type="checkbox"
-                                                                id="imageUrl-{{ bean._id }}">
-                                                            <label class="form-check-label" for="imageUrl">Tick
-                                                                here if you have an image link</label>
-                                                        </p>
-                                                        <label for="affialiate_link"
-                                                            class="disabled d-none"><small>Available to
-                                                                buy: </small></label>
-                                                        <input type="text" id="affialiate_link-{{ bean._id }}"
-                                                            name="affialiate_link"
-                                                            class="form-control mb-1 disabled d-none"
-                                                            placeholder="Add a link to where this can be purchased"
-                                                            aria-label="purchase URl"
-                                                            aria-describedby="affialiate_link-{{ bean._id }}"
-                                                            value="{{ bean.affialiate_link }}">
-                                                    </div>
-                                                    <div class="col-md-8">
-                                                        <div class="row card-body">
-                                                            <div class="col-md-6 mb-1">
-                                                                <label for="bean_rating"><strong>Rating:
-                                                                    </strong></label>
-                                                                <span class="block">
-                                                                    {% for count in range(bean.bean_rating|int)
-                                                                    %} {{ rating }}
-                                                                    {% endfor %}
-                                                                </span>
-                                                            </div>
-                                                            <div class="col-md-6 mb-1">
-                                                                <label for="bean_roast"> <strong>Roast:
-                                                                    </strong></label>
-
-                                                                <select class="form-select form-select-md"
-                                                                    id="bean_roast-{{ bean._id }}" name="bean_roast"
-                                                                    aria-label="bean roast selection"
-                                                                    data-bs-toggle="tooltip" data-bs-placement="left"
-                                                                    title="Light/Medium/Dark" required>
-                                                                    {% for roast in roasts %}
-                                                                    <option value="{{ bean.bean_roast }}" size="3">
-                                                                        {{ roast.bean_roast }}</option>
-                                                                    {% endfor %}
-                                                                </select>
-                                                            </div>
-                                                            <div class="col-md-6 mb-1"><label
-                                                                    for="brew_type"><strong>Brew Type:
-                                                                    </strong></label>
-                                                                <input type="text" id="brew_type-{{ bean._id }}"
-                                                                    name="brew_type" class="form-control-plaintext"
-                                                                    placeholder="Brew Type"
-                                                                    aria-label="How this coffee is brewed"
-                                                                    data-bs-toggle="tooltip" data-bs-placement="left"
-                                                                    title="Filter? Espresso Machine? Cafetiere?"
-                                                                    value="{{ bean.brew_type }}">
-                                                            </div>
-                                                            <div class="col-md-6 mb-1"><strong>Type:</strong>
-                                                                <select class="form-select form-select-md"
-                                                                    id="origin_type-{{ bean._id }}" name="origin_type"
-                                                                    aria-label="origin type selection" required>
-                                                                    {% for origin in origins %}
-                                                                    <option value="{{ bean.origin_type }}" size="2">
-                                                                        {{ origin.origin_type }}</option>
-                                                                    {% endfor %}
-                                                                </select>
-                                                            </div>
-                                                            <div class="col-md-6"><label
-                                                                    for="bean_origin"><strong>Coffee Origin:
-                                                                    </strong></label>
-                                                                <input type="text" id="bean_origin-{{ bean._id }}"
-                                                                    name="bean_origin" class="form-control-plaintext"
-                                                                    placeholder="Coffee Origin" data-bs-toggle="tooltip"
-                                                                    data-bs-placement="left"
-                                                                    title="The magical land this coffee hails from"
-                                                                    value="{{ bean.bean_origin }}">
-                                                            </div>
+                                            <h3><strong>{{ bean.bean_name }}</strong></h3>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Cancel</button>
+                                            <a class="btn btn-danger"
+                                                href="{{ url_for('delete_review', bean_id=bean._id) }}"
+                                                role="button">Delete</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--End Delete Review Modal-->
+                            <!--Edit Review Modal-->
+                            <form method="POST" action="{{ url_for('edit_review', bean_id=bean._id) }}">
+                                <div class="modal fade" id="edit_review-{{ bean._id }}" tabindex="-1"
+                                    aria-labelledby="edit_review-{{ bean._id }}" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <label for="bean_name" class="card-title strong">Edit Your Review
+                                                    for </label>
+                                                <input type="text" id="bean_name-{{ bean._id }}" name="bean_name"
+                                                    class="form-control-plaintext card-title strong text-light"
+                                                    placeholder="Coffee Name" data-bs-toggle="tooltip"
+                                                    data-bs-placement="top"
+                                                    title="Name of the coffee bean you are reviewing"
+                                                    value="{{ bean.bean_name }}">
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="card border-0">
+                                                    <div class="row g-0">
+                                                        <div class="col-md-4 card-body">
+                                                            <img src="{{ bean.bean_image }}" class="rounded img-fluid"
+                                                                alt="An image of {{ bean.bean_name }} coffee">
+                                                            <p><label for="bean_image" class="mb-1 disbaled d-none"
+                                                                    id="bean_imageLabel-{{ bean._id }}">Link an
+                                                                    image of the
+                                                                    coffee</label>
+                                                                <input type="text" id="bean_imageEdit-{{ bean._id }}"
+                                                                    name="bean_image"
+                                                                    class="form-control mb-3 disabled d-none"
+                                                                    placeholder="Add a link to an image of this coffee"
+                                                                    aria-label="bean_image"
+                                                                    aria-describedby="bean_image"
+                                                                    value="{{ bean.bean_image }}">
+                                                                <input class="form-check-input" type="checkbox"
+                                                                    id="imageUrl-{{ bean._id }}">
+                                                                <label class="form-check-label" for="imageUrl">Tick
+                                                                    here if you have an image link</label>
+                                                            </p>
+                                                            <label for="affialiate_link"
+                                                                class="disabled d-none"><small>Available to
+                                                                    buy: </small></label>
+                                                            <input type="text" id="affialiate_link-{{ bean._id }}"
+                                                                name="affialiate_link"
+                                                                class="form-control mb-1 disabled d-none"
+                                                                placeholder="Add a link to where this can be purchased"
+                                                                aria-label="purchase URl"
+                                                                aria-describedby="affialiate_link-{{ bean._id }}"
+                                                                value="{{ bean.affialiate_link }}">
                                                         </div>
-                                                        <div class="card-body">
-                                                            <label for="bean_description">
-                                                                <strong class="h6">Description</strong>
-                                                            </label>
-                                                            <textarea class="form-control-plaintext"
-                                                                id="bean_description-{{ bean._id }}"
-                                                                name="bean_description"
-                                                                placeholder="Your Review of your chosen coffee"
-                                                                data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                                title="Resize this box from the bottom right"
-                                                                required>{{ bean.bean_description }}</textarea>
+                                                        <div class="col-md-8">
+                                                            <div class="row card-body">
+                                                                <div class="col-md-6 mb-1">
+                                                                    <label for="bean_rating"><strong>Rating:
+                                                                        </strong></label>
+                                                                    <span class="block">
+                                                                        {% for count in range(bean.bean_rating|int)
+                                                                        %} {{ rating }}
+                                                                        {% endfor %}
+                                                                    </span>
+                                                                </div>
+                                                                <div class="col-md-6 mb-1">
+                                                                    <label for="bean_roast"> <strong>Roast:
+                                                                        </strong></label>
+
+                                                                    <select class="form-select form-select-md"
+                                                                        id="bean_roast-{{ bean._id }}" name="bean_roast"
+                                                                        aria-label="bean roast selection"
+                                                                        data-bs-toggle="tooltip"
+                                                                        data-bs-placement="left"
+                                                                        title="Light/Medium/Dark" required>
+                                                                        {% for roast in roasts %}
+                                                                        <option value="{{ bean.bean_roast }}" size="3">
+                                                                            {{ roast.bean_roast }}</option>
+                                                                        {% endfor %}
+                                                                    </select>
+                                                                </div>
+                                                                <div class="col-md-6 mb-1"><label
+                                                                        for="brew_type"><strong>Brew Type:
+                                                                        </strong></label>
+                                                                    <input type="text" id="brew_type-{{ bean._id }}"
+                                                                        name="brew_type" class="form-control-plaintext"
+                                                                        placeholder="Brew Type"
+                                                                        aria-label="How this coffee is brewed"
+                                                                        data-bs-toggle="tooltip"
+                                                                        data-bs-placement="left"
+                                                                        title="Filter? Espresso Machine? Cafetiere?"
+                                                                        value="{{ bean.brew_type }}">
+                                                                </div>
+                                                                <div class="col-md-6 mb-1"><strong>Type:</strong>
+                                                                    <select class="form-select form-select-md"
+                                                                        id="origin_type-{{ bean._id }}"
+                                                                        name="origin_type"
+                                                                        aria-label="origin type selection" required>
+                                                                        {% for origin in origins %}
+                                                                        <option value="{{ bean.origin_type }}" size="2">
+                                                                            {{ origin.origin_type }}</option>
+                                                                        {% endfor %}
+                                                                    </select>
+                                                                </div>
+                                                                <div class="col-md-6"><label
+                                                                        for="bean_origin"><strong>Coffee Origin:
+                                                                        </strong></label>
+                                                                    <input type="text" id="bean_origin-{{ bean._id }}"
+                                                                        name="bean_origin"
+                                                                        class="form-control-plaintext"
+                                                                        placeholder="Coffee Origin"
+                                                                        data-bs-toggle="tooltip"
+                                                                        data-bs-placement="left"
+                                                                        title="The magical land this coffee hails from"
+                                                                        value="{{ bean.bean_origin }}">
+                                                                </div>
+                                                            </div>
+                                                            <div class="card-body">
+                                                                <label for="bean_description">
+                                                                    <strong class="h6">Description</strong>
+                                                                </label>
+                                                                <textarea class="form-control-plaintext"
+                                                                    id="bean_description-{{ bean._id }}"
+                                                                    name="bean_description"
+                                                                    placeholder="Your Review of your chosen coffee"
+                                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                                                    title="Resize this box from the bottom right"
+                                                                    required>{{ bean.bean_description }}</textarea>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
 
-                                        <div class="modal-footer border-0">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Exit
-                                                without Saving</button>
-                                            <button type="Submit" class="btn btn-primary">Save changes</button>
+                                            <div class="modal-footer border-0">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Exit
+                                                    without Saving</button>
+                                                <button type="Submit" class="btn btn-primary">Save changes</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </form>
-                        <!--End Edit Review Modal-->
+                            </form>
+                            <!--End Edit Review Modal-->
 
-                    </div>
-                    <div class="tab-content w-100" id="nav-tabContent">
-                        <div class="tab-pane fade show active pl-5" id="nav-home-{{ bean._id }}" role="tabpanel"
-                            aria-labelledby="nav-home-tab">
-                            <div class="card">
-                                <div class="row g-0">
-                                    <div class="col-md-4 card-body">
-                                        <img src="{{ bean.bean_image }}" class="rounded img-fluid"
-                                            alt="An image of {{ bean.bean_name }} coffee">
-                                        <p><strong><small>Available to buy <a href="{{ bean.affialiate_link }}"
-                                                        target="_blank">Here</a></small></strong></p>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="row card-body">
-                                            <div class="col-md-6 mb-1"><strong>Rating:
-                                                </strong><span>
-                                                    {% for count in range(bean.bean_rating|int) %} {{ rating }}
-                                                    {% endfor %}
-                                                </span></div>
-                                            <div class="col-md-6 mb-1"><strong>Roast:
-                                                </strong><span>{{ bean.bean_roast }}</span>
-                                            </div>
-                                            <div class="col-md-6 mb-1"><strong>Brew:
-                                                </strong><span>{{ bean.brew_type }}</span>
-                                            </div>
-                                            <div class="col-md-6 mb-1"><strong>Type:
-                                                </strong><span>{{ bean.origin_type }}</span>
-                                            </div>
-                                            <div class="col-md-6"><strong>Origin:
-                                                </strong><span>{{ bean.bean_origin }}</span>
-                                            </div>
-                                        </div>
-                                        <div class="card-body">
-                                            <h6><strong>Description</strong></h6>
-                                            <p class="card-text">{{ bean.bean_description }}</p>
-                                            <p class="card-text"><strong><small>Reviewed by:
-                                                    </small></strong><small class="text-muted">{{
-                                                    bean.created_by }}</small></p>
-                                            <p class="card-text"><strong><small>Last Updated:
-                                                    </small></strong><small class="text-muted">{{
-                                                    bean.created_date.strftime("%d %B, %Y") }}</small></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
-                        <div class="tab-pane fade" id="nav-profile-{{ bean._id }}" role="tabpanel"
-                            aria-labelledby="nav-profile-tab">
-                            <div class="card">
-                                <div class="row g-0 comment-section">
-
-
-
-                                    <!--User comments generated for each review-->
-                                    {% for comment in bean.comments %}
-                                    <div class="card border-0">
-                                        <div class="card-body">
-                                            <blockquote class="blockquote mb-0 ">
-                                                <p>{{ comment.comment }}</p>
-                                                <footer class="blockquote-footer text-end">Added by: <cite
-                                                        title="Source Title" class="pe-3">{{ comment.username
-                                                        }}</cite>
-                                                    {% if session.user|lower == comment.username|lower %}
-                                                    <a class="btn btn-danger"
-                                                        href="{{ url_for('delete_comment', comment_id=comment.comment_id, bean_id=bean._id) }}"
-                                                        role="button"><i class="fa-trash-alt fa-lg fas"></i></a>
-                                                    {% endif %}
-                                                </footer>
-
-                                            </blockquote>
+                        <div class="tab-content w-100" id="nav-tabContent">
+                            <div class="tab-pane fade show active pl-5" id="nav-home-{{ bean._id }}" role="tabpanel"
+                                aria-labelledby="nav-home-tab">
+                                <div class="card">
+                                    <div class="row g-0">
+                                        <div class="col-md-4 card-body">
+                                            <img src="{{ bean.bean_image }}" class="rounded img-fluid"
+                                                alt="An image of {{ bean.bean_name }} coffee">
+                                            <p><strong><small>Available to buy <a href="{{ bean.affialiate_link }}"
+                                                            target="_blank">Here</a></small></strong></p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="row card-body">
+                                                <div class="col-md-6 mb-1"><strong>Rating:
+                                                    </strong><span>
+                                                        {% for count in range(bean.bean_rating|int) %} {{ rating }}
+                                                        {% endfor %}
+                                                    </span></div>
+                                                <div class="col-md-6 mb-1"><strong>Roast:
+                                                    </strong><span>{{ bean.bean_roast }}</span>
+                                                </div>
+                                                <div class="col-md-6 mb-1"><strong>Brew:
+                                                    </strong><span>{{ bean.brew_type }}</span>
+                                                </div>
+                                                <div class="col-md-6 mb-1"><strong>Type:
+                                                    </strong><span>{{ bean.origin_type }}</span>
+                                                </div>
+                                                <div class="col-md-6"><strong>Origin:
+                                                    </strong><span>{{ bean.bean_origin }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="card-body">
+                                                <h6><strong>Description</strong></h6>
+                                                <p class="card-text">{{ bean.bean_description }}</p>
+                                                <p class="card-text"><strong><small>Reviewed by:
+                                                        </small></strong><small class="text-muted">{{
+                                                        bean.created_by }}</small></p>
+                                                <p class="card-text"><strong><small>Last Updated:
+                                                        </small></strong><small class="text-muted">{{
+                                                        bean.created_date.strftime("%d %B, %Y") }}</small></p>
+                                            </div>
                                         </div>
                                     </div>
-                                    {% endfor %}
                                 </div>
-
-
-
                             </div>
-                            {% if session.user %}
-                            <div class="row g-0 text-end">
-                                <!--Add comments to review-->
-                                <form method="POST" action="{{ url_for('add_comment', bean_id=bean._id) }}">
-                                    <div class="col-md-12 card-body">
-                                        <div class="input-group mb-3">
-                                            <input type="text" class="form-control" id="comment-{{ bean._id }}"
-                                                name="comment" placeholder="Comments" aria-label="Recipient's username"
-                                                aria-describedby="button-addon2">
-                                            <button class="btn btn-success" type="submit" id="add-comment">Add</button>
+                            <div class="tab-pane fade" id="nav-profile-{{ bean._id }}" role="tabpanel"
+                                aria-labelledby="nav-profile-tab">
+                                <div class="card">
+                                    <div class="row g-0 comment-section">
+
+
+
+                                        <!--User comments generated for each review-->
+                                        {% for comment in bean.comments %}
+                                        <div class="card border-0">
+                                            <div class="card-body">
+                                                <blockquote class="blockquote mb-0 ">
+                                                    <p>{{ comment.comment }}</p>
+                                                    <footer class="blockquote-footer text-end">Added by: <cite
+                                                            title="Source Title" class="pe-3">{{ comment.username
+                                                            }}</cite>
+                                                        {% if session.user|lower == comment.username|lower %}
+                                                        <a class="btn btn-danger"
+                                                            href="{{ url_for('delete_comment', comment_id=comment.comment_id, bean_id=bean._id) }}"
+                                                            role="button"><i class="fa-trash-alt fa-lg fas"></i></a>
+                                                        {% endif %}
+                                                    </footer>
+
+                                                </blockquote>
+                                            </div>
                                         </div>
+                                        {% endfor %}
                                     </div>
-                                </form>
-                                {% else %}
-                                <p class="mt-2 pe-3">You must be logged in to post comments</p>
+
+
+
+                                </div>
+                                {% if session.user %}
+                                <div class="row g-0 text-end">
+                                    <!--Add comments to review-->
+                                    <form method="POST" action="{{ url_for('add_comment', bean_id=bean._id) }}">
+                                        <div class="col-md-12 card-body">
+                                            <div class="input-group mb-3">
+                                                <input type="text" class="form-control" id="comment-{{ bean._id }}"
+                                                    name="comment" placeholder="Comments"
+                                                    aria-label="Recipient's username" aria-describedby="button-addon2">
+                                                <button class="btn btn-success" type="submit"
+                                                    id="add-comment">Add</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    {% else %}
+                                    <p class="mt-2 pe-3">You must be logged in to post comments</p>
+                                </div>
+                                {% endif %}
                             </div>
-                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -631,14 +641,8 @@
         </div>
     </div>
 </div>
-<!--This closing div doesn't appear to be connected to anything.
-            However after carefully going through every div tag on this page and
-            the base.html to ensure it wasn't inherited from the template, removing it causes a cascading
-            effect within the reviews page for each review. Additionally, I have carefully gone over the jinja loops
-            and if statements to check if the fault lies there. I can only assume that I have missed something to cause such effect.-->
-</div>
-
 {% endfor %}
+
 {% else %}
 <h3>Your search returned no results</h3>
 {% endif %}

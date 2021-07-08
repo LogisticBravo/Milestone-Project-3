@@ -63,7 +63,7 @@
                             <div class="card-body">
                                 Need an account? <a href="{{ url_for('signup')}}">Sign-up Here</a>
                             </div>
-                            <button type="submit" class="btn btn-primary">Login</button>
+                            <button type="submit" class="btn btn-orange">Login</button>
                         </form>
                     </li>
                     {% endif %}
@@ -151,19 +151,32 @@
     <!--****** End Main Content ******-->
 
     <!--****** Footer ******-->
-    <footer>
+    <footer class="footer container-fluid">
 
-    <div class="row mt-5 text-center">
-        <div class="col-sm-6">
-            <span class="d-inline-block px-2"> <strong> footer here?</strong></span>
-            <span class="d-inline-block px-2"><strong> footer over here?</strong></span>
-            <h5 class="d-inline-block px-2"><strong> footer and here?</strong></h5>
-            <p class="d-block">footer here?</p>
-            <p class="d-block">footer here?</p>
-            
+    <div class="row mt-5 pt-5">
+        <div class="col-sm-8 col-md-2 offset-md-2 text-start">
+            <h6 class="h5">Site Map</h6>
+            <a class="d-block px-1 fs-6 ps-0 text-light" href="{{ url_for('home') }}#about">About</a>
+            <a class="d-block px-1 fs-6 ps-0 text-light" href="{{ url_for('reviews') }}">Reviews</a>
+            {% if session.user %}
+            <span class="d-block px-1 fs-6 ps-0">My Account</span>
+            {% else %}
+            <a class="d-block px-1 fs-6 ps-0 text-light" href="{{ url_for('signup') }}">Sign-Up</a>
+            {% endif %}
         </div>
-        <div class="col-sm-4">
-            here?
+        <div class="col-sm-8 col-md-2 text-start">
+            <h6 class="h5">More</h6>
+            <span class="d-block px-1 fs-6 ps-0">Privacy policy</span>
+            <span class="d-block px-1 fs-6 ps-0">Terms & Conditions</span>
+        </div>
+        <div class="col-sm-8 col-md-6 text-center">
+            <h6 class="h5">Socialise with us!</h6>
+            <span class="d-inline-block px-1 fs-6"><strong> footer over here?</strong></span> 
+        </div>   
+    </div>
+    <div class="row py-2">
+        <div class="col-12 text-center">
+            Made with Love
         </div>
     </div>
 

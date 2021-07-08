@@ -17,6 +17,11 @@ p, span, input, select, textarea {
   font-size: large;
 }
 
+footer > div > div > .text-light {
+  font-family: 'Stardos Stencil', cursive;
+  text-decoration: none;
+}
+
 a.navbar-brand {
   background-color: white;
   color: black;
@@ -33,7 +38,7 @@ a.navbar-brand {
   mix-blend-mode: screen;
 }
 
-li > a {
+li > a, footer > div > div > h6 {
   color: #fff;
   font-family: 'Fredericka the Great', cursive;
   letter-spacing: 0.25em;
@@ -227,8 +232,8 @@ button.nav-link.active:focus, button.nav-link:focus, button.nav-link:focus-visib
   text-decoration: none; 
 }
 
-.card-text > a:hover, .fa-star, .rating {
-  color: #F99459;
+.card-text > a:hover, .fa-star, .rating, a.text-light:hover {
+  color: #F99459!important;
 }
 
 .mh{
