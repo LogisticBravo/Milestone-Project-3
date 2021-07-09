@@ -3,14 +3,14 @@
 {% block content %}
 
     <div class="row g-0">
-        <div class="col-8 offset-md-2 mt-5">
+        <div class="col-sm-10 offset-sm-1 mt-5">
             <div class="card text-center card-border">
                 <div class="card-header">
                     <h5>Sign-Up Below!</h5>
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-8 offset-md-2">
+                        <div class="col-sm-10 offset-sm-1">
                             <!--Sign-Up Form-->
                             <form method="POST" action="{{ url_for('signup') }}">
                                 <div class="mb-3">
@@ -49,7 +49,7 @@
                                     <!--Terms & Conditions check box-->
                                     <input type="checkbox" class="form-check-input" id="tandc" name="tandc" required>
                                     <label class="form-check-label" for="tandc">Check here to agree to our <a
-                                            href="">Terms & Conditions.</a> </label>
+                                            href="">Privacy Policy.</a> </label>
                                 </div>
                                 <!--Submit form button-->
                                 <button type="submit" class="btn btn-primary" id="submit">Submit</button>

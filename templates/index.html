@@ -5,7 +5,7 @@
 <section class="page-section clearfix">
     <div class="container mt-5">
         <div class="callout">
-            <img class="hero-img img-fluid mb-3 rounded" src="{{ url_for('static', filename='assets/img/coffee_beans_hero.jpeg') }}" alt="..." />
+            <img class="hero-img img-fluid mb-3 rounded" src="{{ url_for('static', filename='assets/img/coffee_beans_hero.jpeg') }}" alt="An image of coffee beans" />
             <div class="callout-text text-center p-5 rounded" id ="about">
                 <h2 class="section-heading mb-4">
                     <span class="section-heading-upper">Find Coffee</span>
@@ -15,7 +15,7 @@
                     difficult! Luckily, The Trusted Barista is here to help you find that blissful addition to your
                     morning routine. Every review is user written so come sip on the right roast for you, recommended by
                     people like you!</p>
-                <div class="callout-button mx-auto"><a class="btn btn-primary" href="#">Read Reviews!</a></div>
+                <div class="callout-button mx-auto"><a class="btn btn-primary" href="{{ url_for('reviews') }}">Read Reviews!</a></div>
             </div>
         </div>
     </div>

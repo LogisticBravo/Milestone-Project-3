@@ -17,7 +17,7 @@ p, span, input, select, textarea {
   font-size: large;
 }
 
-footer > div > div > .text-light {
+footer > div > div > .text-light, .toast-body {
   font-family: 'Stardos Stencil', cursive;
   text-decoration: none;
 }
@@ -29,12 +29,25 @@ a.navbar-brand {
   font-weight: bold;
   margin: 0 auto;
   padding: 0px;
-  width: 45%;
+  width: 42%;
   text-align: left;
   position: absolute;
   top: 50%;
   left: 25%;
   transform: translate(-50%, -50%);
+  mix-blend-mode: screen;
+}
+
+.cutout {
+  background-color: white;
+  color: black;
+  font-size: 3vw;
+  font-weight: bold;
+  margin: 0 auto;
+  padding: 0px;
+  width: 60%;
+  text-align: center;
+  position: relative;
   mix-blend-mode: screen;
 }
 
@@ -226,13 +239,13 @@ button.nav-link.active:focus, button.nav-link:focus, button.nav-link:focus-visib
   overflow-y: scroll;
 }
 
-.card-text > a {
+.card-text > a, .text-dark {
   color: #3C3A43;
   text-transform: capitalize;
   text-decoration: none; 
 }
 
-.card-text > a:hover, .fa-star, .rating, a.text-light:hover {
+.card-text > a:hover, .fa-star, .rating, a.text-light:hover, .text-dark:hover {
   color: #F99459!important;
 }
 
@@ -255,4 +268,18 @@ button.nav-link.active:focus, button.nav-link:focus, button.nav-link:focus-visib
 
 .fa-comments.fas {
   color: #5cb85c;
+}
+
+.mapouter {
+  position: relative;
+  text-align: right;
+  height: 300px;
+  width: 300px;
+}
+
+.gmap_canvas {
+  overflow: hidden;
+  background: none !important;
+  height: 300px;
+  width: 300px;
 }

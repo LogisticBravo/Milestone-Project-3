@@ -25,11 +25,11 @@
 
     <!--****** Header ******-->
     <header>
-        <nav class="navbar navbar-light bg-light">
+        <nav class="navbar navbar-light bg-light navbar-expand-lg">
             <div class="container justify-content-end">
-                <a class="navbar-brand" href="#">
-                    <img src="#" alt="#" width="30" height="24" class="d-inline-block align-text-top">
-                    The Trusted Barista
+                <a class="navbar-brand" href="{{ url_for('home') }}">
+                    
+                    # The Trusted Barista
                 </a>
                 <ul class="nav justify-content-end">
                     <li class="nav-item">
@@ -130,7 +130,6 @@
         <div class="toast-container position-sticky top-50 start-50 translate-middle-x">
             <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
                 <div class="toast-header">
-                    <img src="..." class="rounded me-2" alt="...">
                     <strong class="me-auto">The Trusted Barista</strong>
                     <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
                 </div>
@@ -155,28 +154,37 @@
 
     <div class="row mt-5 pt-5">
         <div class="col-sm-8 col-md-2 offset-md-2 text-start">
-            <h6 class="h5">Site Map</h6>
+            <h6 class="h5 mt-2">Site Map</h6>
             <a class="d-block px-1 fs-6 ps-0 text-light" href="{{ url_for('home') }}#about">About</a>
             <a class="d-block px-1 fs-6 ps-0 text-light" href="{{ url_for('reviews') }}">Reviews</a>
             {% if session.user %}
-            <span class="d-block px-1 fs-6 ps-0">My Account</span>
+            <a class="d-block px-1 fs-6 ps-0 text-light" href="{{ url_for('profile', username=session['user']) }}">My Account</a>
             {% else %}
             <a class="d-block px-1 fs-6 ps-0 text-light" href="{{ url_for('signup') }}">Sign-Up</a>
             {% endif %}
         </div>
         <div class="col-sm-8 col-md-2 text-start">
-            <h6 class="h5">More</h6>
+            <h6 class="h5 mt-2">More</h6>
             <span class="d-block px-1 fs-6 ps-0">Privacy policy</span>
-            <span class="d-block px-1 fs-6 ps-0">Terms & Conditions</span>
+            <a class="d-block px-1 fs-6 ps-0 text-light" href="{{ url_for('contact') }}">Contact Us</a>
         </div>
         <div class="col-sm-8 col-md-6 text-center">
-            <h6 class="h5">Socialise with us!</h6>
-            <span class="d-inline-block px-1 fs-6"><strong> footer over here?</strong></span> 
+            <h6 class="h5 cutout my-2">The Trusted Barista</h6>
+            <a class="text-light px-2" href="https://www.facebook.com/"
+                                target="_blank" aria-label="facebook page icon" rel="noreferrer"><i class="fab fa-facebook-square fs-2"></i></a>
+                            <a class="text-light px-2" href="https://www.instagram.com/"
+                                target="_blank" aria-label="instagram page icon" rel="noreferrer"><i class="fab fa-instagram-square fs-2"></i></a>
+                            <a class="text-light px-2" href="https://www.pinterest.com/"
+                                target="_blank" aria-label="pinterest page icon" rel="noreferrer"><i class="fab fa-pinterest-square fs-2"></i></a>
+                            <a class="text-light px-2" href="https://www.twitter.com/"
+                                target="_blank" aria-label="twitter page icon" rel="noreferrer"><i class="fab fa-twitter-square fs-2"></i></a>
+                            <a class="text-light px-2" href="https://www.youtube.com/"
+                                target="_blank" aria-label="youtube page icon" rel="noreferrer"><i class="fab fa-youtube-square fs-2"></i></a>
         </div>   
     </div>
     <div class="row py-2">
         <div class="col-12 text-center">
-            Made with Love
+            Made with <i class="far fa-heart"></i><i class="far fa-copyright px-2"></i><span>Bravo Digital Designs</span>
         </div>
     </div>
 
