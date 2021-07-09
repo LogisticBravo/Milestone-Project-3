@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% set active_page = "contact" %}
+{% block content %}
+<div class="row g-0">
+    <div class="col-sm-10 offset-sm-1 mt-5">
+        <div class="card text-center card-border">
+            <div class="card-header">
+                <h5>Contact Us!</h5>
+            </div>
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col-sm-4 offset-md-1 mt-2 order-1">
+                        <!--generated and styl courtesy of https://google-map-generator.com/-->
+                        <div class="mapouter">
+                            <div class="gmap_canvas"><iframe width="300" height="300" id="gmap_canvas"
+                                    src="https://maps.google.com/maps?q=patrick%20street%20cork&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                                    frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-8 offset-md-2 mt-2">
+                        <form action="#">
+                            <p>Got something to add?</p>
+                            <p>We’d <em>love</em> to hear!</p>
+                            <div class="form-row form-group text-center col-auto">
+                                <input type="text" class="form-control mb-2" placeholder="Your Name" name="user_name"
+                                    id="fname" aria-label="form" required />
+                            </div>
+                            <div class="form-row form-group text-center col-auto mb-2">
+                                <input type="email" class="form-control" placeholder="Your Email Address"
+                                    name="user_email" id="email" required aria-describedby="emailHelp"
+                                    aria-label="email input form" />
+                                <small id="emailHelp" class="form-text text-muted">We'll never share your email with
+                                    anyone else.</small>
+                            </div>
+                            <div class="form-row form-group text-center col-auto mb-2">
+                                <textarea class="form-control" rows="2" placeholder="Your Message" name="user_message"
+                                    id="message" required aria-label="text-box for message"></textarea>
+                            </div>
+                            <div class="form-row form-group justify-content-center col-auto">
+                                <input type="submit" class="btn btn-orange" aria-label="submit form button">
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="col-sm-4 offset-md-3 offset-lg-2 order-2 text-start mt-2">
+                        <address>
+                            <span>
+                                Address <i class="fas fa-map-pin"></i>
+                            </span>
+                            <a href="https://goo.gl/maps/xxrJihnrqXCQjTNB7" class="text-dark" target="_blank"
+                                rel="noreferrer">
+                                <span class="d-block px-1">Bravo Digital Designs,</span>
+                                <span class="d-block px-1"> Cork.</span>
+                                <span class="d-block px-1">Ireland</span>
+                            </a>
+                        </address>
+                        <p>
+                        <address>
+                            <span>Email: <i class="fas fa-paper-plane"></span></i>
+                            <span class="d-block px-1"><a href="mailto:bravodigitaldesigns@gmail.com" class="text-dark"
+                                    target="_blank" rel="noreferrer">bravodigitaldesigns@gmail.com</a></span>
+                        </address>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% block scripts %}
+{% endblock %}
+{% endblock %}
