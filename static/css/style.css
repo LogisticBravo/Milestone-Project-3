@@ -52,9 +52,13 @@ a.navbar-brand {
 }
 
 li > a, footer > div > div > h6 {
-  color: #fff;
+  color: #fff!important;
   font-family: 'Fredericka the Great', cursive;
   letter-spacing: 0.25em;
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e")!important;
 }
 
 p > a {
@@ -94,7 +98,7 @@ a.nav-link.active {
     background-repeat: no-repeat;
     background-size: 100%;
     background-position: center ;
-    height: 95px;
+    height: 100%;
     position: relative;
 }
 
