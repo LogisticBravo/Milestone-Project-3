@@ -22,7 +22,8 @@ mongo = PyMongo(app)
 @app.route("/")
 @app.route("/home")
 def home():
-    reviews = list(mongo.db.beans.aggregate([{"$sort": {"created_date": -1}}, {"$limit": 5}]))
+    reviews = list(mongo.db.beans.aggregate([{
+        "$sort": {"created_date": -1}}, {"$limit": 5}]))
     try:
         if session["user"]:
             username = mongo.db.users.find_one({"username": session["user"]})
@@ -73,7 +74,7 @@ def login():
 
         if user_exists:
             if check_password_hash(
-                user_exists["password"], request.form.get("password")):
+                    user_exists["password"], request.form.get("password")):
                 session["user"] = request.form.get("username").lower()
                 if session["user"]:
                     username = mongo.db.users.find_one(
@@ -139,7 +140,7 @@ def update():
                     {"_id": username["_id"]},
                     {"$set": {"username": request.form.get(
                         "current_username").lower()}}
-                        )
+                )
                 mongo.db.beans.update_many(
                     {"created_by_id": username["_id"]},
                     {"$set": {"created_by": request.form.get(
@@ -156,7 +157,7 @@ def update():
 @app.route("/update_pw", methods=["GET", "POST"])
 def update_pw():
     username = mongo.db.users.find_one(
-            {"username": session["user"]})
+        {"username": session["user"]})
     if request.method == "POST":
         if session["user"]:
             if check_password_hash(
@@ -175,14 +176,14 @@ def update_pw():
 @app.route("/newsletter_sub", methods=["GET", "POST"])
 def newsletter_sub():
     username = mongo.db.users.find_one(
-            {"username": session["user"]})
+        {"username": session["user"]})
     newsletter_check = "checked" if request.form.get(
-            "subscription") else "off"
+        "subscription") else "off"
     if request.method == "POST":
         if session["user"]:
             mongo.db.users.update_one(
-                    {"_id": username["_id"]},
-                    {"$set": {"newsletter_check": newsletter_check}})
+                {"_id": username["_id"]},
+                {"$set": {"newsletter_check": newsletter_check}})
         return profile(username)
 
 
@@ -196,15 +197,15 @@ def newsletter_form():
                 newsletter_check = "checked" if request.form.get(
                     "newsletterSub") else "off"
                 mongo.db.users.update_one(
-                        {"_id": username["_id"]},
-                        {"$set": {"newsletter_check": newsletter_check}})
+                    {"_id": username["_id"]},
+                    {"$set": {"newsletter_check": newsletter_check}})
                 flash("Thanks for updating your Subscription!")
                 return redirect(url_for("reviews"))
         except Exception:
             newsletter = {
-                    "name": request.form.get("user_name"),
-                    "email": request.form.get("user_email")
-                    }
+                "name": request.form.get("user_name"),
+                "email": request.form.get("user_email")
+            }
             mongo.db.newsletters.insert_one(newsletter)
             flash("Thanks for subscribing! Why not Create an Account?")
             return redirect(url_for("signup"))
@@ -228,7 +229,8 @@ def reviews():
             favourites = list(username["favourites"])
             return render_template(
                 "reviews.html", username=username,
-                beans=beans, origins=origins, favourites=favourites, roasts=roasts)
+                beans=beans, origins=origins,
+                favourites=favourites, roasts=roasts)
     except Exception:
         return render_template("reviews.html", beans=beans)
 
@@ -265,19 +267,23 @@ def edit_review(bean_id):
         if session["user"]:
             username = mongo.db.users.find_one({"username": session["user"]})
             if request.method == "POST":
-                mongo.db.beans.update_one({"_id": ObjectId(bean_id)}, {"$set": {"bean_name": request.form.get("bean_name"),
-                    "bean_roast": request.form.get("bean_roast"),
-                    "bean_rating": request.form.get("bean_rating"),
-                    "bean_description": request.form.get("bean_description"),
-                    "bean_origin": request.form.get("bean_origin"),
-                    "origin_type": request.form.get("origin_type"),
-                    "brew_type": request.form.get("brew_type"),
-                    "bean_image": request.form.get("bean_image"),
-                    "affialiate_link": request.form.get("affialiate_link"),
-                    "created_by": session["user"],
-                    "created_date": datetime.datetime.utcnow()}})
+                mongo.db.beans.update_one({"_id": ObjectId(bean_id)}, {
+                    "$set": {"bean_name": request.form.get("bean_name"),
+                             "bean_roast": request.form.get("bean_roast"),
+                             "bean_rating": request.form.get("bean_rating"),
+                             "bean_description": request.form.get(
+                                 "bean_description"),
+                             "bean_origin": request.form.get("bean_origin"),
+                             "origin_type": request.form.get("origin_type"),
+                             "brew_type": request.form.get("brew_type"),
+                             "bean_image": request.form.get("bean_image"),
+                             "affialiate_link": request.form.get(
+                                 "affialiate_link"),
+                             "created_by": session["user"],
+                             "created_date": datetime.datetime.utcnow()}})
                 flash("Review Updated!")
-            return render_template("reviews.html", username=username, beans=beans)
+            return render_template("reviews.html",
+                                   username=username, beans=beans)
     except Exception:
         return reviews()
 
@@ -295,11 +301,11 @@ def add_comment(bean_id):
         username = mongo.db.users.find_one({"username": session["user"]})
         if request.method == "POST":
             comments = {
-                    "comment_id": ObjectId(),
-                    "user_id": username["_id"],
-                    "username": username["username"],
-                    "comment": request.form.get("comment")
-                }
+                "comment_id": ObjectId(),
+                "user_id": username["_id"],
+                "username": username["username"],
+                "comment": request.form.get("comment")
+            }
             mongo.db.beans.update_one(
                 {"_id": ObjectId(bean_id)},
                 {"$push": {"comments": comments}})
@@ -339,17 +345,19 @@ def favourite(bean_id):
             bean = mongo.db.beans.find_one(
                 {"_id": ObjectId(bean_id)})["bean_name"]
             favourite = {
-                    "coffee_id": ObjectId(bean_id),
-                    "coffee_name": bean,
-                    "favshown": True
-                }
+                "coffee_id": ObjectId(bean_id),
+                "coffee_name": bean,
+                "favshown": True
+            }
             mongo.db.users.update_one(
-                    {"_id": ObjectId(username["_id"])},
-                    {"$push": {"favourites": favourite}}
-                )
+                {"_id": ObjectId(username["_id"])},
+                {"$push": {"favourites": favourite}}
+            )
             mongo.db.beans.update_one(
                 {"_id": ObjectId(bean_id)},
-                {"$push": {"favoured_by": {"user_id": username["_id"], "username": username["username"]}}}
+                {"$push": {"favoured_by": {
+                    "user_id": username["_id"],
+                    "username": username["username"]}}}
             )
             flash("Added to your Favourites!")
             return reviews()
