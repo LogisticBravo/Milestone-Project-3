@@ -51,8 +51,13 @@ a.navbar-brand {
   mix-blend-mode: screen;
 }
 
-li > a, footer > div > div > h6 {
+li > a {
   color: #fff!important;
+  font-family: 'Fredericka the Great', cursive;
+  letter-spacing: 0.25em;
+}
+
+footer > div > div > h6 {
   font-family: 'Fredericka the Great', cursive;
   letter-spacing: 0.25em;
 }
@@ -152,6 +157,12 @@ a.nav-link.active {
     left: 0;
     position: absolute;
     bottom: -1rem;
+  }
+}
+
+@media only screen and (max-width:1024px){
+  .scroll-div, .scroll-div-2{
+    animation: none!important;
   }
 }
 
