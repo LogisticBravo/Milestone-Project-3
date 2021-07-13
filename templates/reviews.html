@@ -27,7 +27,6 @@
             <!--End Modal-->
         </form>
     </div>
-
     {% endif %}
     {% if beans|length > 0 %}
     {% for bean in beans %}
@@ -116,6 +115,7 @@
                             <!--End Edit Review Modal-->
 
                         </div>
+                        <!--Review-->
                         <div class="tab-content w-100" id="nav-tabContent">
                             <div class="tab-pane fade show active pl-5" id="nav-home-{{ bean._id }}" role="tabpanel"
                                 aria-labelledby="nav-home-tab">
@@ -165,9 +165,6 @@
                                 aria-labelledby="nav-profile-tab">
                                 <div class="card">
                                     <div class="row g-0 comment-section">
-
-
-
                                         <!--User comments generated for each review-->
                                         {% for comment in bean.comments %}
                                         <div class="card border-0">
@@ -189,9 +186,6 @@
                                         </div>
                                         {% endfor %}
                                     </div>
-
-
-
                                 </div>
                                 {% if session.user %}
                                 <div class="row g-0 text-end">
@@ -220,7 +214,6 @@
     </div>
 </div>
 {% endfor %}
-
 {% else %}
 <h3>Your search returned no results</h3>
 {% endif %}

@@ -404,6 +404,23 @@ def privacy():
         return render_template("privacy.html", privacy_policy=privacy_policy)
 
 
+@app.route("/admin")
+def admin():
+    if session["user"]:
+        username = mongo.db.users.find_one({"username": session["user"]})
+        users = list(mongo.db.users.find())
+        beans = list(mongo.db.beans.find())
+        return render_template("admin.html", username=username,
+                               users=users, beans=beans)
+
+
+@app.route("/delete_account/<user_id>")
+def delete_account(user_id):
+    mongo.db.users.delete_one({"_id": ObjectId(user_id)})
+    flash("Account Deleted")
+    return admin()
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
