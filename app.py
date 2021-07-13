@@ -352,8 +352,7 @@ def favourite(bean_id):
                 {"$push": {"favoured_by": {"user_id": username["_id"], "username": username["username"]}}}
             )
             flash("Added to your Favourites!")
-            return redirect(url_for(
-                "reviews", bean=bean, username=username))
+            return reviews()
     except Exception:
         return render_template("reviews.html")
 
@@ -371,7 +370,7 @@ def remove_favourite(bean_id):
             {"$pull": {"favourites": {"coffee_id": ObjectId(bean_id)}}}
         )
         flash("Yikes! Left a bad taste?!")
-    return redirect(url_for("reviews"))
+    return reviews()
 
 
 @app.route("/contact")

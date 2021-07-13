@@ -90,11 +90,11 @@ a.nav-link.active {
 }
 
 .col-12 > li > a, .modal-body > div.card {
-  color: #3C3A43;
+  color: #3C3A43!important;
 }
 
 .col-12 > li > a:hover, a.dropdown-item:hover, .footer, .btn-primary, .btn-secondary {
-  color: #fff;
+  color: #fff!important;
   background-color: #3C3A43;
 }
 
@@ -163,6 +163,12 @@ a.nav-link.active {
 @media only screen and (max-width:1024px){
   .scroll-div, .scroll-div-2{
     animation: none!important;
+  }
+
+  .translate-middle-x {
+    transform: none!important;
+    margin-top: 1rem;
+    margin-right: 0.75rem;
   }
 }
 
