@@ -93,7 +93,7 @@ a.nav-link.active {
   color: #3C3A43;
 }
 
-.col-12 > li > a:hover, a.dropdown-item:hover, .footer {
+.col-12 > li > a:hover, a.dropdown-item:hover, .footer, .btn-primary, .btn-secondary {
   color: #fff;
   background-color: #3C3A43;
 }
@@ -218,7 +218,7 @@ a.nav-link.active {
   border-top: none;
 }
 
-.modal-content {
+.modal-content, .btn-primary, .btn-secondary {
   border: 2px solid #f99459;
   color: #fff;
 }

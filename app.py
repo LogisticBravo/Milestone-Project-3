@@ -254,18 +254,18 @@ def add_review():
         }
         mongo.db.beans.insert_one(bean)
         flash("Review Added!")
-        return redirect(url_for("reviews"))
+        return reviews()
 
 
 @app.route("/edit_review/<bean_id>", methods=["GET", "POST"])
 def edit_review(bean_id):
     beans = mongo.db.beans.find()
+    username = mongo.db.users.find_one({"username": session["user"]})
     try:
         if session["user"]:
             username = mongo.db.users.find_one({"username": session["user"]})
             if request.method == "POST":
-                edit = {
-                    "bean_name": request.form.get("bean_name"),
+                mongo.db.beans.update_one({"_id": ObjectId(bean_id)}, {"$set": {"bean_name": request.form.get("bean_name"),
                     "bean_roast": request.form.get("bean_roast"),
                     "bean_rating": request.form.get("bean_rating"),
                     "bean_description": request.form.get("bean_description"),
@@ -275,22 +275,18 @@ def edit_review(bean_id):
                     "bean_image": request.form.get("bean_image"),
                     "affialiate_link": request.form.get("affialiate_link"),
                     "created_by": session["user"],
-                    "created_date": datetime.datetime.utcnow()
-                }
-                mongo.db.beans.update({"_id": ObjectId(bean_id)}, edit)
+                    "created_date": datetime.datetime.utcnow()}})
                 flash("Review Updated!")
-            bean = mongo.db.beans.find_one({"_id": ObjectId(bean_id)})
-
-            return redirect(url_for("reviews", bean=bean, username=username, beans=beans))
+            return render_template("reviews.html", username=username, beans=beans)
     except Exception:
-        return render_template("reviews.html")
+        return reviews()
 
 
 @app.route("/delete_review/<bean_id>")
 def delete_review(bean_id):
-    mongo.db.beans.remove({"_id": ObjectId(bean_id)})
+    mongo.db.beans.delete_one({"_id": ObjectId(bean_id)})
     flash("Review Deleted")
-    return redirect(url_for("reviews"))
+    return reviews()
 
 
 @app.route("/add_comment/<bean_id>", methods=["GET", "POST"])
@@ -319,7 +315,7 @@ def delete_comment(bean_id, comment_id):
             {"$pull": {"comments": {"comment_id": ObjectId(comment_id)}}}
         )
         flash("comment removed")
-    return redirect(url_for("reviews"))
+    return reviews()
 
 
 @app.route("/search", methods=["GET", "POST"])

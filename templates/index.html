@@ -38,7 +38,7 @@
                       <h5 class="card-title">{{ review.bean_name|title }}</h5>
                       <p class="card-text">{{ review.bean_description }}</p>
                       <p class="card-text">Added:<small class="text-muted"> {{ review.created_date.strftime("%d %B, %Y") }}</small></p>
-                      <a href="{{ url_for('reviews') }}#nav-home-{{ review._id }}" class="btn btn-primary">Read More</a>
+                      <a href="{{ url_for('reviews') }}#nav-home-{{ review._id }}" class="btn btn-secondary">Read More</a>
                     </div>
                   </div>
                 </div>
@@ -50,7 +50,7 @@
               <div class="card-body">
                 <h5 class="card-title">{{ review.bean_name|title }}</h5>
                 <p class="card-text">{{ review.bean_description }}</p>
-                <a href="{{ url_for('reviews') }}#nav-home-{{ review._id }}" class="btn btn-primary">Read More</a>
+                <a href="{{ url_for('reviews') }}#nav-home-{{ review._id }}" class="btn btn-secondary">Read More</a>
               </div>
             </div>
           </div>
@@ -61,7 +61,7 @@
                     <h5 class="card-title">{{ review.bean_name|title }}</h5>
                     <p class="card-text">{{ review.bean_description }}</p>
                     <p class="card-text">Added:<small class="text-muted"> {{ review.created_date.strftime("%d %B, %Y") }}</small></p>
-                    <a href="{{ url_for('reviews') }}#nav-home-{{ review._id }}" class="btn btn-primary">Read More</a>
+                    <a href="{{ url_for('reviews') }}#nav-home-{{ review._id }}" class="btn btn-secondary">Read More</a>
                   </div>
                 </div>
               </div>

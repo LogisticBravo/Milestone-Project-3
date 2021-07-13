@@ -465,10 +465,14 @@
                                                                         aria-label="bean roast selection"
                                                                         data-bs-toggle="tooltip"
                                                                         data-bs-placement="left"
-                                                                        title="Light/Medium/Dark" required>
+                                                                        title="Light/Medium/Dark">
                                                                         {% for roast in roasts %}
-                                                                        <option value="{{ bean.bean_roast }}" size="3">
-                                                                            {{ roast.bean_roast }}</option>
+                                                                        {% if loop.first %}
+                                                                        <option value="{{ roast.bean_roast }}" selected>
+                                                                            {{ bean.bean_roast }}</option>
+                                                                        {% endif %}
+                                                                            <option value="{{ roast.bean_roast }}">
+                                                                                {{ roast.bean_roast }}</option>
                                                                         {% endfor %}
                                                                     </select>
                                                                 </div>
@@ -490,7 +494,11 @@
                                                                         name="origin_type"
                                                                         aria-label="origin type selection" required>
                                                                         {% for origin in origins %}
-                                                                        <option value="{{ bean.origin_type }}" size="2">
+                                                                        {% if loop.first %}
+                                                                        <option value="{{ origin.origin_type }}" selected>
+                                                                            {{ bean.origin_type }}</option>
+                                                                        {% endif %}
+                                                                        <option value="{{ origin.origin_type }}">
                                                                             {{ origin.origin_type }}</option>
                                                                         {% endfor %}
                                                                     </select>

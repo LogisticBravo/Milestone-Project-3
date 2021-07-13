@@ -54,14 +54,14 @@ button.onclick = function () {
     else {$("#bean-rating").val("5")}
 
     editReview("bean-name")
-    editReview("bean-roast")
+    preview.push($("#bean-roast").prop("value"))
     editReview("bean-rating")
     editReview("bean-origin")
     editReview("brew-type")
     editReview("bean-description")
     preview.push($("#origin-type").prop("value"))
     print("bean_name",0)
-    print("bean_roast",1)
+    $("#bean_roast").prop("value", preview[1])
     print("bean_rating",2)
     print("bean_origin",3)
     print("brew_type",4)
