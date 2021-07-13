@@ -383,6 +383,12 @@ def contact():
     return render_template("contact.html")
 
 
+@app.route("/privacy")
+def privacy():
+    privacy_policy = mongo.db.privacy_policy.find()
+    return render_template("privacy.html", privacy_policy=privacy_policy)
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
