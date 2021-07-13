@@ -19,7 +19,7 @@
                         </div>
                     </div>
                     <div class="col-sm-8 offset-md-2 mt-2">
-                        <form action="#">
+                        <form onsubmit="emailjs.sendForm('service_ldfr7wv', 'contact', this);return false">
                             <p>Got something to add?</p>
                             <p>We’d <em>love</em> to hear!</p>
                             <div class="form-row form-group text-center col-auto">
@@ -38,7 +38,7 @@
                                     id="message" required aria-label="text-box for message"></textarea>
                             </div>
                             <div class="form-row form-group justify-content-center col-auto">
-                                <input type="submit" class="btn btn-orange" aria-label="submit form button">
+                                <input type="submit" class="btn btn-orange" aria-label="submit form button" id="contact-submit">
                             </div>
                         </form>
                     </div>
@@ -69,5 +69,6 @@
     </div>
 </div>
 {% block scripts %}
+<script src="{{ url_for('static', filename='js/contact.js') }}"></script>
 {% endblock %}
 {% endblock %}

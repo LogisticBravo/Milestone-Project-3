@@ -215,7 +215,7 @@ def newsletter_form():
 def logout():
     flash("Successfully logged out")
     session.pop("user")
-    return redirect(url_for("home"))
+    return home()
 
 
 @app.route("/reviews", methods=["GET", "POST"])
@@ -383,7 +383,12 @@ def remove_favourite(bean_id):
 
 @app.route("/contact")
 def contact():
-    return render_template("contact.html")
+    try:
+        if session["user"]:
+            username = mongo.db.users.find_one({"username": session["user"]})
+            return render_template("contact.html", username=username)
+    except Exception:
+        return render_template("contact.html")
 
 
 @app.route("/privacy")
