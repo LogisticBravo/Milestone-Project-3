@@ -200,7 +200,7 @@ def newsletter_form():
                     {"_id": username["_id"]},
                     {"$set": {"newsletter_check": newsletter_check}})
                 flash("Thanks for updating your Subscription!")
-                return redirect(url_for("reviews"))
+                return reviews()
         except Exception:
             newsletter = {
                 "name": request.form.get("user_name"),
@@ -208,7 +208,7 @@ def newsletter_form():
             }
             mongo.db.newsletters.insert_one(newsletter)
             flash("Thanks for subscribing! Why not Create an Account?")
-            return redirect(url_for("signup"))
+            return render_template("signup.html")
 
 
 @app.route("/logout")
@@ -270,7 +270,6 @@ def edit_review(bean_id):
                 mongo.db.beans.update_one({"_id": ObjectId(bean_id)}, {
                     "$set": {"bean_name": request.form.get("bean_name"),
                              "bean_roast": request.form.get("bean_roast"),
-                             "bean_rating": request.form.get("bean_rating"),
                              "bean_description": request.form.get(
                                  "bean_description"),
                              "bean_origin": request.form.get("bean_origin"),
@@ -394,7 +393,15 @@ def contact():
 @app.route("/privacy")
 def privacy():
     privacy_policy = mongo.db.privacy_policy.find()
-    return render_template("privacy.html", privacy_policy=privacy_policy)
+    try:
+        if session["user"]:
+            username = mongo.db.users.find_one({"username": session["user"]})
+            privacy_policy = mongo.db.privacy_policy.find()
+            return render_template("privacy.html",
+                                   privacy_policy=privacy_policy,
+                                   username=username)
+    except Exception:
+        return render_template("privacy.html", privacy_policy=privacy_policy)
 
 
 if __name__ == "__main__":
