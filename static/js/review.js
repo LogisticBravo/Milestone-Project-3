@@ -3,13 +3,12 @@ var newsletterModal = new bootstrap.Modal(document.getElementById('newsletter'),
   })
 
 //triggers newsletter modal. Code partially from: https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_onscroll3
-// Session storage code from https://stackoverflow.com/questions/8123032/how-do-i-make-a-count-variable-persistent-across-sessions
+// local storage code partially from https://stackoverflow.com/questions/8123032/how-do-i-make-a-count-variable-persistent-across-sessions
 window.onscroll = function(){newsletter()}
-var newsletterCount = 0;
 
-function newsletter() {
-    if ((document.body.scrollTop > 1000 || document.documentElement.scrollTop > 1000) && newsletterCount == 0) {
-        newsletterModal.show(); newsletterCount ++;
+function newsletter() { 
+    if ((document.body.scrollTop > 1000 || document.documentElement.scrollTop > 1000) && window.localStorage.getItem("newsletterCount") != 1) {
+        newsletterModal.show(); window.localStorage.setItem("newsletterCount", 1);
       }
 }
 
@@ -83,11 +82,20 @@ $("#validate").find('input:text, textarea').each(function(){
 document.getElementById("disableContinue").onmouseover = function(){validate()};
 
 var imgFallback = document.getElementById("imageLinkCheck")
-
+var checkCount = 0;
 imgFallback.onclick = function () {
+    if(checkCount == 0){
     $("#bean-image").val("https://cdn.pixabay.com/photo/2013/08/11/19/46/coffee-171653_960_720.jpg")
     $("#bean-image").addClass("disabled d-none")
-    $("#bean-image-label").after("<p>We'll add our own ;-)</p>")
+    $("#bean-image-label").after("<p id='fallback-msg'>We'll add our own ;-)</p>")
+    checkCount += 1}
+    else if (checkCount == 1){
+        $("#bean-image").val("");
+        $("#bean-image").toggleClass("disabled d-none");
+        $("#fallback-msg").remove();
+        checkCount -= 1;
+    }
+    
 }
 
 //Dynamically sets the button for editing image url on edit review as each id is dynmaically unique.
@@ -118,6 +126,10 @@ continueButton.onclick = function () {
     if ($("#imageLinkCheck").prop("checked") == true){
     $("#bean_image").addClass("disabled d-none")
     $("#bean_image").after("<p>Default Trusted Barista Image</p>")
+} else if($("#bean-image").val() == ""){
+    $("#bean_image").val("https://cdn.pixabay.com/photo/2013/08/11/19/46/coffee-171653_960_720.jpg");
+    $("#bean_image").addClass("disabled d-none");
+    $("#bean_image").after("<p>Default Trusted Barista Image</p>");
 }
 }
 
