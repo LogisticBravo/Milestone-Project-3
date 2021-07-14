@@ -52,7 +52,7 @@ def signup():
             "password": generate_password_hash(
                 request.form.get("new_password")),
             "tandc": "on",
-            "is_admin": "off",
+            "is_admin": False,
             "newsletter_check": newsletter_check,
             "signup_date": datetime.datetime.utcnow(),
             "last_login": datetime.datetime.utcnow(),
@@ -418,6 +418,21 @@ def admin():
 def delete_account(user_id):
     mongo.db.users.delete_one({"_id": ObjectId(user_id)})
     flash("Account Deleted")
+    return admin()
+
+
+@app.route("/enable_admin/<user_id>")
+def enable_admin(user_id):
+    user = mongo.db.users.find_one({"_id": ObjectId(user_id)})
+    if user["is_admin"] is False:
+        mongo.db.users.update_one(
+                        {"_id": user["_id"]},
+                        {"$set": {"is_admin": True}})
+    else:
+        mongo.db.users.update_one(
+                        {"_id": user["_id"]},
+                        {"$set": {"is_admin": False}})
+    flash("Permission Updated")
     return admin()
 
 

@@ -17,13 +17,17 @@
             <div class="fw-bold">Total Reviews: {{ beans|length }}</div>
             <hr>
             {% for user in users %}
+            {% if user.username|lower != session.user|lower %}
             <div class="fw-bold">User: {{ user.username|title }}</div>
             <p><strong class="pe-2">Email:</strong>{{ user.email }}</p>
             <p><strong class="pe-2">Signed Up:</strong>{{ user.signup_date.strftime("%d %B, %Y") }}</p>
             <p><strong class="pe-2">Newsletter:</strong>  {{ user.newsletter_check }}</p>
             <p><strong class="pe-2">Admin:</strong>  {{ user.is_admin }}</p>
-            <a class="btn btn-danger" href="{{ url_for('delete_account', user_id=user._id) }}" role="button">Delete Account</a>
+            <a class="btn btn-secondary mt-1" href="{{ url_for('delete_account', user_id=user._id) }}" role="button">Delete Account</a>
+            <span><a class="btn btn-success mt-1 {{ 'disabled' if user.is_admin == True else '' }}" href="{{ url_for('enable_admin', user_id=user._id) }}" role="button">Enable Admin</a></span>
+            <span><a class="btn btn-danger mt-1 {{ 'disabled' if user.is_admin == False else '' }}" href="{{ url_for('enable_admin', user_id=user._id) }}" role="button">Disable Admin</a></span>
             <hr>
+            {% endif %}
             {% endfor %}
           </div>
         </li>
