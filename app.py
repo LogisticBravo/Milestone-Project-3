@@ -223,6 +223,7 @@ def reviews():
     origins = list(mongo.db.origin.find().sort("origin_type", 1))
     roasts = list(mongo.db.roast.find())
     beans = list(mongo.db.beans.find())
+    username = mongo.db.users.find_one({"username": session})
     try:
         if session["user"]:
             username = mongo.db.users.find_one({"username": session["user"]})
@@ -232,7 +233,7 @@ def reviews():
                 beans=beans, origins=origins,
                 favourites=favourites, roasts=roasts)
     except Exception:
-        return render_template("reviews.html", beans=beans)
+        return render_template("reviews.html", beans=beans, username=username)
 
 
 @app.route("/add_review", methods=["GET", "POST"])
