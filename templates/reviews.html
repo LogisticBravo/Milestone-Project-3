@@ -211,6 +211,9 @@
                 </div>
             </div>
         </div>
+        {% if loop.index %3 == 0 %}
+        <button type="button" class="btn btn-outline-secondary" id="scrollUp-{{ bean._id }}">Back to top<i class="fas fa-chevron-circle-up ps-2"></i></button>
+        {% endif %}
     </div>
 </div>
 {% endfor %}

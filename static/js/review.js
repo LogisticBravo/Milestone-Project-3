@@ -12,6 +12,9 @@ function newsletter() {
       }
 }
 
+//Scroll to top button
+$("button[id*='scrollUp-']").on("click", function(){
+    $(document).scrollTop(0)})
 
 var preview = [];
 //Sets up an array called Preview that input fields are pushed to.
