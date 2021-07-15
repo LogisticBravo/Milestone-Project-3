@@ -408,10 +408,14 @@ def privacy():
 def admin():
     if session["user"]:
         username = mongo.db.users.find_one({"username": session["user"]})
-        users = list(mongo.db.users.find())
-        beans = list(mongo.db.beans.find())
-        return render_template("admin.html", username=username,
-                               users=users, beans=beans)
+        if username["is_admin"] is True:
+            users = list(mongo.db.users.find())
+            beans = list(mongo.db.beans.find())
+            return render_template("admin.html", username=username,
+                                   users=users, beans=beans)
+        else:
+            flash("Unauthorized")
+            return home()
 
 
 @app.route("/delete_account/<user_id>")
@@ -426,12 +430,12 @@ def enable_admin(user_id):
     user = mongo.db.users.find_one({"_id": ObjectId(user_id)})
     if user["is_admin"] is False:
         mongo.db.users.update_one(
-                        {"_id": user["_id"]},
-                        {"$set": {"is_admin": True}})
+            {"_id": user["_id"]},
+            {"$set": {"is_admin": True}})
     else:
         mongo.db.users.update_one(
-                        {"_id": user["_id"]},
-                        {"$set": {"is_admin": False}})
+            {"_id": user["_id"]},
+            {"$set": {"is_admin": False}})
     flash("Permission Updated")
     return admin()
 
