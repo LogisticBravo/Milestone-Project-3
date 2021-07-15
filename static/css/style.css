@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Fredericka+the+Great&family=Stardos+Stencil&display=swap');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css');
-
+/* Font's, sizes and spacing */
 body{
   overflow-x: hidden;
   font-family: 'Fredericka the Great', cursive;
@@ -22,6 +22,25 @@ footer > div > div > .text-light, .toast-body {
   text-decoration: none;
 }
 
+li > a {
+  color: #fff!important;
+  font-family: 'Fredericka the Great', cursive;
+  letter-spacing: 0.25em;
+}
+
+footer > div > div > h6 {
+  font-family: 'Fredericka the Great', cursive;
+  letter-spacing: 0.25em;
+}
+
+.card-header > h4, .card-header > h5 {
+  color: #fff;
+  font-family: 'Fredericka the Great', cursive;
+  letter-spacing: 0.25em;
+  font-size: x-large;
+}
+
+/* a.nvabr-brand and .cutour code adpated from https://www.w3schools.com/howto/howto_css_cutout_text.asp */
 a.navbar-brand {
   background-color: white;
   color: black;
@@ -51,21 +70,11 @@ a.navbar-brand {
   mix-blend-mode: screen;
 }
 
-li > a {
-  color: #fff!important;
-  font-family: 'Fredericka the Great', cursive;
-  letter-spacing: 0.25em;
-}
-
-footer > div > div > h6 {
-  font-family: 'Fredericka the Great', cursive;
-  letter-spacing: 0.25em;
-}
-
 .navbar-toggler-icon {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e")!important;
 }
 
+/*Decorations, transforms and hovers*/
 p > a {
   text-decoration: #f99459 underline!important;
 }
@@ -102,6 +111,21 @@ a.nav-link.active {
   color: #3C3A43!important;
 }
 
+.card-text > a, .text-dark {
+  color: #3C3A43;
+  text-transform: capitalize;
+  text-decoration: none; 
+}
+
+.card-text > a:hover, .fa-star, .rating, a.text-light:hover, .text-dark:hover {
+  color: #F99459!important;
+}
+
+.section-heading {
+  text-transform: uppercase;
+}
+
+/*Positions, sizes and display control*/
 .navbar {
     background-image:linear-gradient(180deg, #3C3A43 0%, rgba(255, 255, 255, 0) 100%), url('../assets/img/nav_img.jpeg');
     background-repeat: no-repeat;
@@ -113,10 +137,6 @@ a.nav-link.active {
 
 .login-form {
     width: max-content;
-}
-
-.section-heading {
-  text-transform: uppercase;
 }
 
 .section-heading .section-heading-upper {
@@ -138,9 +158,35 @@ a.nav-link.active {
 .callout-button > a {
     background-color: #3C3A43;
     height: 100%;
-    width: 33%;
+    width: 50%;
 }
 
+.block {
+  display: block;
+}
+
+.comment-section {
+  max-height: 30vh;
+  overflow-y: scroll;
+}
+
+.mh{
+  max-height: 28vh;
+  overflow: scroll;
+}
+
+.container-fluid, div.row > .col-sm-12, .modal-content {
+  background-color: rgba(60, 58, 67, 0.8);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 100 100'%3E%3Crect x='0' y='0' width='15' height='15' fill-opacity='0.6' fill='%23ffffff'/%3E%3C/svg%3E"); 
+  /* background image styled using SVGBackgrounds.com */
+}
+
+.container-fluid .card {
+  box-shadow: 8px 0px 6px rgba(0, 0, 0, 60%), inset 0px 0px 0px rgba(0, 0, 0, 50%);
+  border-color: #F99459;
+}
+
+/* Media Queries and Animations */
 @media (min-width: 992px) {
 .hero-img {
     width: 75%;
@@ -183,17 +229,6 @@ a.nav-link.active {
   }
 }
 
-.container-fluid, div.row > .col-sm-12, .modal-content {
-  background-color: rgba(60, 58, 67, 0.8);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 100 100'%3E%3Crect x='0' y='0' width='15' height='15' fill-opacity='0.6' fill='%23ffffff'/%3E%3C/svg%3E"); 
-  /* background image styled using SVGBackgrounds.com */
-}
-
-.container-fluid .card {
-  box-shadow: 8px 0px 6px rgba(0, 0, 0, 60%), inset 0px 0px 0px rgba(0, 0, 0, 50%);
-  border-color: #F99459;
-}
-
 .scroll-div, .scroll-div-2 {
   animation: hscroll 30s infinite linear;
   display: flex;
@@ -212,6 +247,7 @@ a.nav-link.active {
   }
 }
 
+/* Borders and box shadows */
 .btn-orange {
   background-color: #F99459;
   color: #3C3A43;
@@ -226,7 +262,7 @@ a.nav-link.active {
   /* background image styled using SVGBackgrounds.com */
 }
 
-.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active, .tab-pane > .card, .nav-tabs {
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active, .tab-pane > .card, .nav-tabs, .btn-outline-secondary {
   border:none;
 }
 
@@ -255,37 +291,7 @@ button.nav-link.active:focus, button.nav-link:focus, button.nav-link:focus-visib
   border-top: none!important;
 }
 
-.card-header > h4, .card-header > h5 {
-  color: #fff;
-  font-family: 'Fredericka the Great', cursive;
-  letter-spacing: 0.25em;
-  font-size: x-large;
-}
-
-.block {
-  display: block;
-}
-
-.comment-section {
-  max-height: 30vh;
-  overflow-y: scroll;
-}
-
-.card-text > a, .text-dark {
-  color: #3C3A43;
-  text-transform: capitalize;
-  text-decoration: none; 
-}
-
-.card-text > a:hover, .fa-star, .rating, a.text-light:hover, .text-dark:hover {
-  color: #F99459!important;
-}
-
-.mh{
-  max-height: 28vh;
-  overflow: scroll;
-}
-
+/* Font Awesome icons */
 .fas.fa-star {
   text-shadow: 0px 0px 13px #fff;
 }
@@ -302,6 +308,7 @@ button.nav-link.active:focus, button.nav-link:focus, button.nav-link:focus-visib
   color: #5cb85c;
 }
 
+/* Google Map attribution https://google-map-generator.com/ */
 .mapouter {
   position: relative;
   text-align: right;
