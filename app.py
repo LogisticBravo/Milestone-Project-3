@@ -406,16 +406,19 @@ def privacy():
 
 @app.route("/admin")
 def admin():
-    if session["user"]:
-        username = mongo.db.users.find_one({"username": session["user"]})
-        if username["is_admin"] is True:
-            users = list(mongo.db.users.find())
-            beans = list(mongo.db.beans.find())
-            return render_template("admin.html", username=username,
-                                   users=users, beans=beans)
-        else:
-            flash("Unauthorized")
-            return home()
+    try:
+        if session["user"]:
+            username = mongo.db.users.find_one({"username": session["user"]})
+            if username["is_admin"] is True:
+                users = list(mongo.db.users.find())
+                beans = list(mongo.db.beans.find())
+                return render_template("admin.html", username=username,
+                                       users=users, beans=beans)
+            else:
+                flash("Unauthorized")
+                return home()
+    except Exception:
+        return home()
 
 
 @app.route("/delete_account/<user_id>")
@@ -438,6 +441,16 @@ def enable_admin(user_id):
             {"$set": {"is_admin": False}})
     flash("Permission Updated")
     return admin()
+
+
+@app.errorhandler(404)
+def page_not_found(e):
+    try:
+        if session["user"]:
+            username = mongo.db.users.find_one({"username": session["user"]})
+        return render_template('404.html', username=username), 404
+    except Exception:
+        return render_template('404.html'), 404
 
 
 if __name__ == "__main__":
