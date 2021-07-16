@@ -16,3 +16,9 @@ $(document).ready(function () {
         myModal.show();
     }
 });
+
+/*recalls the local storage value of 'usermail' and populates the input form for email on the sign-up page if it exists.
+It exists if the URL contains 'newsletter_form' */
+if(window.location.href.indexOf("newsletter_form") !== -1){
+    $("#email").val(window.localStorage.getItem("usermail"))
+}

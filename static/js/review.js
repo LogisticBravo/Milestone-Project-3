@@ -2,13 +2,20 @@ var newsletterModal = new bootstrap.Modal(document.getElementById('newsletter'),
     keyboard: false
   })
 
-//triggers newsletter modal. Code partially from: https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_onscroll3
-// local storage code partially from https://stackoverflow.com/questions/8123032/how-do-i-make-a-count-variable-persistent-across-sessions
+/* triggers newsletter modal. Code partially from: https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_onscroll3
+local storage code partially from https://stackoverflow.com/questions/8123032/how-do-i-make-a-count-variable-persistent-across-sessions
+takes the users email address and stores it to local storage to be poulated on the signup page if it's triggered. i.e if they are not signed in. */
 window.onscroll = function(){newsletter()}
 
 function newsletter() { 
     if ((document.body.scrollTop > 1000 || document.documentElement.scrollTop > 1000) && window.localStorage.getItem("newsletterCount") != 1) {
-        newsletterModal.show(); window.localStorage.setItem("newsletterCount", 1);
+        newsletterModal.show();
+        window.localStorage.setItem("newsletterCount", 1);
+        var submitnewsletterButton = document.getElementById("submitnewsletter");
+        submitnewsletterButton.onclick = function () {
+            var useremail = document.getElementById("emailInput").value;
+            window.localStorage.setItem("usermail", useremail); 
+        }
       }
 }
 
@@ -135,8 +142,6 @@ continueButton.onclick = function () {
     $("#bean_image").after("<p>Default Trusted Barista Image</p>");
 }
 }
-
-
 
 /*Fixes bug where favourite button was still displaying on favourited reviews to user. 
 Identifies an element wthat contains 'remove-favourite' in id and selects the next element, in this case the favourite button.
