@@ -19,6 +19,7 @@ app.secret_key = os.environ.get("SECRET_KEY")
 mongo = PyMongo(app)
 
 
+# Basic C.R.U.D functionality adapted from CI Task Manager walkthrough Project.
 @app.route("/")
 @app.route("/home")
 def home():
@@ -33,6 +34,8 @@ def home():
         return render_template("index.html", reviews=reviews)
 
 
+# creates a new user in the DB. Assings default value of false for is_admin.
+# Set's up favourite array for later use when favouriting reviews.
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
     if request.method == "POST":
@@ -66,6 +69,8 @@ def signup():
     return render_template("signup.html")
 
 
+# Basic Authentication and session.
+# Adapted from CI course Task Manager walkthrough module.
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
@@ -88,6 +93,8 @@ def login():
     return reviews()
 
 
+# Lists users reviews that they have created and
+# reviews that they have favourited.
 @app.route("/profile/<username>", methods=["GET", "POST"])
 def profile(username):
     try:
@@ -106,6 +113,9 @@ def profile(username):
         return redirect(url_for("home"))
 
 
+# Allows the user to update their username.
+# Check's if it exists or if it's their current username.
+# Check's password authentication of change before submission to the DB.
 @app.route("/update", methods=["GET", "POST"])
 def update():
     if request.method == "POST":
@@ -154,6 +164,8 @@ def update():
             return profile(username)
 
 
+# Allows user to update their password to a new one.
+# Check's if the password is their current password.
 @app.route("/update_pw", methods=["GET", "POST"])
 def update_pw():
     username = mongo.db.users.find_one(
@@ -173,6 +185,7 @@ def update_pw():
             return profile(username)
 
 
+# Updates user's subscription preferences to the newsletter from their profile.
 @app.route("/newsletter_sub", methods=["GET", "POST"])
 def newsletter_sub():
     username = mongo.db.users.find_one(
@@ -187,6 +200,11 @@ def newsletter_sub():
         return profile(username)
 
 
+# Updates users subscription preferences to the newsletter if they
+# subscribe via the newsletter pop-up modal via the reviews.html page.
+# Add's the users name and email address to a database if they're not logged in
+# or are not a user.
+# Allows collection of name's and emails for future targeting.
 @app.route("/newsletter_form", methods=["GET", "POST"])
 def newsletter_form():
     if request.method == "POST":
@@ -211,6 +229,7 @@ def newsletter_form():
             return render_template("signup.html")
 
 
+# logout the user and ends the session.
 @app.route("/logout")
 def logout():
     try:
@@ -222,6 +241,9 @@ def logout():
         return home()
 
 
+# lists the reviews on the review.html page.
+# Also set's reviews that are already
+# favourited by the user on the respective reviews.
 @app.route("/reviews", methods=["GET", "POST"])
 def reviews():
     origins = list(mongo.db.origin.find().sort("origin_type", 1))
@@ -240,6 +262,7 @@ def reviews():
         return render_template("reviews.html", beans=beans, username=username)
 
 
+# Inserts the review to the database.
 @app.route("/add_review", methods=["GET", "POST"])
 def add_review():
     if request.method == "POST":
@@ -264,6 +287,8 @@ def add_review():
         return reviews()
 
 
+# Allows the user to edit reviews which they have written.
+# Admin can also edit reviews.
 @app.route("/edit_review/<bean_id>", methods=["GET", "POST"])
 def edit_review(bean_id):
     beans = mongo.db.beans.find()
@@ -292,6 +317,7 @@ def edit_review(bean_id):
         return reviews()
 
 
+# Deletes the review from the database. Admin can also delete reviews.
 @app.route("/delete_review/<bean_id>")
 def delete_review(bean_id):
     mongo.db.beans.delete_one({"_id": ObjectId(bean_id)})
@@ -299,6 +325,9 @@ def delete_review(bean_id):
     return reviews()
 
 
+# Add's a comment to a comment array within each review document.
+# Give's the comment a unique id and ties the comment to the user
+# that left it via username and their unique ObjectId.
 @app.route("/add_comment/<bean_id>", methods=["GET", "POST"])
 def add_comment(bean_id):
     if session["user"]:
@@ -317,6 +346,8 @@ def add_comment(bean_id):
         return reviews()
 
 
+# Removes a comment from the database if the user wrote it.
+# Admin can also delete comments.
 @app.route("/delete_comment/<bean_id>/<comment_id>")
 def delete_comment(bean_id, comment_id):
     if session["user"]:
@@ -328,6 +359,7 @@ def delete_comment(bean_id, comment_id):
     return reviews()
 
 
+# Searches the database and lsits the results.
 @app.route("/search", methods=["GET", "POST"])
 def search():
     query = request.form.get("query")
@@ -341,6 +373,11 @@ def search():
         return render_template("reviews.html", beans=beans)
 
 
+# Allows for a user to favourite a review. Updates both the review (beans)
+# document aswell as the users document with who has favourited it and
+# what reviews a user has favourited.
+# Updating both allows for future reporting on the number of reviews
+# favourited by a user and the number of favourites a review has.
 @app.route("/favourite/<bean_id>")
 def favourite(bean_id):
     try:
@@ -369,6 +406,7 @@ def favourite(bean_id):
         return render_template("reviews.html")
 
 
+# Removes a favourited review from both the user and review (beans) document.
 @app.route("/remove_favourite/<bean_id>")
 def remove_favourite(bean_id):
     if session["user"]:
@@ -385,6 +423,7 @@ def remove_favourite(bean_id):
     return reviews()
 
 
+# App route for the contact page.
 @app.route("/contact")
 def contact():
     try:
@@ -395,6 +434,8 @@ def contact():
         return render_template("contact.html")
 
 
+# App route for the privacy policy. The policy is stored in the DB and
+# jinja templating is used to create the privacy policy page.
 @app.route("/privacy")
 def privacy():
     privacy_policy = mongo.db.privacy_policy.find()
@@ -409,6 +450,9 @@ def privacy():
         return render_template("privacy.html", privacy_policy=privacy_policy)
 
 
+# App route for the admin page. Only visible to admins.
+# Lists basic stats of the site and user preferences such as
+# newseltter subscription status and if they are an admin or not.
 @app.route("/admin")
 def admin():
     try:
@@ -426,6 +470,7 @@ def admin():
         return home()
 
 
+# Allows for an admin to delete an account from the database.
 @app.route("/delete_account/<user_id>")
 def delete_account(user_id):
     mongo.db.users.delete_one({"_id": ObjectId(user_id)})
@@ -433,6 +478,7 @@ def delete_account(user_id):
     return admin()
 
 
+# Allows the site owner or admins to enable other users with admin permissions.
 @app.route("/enable_admin/<user_id>")
 def enable_admin(user_id):
     user = mongo.db.users.find_one({"_id": ObjectId(user_id)})
@@ -448,6 +494,9 @@ def enable_admin(user_id):
     return admin()
 
 
+# Error handling for 404. note that 404 status set explicitly.
+# adapted from flask documentation:
+# https://flask.palletsprojects.com/en/1.1.x/patterns/errorpages/
 @app.errorhandler(404)
 def page_not_found(e):
     try:
