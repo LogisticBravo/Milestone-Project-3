@@ -1,286 +1,271 @@
 <div class="modal fade" id="writeReviewToggle" aria-hidden="true" aria-labelledby="writeReviewToggleLabel"
-                tabindex="-1">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="writeReviewToggleLabel">Leave a Review</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="writeReviewToggleLabel">Leave a Review</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="validate">
+                <div class="row mb-2">
+                    <div class="col">
+                        <!--title of coffee input-->
+                        <label for="bean-name">Review Title</label>
+                        <input type="text" id="bean-name" name="bean-name" class="form-control"
+                            placeholder="Coffee Name" data-bs-toggle="tooltip" data-bs-placement="top"
+                            title="Name of the coffee bean you are reviewing" required>
+                    </div>
+                </div>
+                <div class="row g-3 mb-2">
+                    <div class="col">
+                        <!--roast type input-->
+                        <label for="bean-roast">Roast Type</label>
+                        <select class="form-select form-select-md" id="bean-roast" name="bean-roast"
+                            aria-label=".form-select-sm example" data-bs-toggle="tooltip" data-bs-placement="left"
+                            title="Light/Medium/Dark">
+                            <option selected>Choose Roast Type</option>
+                            {% for roast in roasts %}
+                            <option value="{{ roast.bean_roast }}">{{ roast.bean_roast }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col">
+                        <!--rating input-->
+                        <label for="bean-rating">Rating</label>
+                        <input type="text" id="bean-rating" name="bean-rating" class="form-control disabled d-none"
+                            placeholder="Coffee Rating" aria-label="Rate the coffee" data-bs-toggle="tooltip"
+                            data-bs-placement="right" title="Out of 5">
+                        <p>
+                            <i class="fa-coffee fas" id="one-rating"><input id="rating-1" class="disabled d-none"
+                                    type="checkbox" /></i>
+                            <label for="rating-1" class="disabled d-none">1</label>
+                            <i class="fa-coffee fas" id="two-rating"><input id="rating-2" class="disabled d-none"
+                                    type="checkbox" /></i>
+                            <label for="rating-2" class="disabled d-none">2</label>
+                            <i class="fa-coffee fas" id="three-rating"><input id="rating-3" class="disabled d-none"
+                                    type="checkbox" /></i>
+                            <label for="rating-3" class="disabled d-none">3</label>
+                            <i class="fa-coffee fas" id="four-rating"><input id="rating-4" class="disabled d-none"
+                                    type="checkbox" /></i>
+                            <label for="rating-4" class="disabled d-none">4</label>
+                            <i class="fa-coffee fas" id="five-rating"><input id="rating-5" class="disabled d-none"
+                                    type="checkbox" /></i>
+                            <label for="rating-5" class="disabled d-none">5</label>
+                            <small class="text-light fw-lighter block">You <strong>can't</strong> change
+                                this later!</small>
+                        </p>
+                    </div>
+                </div>
+                <div class="row g-3 mb-2">
+                    <div class="col">
+                        <!--coffee origin input-->
+                        <label for="bean-origin">Coffee Origin</label>
+                        <input type="text" id="bean-origin" name="bean-origin" class="form-control"
+                            placeholder="Coffee Origin" data-bs-toggle="tooltip" data-bs-placement="top"
+                            title="The magical land this coffee hails from">
+                    </div>
+                    <div class="col">
+                        <!--brew selection input-->
+                        <label for="brew-type">Brew Type</label>
+                        <input type="text" id="brew-type" name="brew-type" class="form-control" placeholder="Brew Type"
+                            aria-label="How this coffee is brewed" data-bs-toggle="tooltip" data-bs-placement="top"
+                            title="Filter? Espresso Machine? Cafetiere?">
+                    </div>
+                </div>
+                <div class="row g-3 mb-2">
+                    <div class="col">
+                        <select class="form-select form-select-md" id="origin-type"
+                            aria-label=".form-select-sm example">
+                            <option selected>Choose Origin Type</option>
+                            {% for origin in origins %}
+                            <option value="{{ origin.origin_type }}">{{ origin.origin_type }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <!--Description of coffee input-->
+                        <label for="bean-description">Tell us about this Coffee</label>
+                        <textarea class="form-control" id="bean-description" name="bean-description"
+                            placeholder="Your Review of your chosen coffee" data-bs-toggle="tooltip"
+                            data-bs-placement="bottom"
+                            title="If you needed this tooltip, then you need more coffee!"></textarea>
+                    </div>
+                </div>
+            </div>
+            <!--Next modal pop up button-->
+            <div class="modal-footer" id="disableContinue">
+                <button class="btn btn-primary" id="continueModal1" data-bs-target="#writeReviewToggle2"
+                    data-bs-toggle="modal" data-bs-dismiss="modal" aria-label="Continue to next form">Continue</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="writeReviewToggle2" aria-hidden="true" aria-labelledby="writeReviewToggleLabel2"
+    tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="writeReviewToggleLabel2">Leave a Review</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group mb-3">
+                    <div class="row">
+                        <!--Image link input-->
+                        <div class="col-md-12">
+                            <label for="bean-image" class="mb-1" id="bean-image-label">Link an image of
+                                the coffee</label>
+                            <input type="text" id="bean-image" name="bean-image" class="form-control mb-3"
+                                placeholder="Add a link to an image of this coffee" aria-label="product image URl"
+                                aria-describedby="bean-image">
+                            <input class="form-check-input" type="checkbox" id="imageLinkCheck">
+                            <label class="form-check-label" for="imageLinkCheck">Tick here if you don't
+                                have a link</label>
                         </div>
-                        <div class="modal-body" id="validate">
-                            <div class="row mb-2">
-                                <div class="col">
-                                    <!--title of coffee input-->
-                                    <label for="bean-name">Review Title</label>
-                                    <input type="text" id="bean-name" name="bean-name" class="form-control"
-                                        placeholder="Coffee Name" data-bs-toggle="tooltip" data-bs-placement="top"
-                                        title="Name of the coffee bean you are reviewing" required>
-
-                                </div>
+                        <!--Affialiate link input-->
+                        <div class="input-group">
+                            <div class="col-md-12">
+                                <label for="affialiate-link" class="disabled d-none">Purchase link for
+                                    this Coffee</label>
+                                <input type="text" id="affialiate-link" name="affialiate-link"
+                                    class="form-control mb-1 disabled d-none"
+                                    placeholder="Add a link to where this can be purchased" aria-label="purchase URl"
+                                    aria-describedby="affialiate-link">
                             </div>
-                            <div class="row g-3 mb-2">
-                                <div class="col">
-                                    <!--roast type input-->
-                                    <label for="bean-roast">Roast Type</label>
-                                    <select class="form-select form-select-md" id="bean-roast" name="bean-roast"
-                                        aria-label=".form-select-sm example" data-bs-toggle="tooltip"
-                                        data-bs-placement="left" title="Light/Medium/Dark">
-                                        <option selected>Choose Roast Type</option>
-                                        {% for roast in roasts %}
-                                        <option value="{{ roast.bean_roast }}">{{ roast.bean_roast }}</option>
-                                        {% endfor %}
-                                    </select>
-                                </div>
-                                <div class="col">
-                                    <!--rating input-->
-                                    <label for="bean-rating">Rating</label>
-                                    <input type="text" id="bean-rating" name="bean-rating"
-                                        class="form-control disabled d-none" placeholder="Coffee Rating"
-                                        aria-label="Rate the coffee" data-bs-toggle="tooltip" data-bs-placement="right"
-                                        title="Out of 5">
-                                    <p>
-                                        <i class="fa-coffee fas" id="one-rating"><input id="rating-1"
-                                                class="disabled d-none" type="checkbox" /></i>
-                                        <label for="rating-1" class="disabled d-none">1</label>
-                                        <i class="fa-coffee fas" id="two-rating"><input id="rating-2"
-                                                class="disabled d-none" type="checkbox" /></i>
-                                        <label for="rating-2" class="disabled d-none">2</label>
-                                        <i class="fa-coffee fas" id="three-rating"><input id="rating-3"
-                                                class="disabled d-none" type="checkbox" /></i>
-                                        <label for="rating-3" class="disabled d-none">3</label>
-                                        <i class="fa-coffee fas" id="four-rating"><input id="rating-4"
-                                                class="disabled d-none" type="checkbox" /></i>
-                                        <label for="rating-4" class="disabled d-none">4</label>
-                                        <i class="fa-coffee fas" id="five-rating"><input id="rating-5"
-                                                class="disabled d-none" type="checkbox" /></i>
-                                        <label for="rating-5" class="disabled d-none">5</label>
-                                        <small class="text-light fw-lighter block">You <strong>can't</strong> change
-                                            this later!</small>
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="row g-3 mb-2">
-                                <div class="col">
-                                    <!--coffee origin input-->
-                                    <label for="bean-origin">Coffee Origin</label>
-                                    <input type="text" id="bean-origin" name="bean-origin" class="form-control"
-                                        placeholder="Coffee Origin" data-bs-toggle="tooltip" data-bs-placement="top"
-                                        title="The magical land this coffee hails from">
-                                </div>
-                                <div class="col">
-                                    <!--brew selection input-->
-                                    <label for="brew-type">Brew Type</label>
-                                    <input type="text" id="brew-type" name="brew-type" class="form-control"
-                                        placeholder="Brew Type" aria-label="How this coffee is brewed"
-                                        data-bs-toggle="tooltip" data-bs-placement="top"
-                                        title="Filter? Espresso Machine? Cafetiere?">
-                                </div>
-                            </div>
-                            <div class="row g-3 mb-2">
-                                <div class="col">
-                                    <select class="form-select form-select-md" id="origin-type"
-                                        aria-label=".form-select-sm example">
-                                        <option selected>Choose Origin Type</option>
-                                        {% for origin in origins %}
-                                        <option value="{{ origin.origin_type }}">{{ origin.origin_type }}</option>
-                                        {% endfor %}
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <!--Description of coffee input-->
-                                    <label for="bean-description">Tell us about this Coffee</label>
-                                    <textarea class="form-control" id="bean-description" name="bean-description"
-                                        placeholder="Your Review of your chosen coffee" data-bs-toggle="tooltip"
-                                        data-bs-placement="bottom"
-                                        title="If you needed this tooltip, then you need more coffee!"></textarea>
-                                </div>
-                            </div>
-                        </div>
-                        <!--Next modal pop up button-->
-                        <div class="modal-footer" id="disableContinue">
-                            <button class="btn btn-primary" id="continueModal1" data-bs-target="#writeReviewToggle2"
-                                data-bs-toggle="modal" data-bs-dismiss="modal"
-                                aria-label="Continue to next form">Continue</button>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="modal fade" id="writeReviewToggle2" aria-hidden="true" aria-labelledby="writeReviewToggleLabel2"
-                tabindex="-1">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="writeReviewToggleLabel2">Leave a Review</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="input-group mb-3">
-                                <div class="row">
-                                    <!--Image link input-->
-                                    <div class="col-md-12">
-                                        <label for="bean-image" class="mb-1" id="bean-image-label">Link an image of
-                                            the coffee</label>
-                                        <input type="text" id="bean-image" name="bean-image" class="form-control mb-3"
-                                            placeholder="Add a link to an image of this coffee"
-                                            aria-label="product image URl" aria-describedby="bean-image">
-                                        <input class="form-check-input" type="checkbox" id="imageLinkCheck">
-                                        <label class="form-check-label" for="imageLinkCheck">Tick here if you don't
-                                            have a link</label>
-                                    </div>
-                                    <!--Affialiate link input-->
-                                    <div class="input-group">
-                                        <div class="col-md-12">
-                                            <label for="affialiate-link" class="disabled d-none">Purchase link for
-                                                this Coffee</label>
-                                            <input type="text" id="affialiate-link" name="affialiate-link"
-                                                class="form-control mb-1 disabled d-none"
-                                                placeholder="Add a link to where this can be purchased"
-                                                aria-label="purchase URl" aria-describedby="affialiate-link">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--Next modal pop up button-->
-                        <div class="modal-footer">
-                            <button class="btn btn-primary" id="continueModal2" data-bs-target="#writeReviewToggle3"
-                                data-bs-toggle="modal" data-bs-dismiss="modal">Continue</button>
-                        </div>
-                    </div>
-                </div>
+            <!--Next modal pop up button-->
+            <div class="modal-footer">
+                <button class="btn btn-primary" id="continueModal2" data-bs-target="#writeReviewToggle3"
+                    data-bs-toggle="modal" data-bs-dismiss="modal">Continue</button>
             </div>
-            <div class="modal fade" id="writeReviewToggle3" aria-hidden="true" aria-labelledby="writeReviewToggleLabel3"
-                tabindex="-1">
-                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="writeReviewToggleLabel3">Confirm Your Review</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <!-- 
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="writeReviewToggle3" aria-hidden="true" aria-labelledby="writeReviewToggleLabel3"
+    tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="writeReviewToggleLabel3">Confirm Your Review</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <!-- 
                                 Modal that shows a preview of the review before submission to allow for changes.
                                 The contents of the input elements are ultimately what's submitted to the DB. 
                             -->
+            <div class="modal-body">
+                <h6 class="card-subtitle mb-2 text-light">Confirm you're happy with your review or make
+                    changes!</h6>
+                <div class="row">
+                    <div class="col-md-12">
                         <div class="modal-body">
-                            <h6 class="card-subtitle mb-2 text-light">Confirm you're happy with your review or make
-                                changes!</h6>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="modal-body">
-                                        <div class="card">
-                                            <div class="row g-0">
-                                                <div class="col-md-12 card-body">
-                                                    <!--title of coffee input-->
-                                                    <label for="bean_name">Review Title</label>
-                                                    <input type="text" id="bean_name" name="bean_name"
-                                                        class="form-control" placeholder="Coffee Name"
-                                                        data-bs-toggle="tooltip" data-bs-placement="top"
-                                                        title="Name of the coffee bean you are reviewing" value="">
-                                                    <!--image link of coffee input-->
-                                                    <label for="bean_image" class="mb-1">Link an image of the
-                                                        coffee</label>
-                                                    <input type="text" id="bean_image" name="bean_image"
-                                                        class="form-control mb-3"
-                                                        placeholder="Add a link to an image of this coffee"
-                                                        aria-label="product image URl" aria-describedby="bean_image"
-                                                        value="">
-                                                    <!--affialiate link input-->
-                                                    <label for="affialiate_link"
-                                                        class="disabled d-none"><small>Available to
-                                                            buy: </small></label>
-                                                    <input type="text" id="affialiate_link" name="affialiate_link"
-                                                        class="form-control mb-1 disabled d-none"
-                                                        placeholder="Add a link to where this can be purchased"
-                                                        aria-label="purchase URl" aria-describedby="affialiate_link"
-                                                        value="">
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="row card-body">
-                                                        <div class="col-md-6 mb-1">
-                                                            <!--rating input-->
-                                                            <label for="bean_rating"><strong>Rating:
-                                                                </strong></label>
-                                                            <input type="text" id="bean_rating" name="bean_rating"
-                                                                class="form-control-plaintext disabled d-none"
-                                                                placeholder="Coffee Rating" aria-label="Rate the coffee"
-                                                                data-bs-toggle="tooltip" data-bs-placement="top"
-                                                                title="Out of 5" value="">
-                                                            <p id="icon-rating"></p>
-                                                        </div>
-                                                        <div class="col-md-6 mb-1">
-                                                            <!--roast type input-->
-                                                            <label for="bean-roast">Roast Type</label>
-                                                            <select class="form-select form-select-md" id="bean_roast"
-                                                                name="bean_roast" aria-label="bean roast selection"
-                                                                data-bs-toggle="tooltip" data-bs-placement="left"
-                                                                title="Light/Medium/Dark" required>
-                                                                {% for roast in roasts %}
-                                                                <option value="{{ roast.bean_roast }}">
-                                                                    {{ roast.bean_roast }}</option>
-                                                                {% endfor %}
-                                                            </select>
-                                                        </div>
-                                                        <div class="col-md-6 mb-1">
-                                                            <!--brew type input-->
-                                                            <label for="brew_type"><strong>Brew Type:
-                                                                </strong></label>
-                                                            <input type="text" id="brew_type" name="brew_type"
-                                                                class="form-control-plaintext" placeholder="Brew Type"
-                                                                aria-label="How this coffee is brewed"
-                                                                data-bs-toggle="tooltip" data-bs-placement="left"
-                                                                title="Filter? Espresso Machine? Cafetiere?" value="">
-                                                        </div>
-                                                        <!--coffee type input-->
-                                                        <div class="col-md-6 mb-1"><strong>Type:
-                                                            </strong>
+                            <div class="card">
+                                <div class="row g-0">
+                                    <div class="col-md-12 card-body">
+                                        <!--title of coffee input-->
+                                        <label for="bean_name">Review Title</label>
+                                        <input type="text" id="bean_name" name="bean_name" class="form-control"
+                                            placeholder="Coffee Name" data-bs-toggle="tooltip" data-bs-placement="top"
+                                            title="Name of the coffee bean you are reviewing" value="">
+                                        <!--image link of coffee input-->
+                                        <label for="bean_image" class="mb-1">Link an image of the
+                                            coffee</label>
+                                        <input type="text" id="bean_image" name="bean_image" class="form-control mb-3"
+                                            placeholder="Add a link to an image of this coffee"
+                                            aria-label="product image URl" aria-describedby="bean_image" value="">
+                                        <!--affialiate link input-->
+                                        <label for="affialiate_link" class="disabled d-none"><small>Available to
+                                                buy: </small></label>
+                                        <input type="text" id="affialiate_link" name="affialiate_link"
+                                            class="form-control mb-1 disabled d-none"
+                                            placeholder="Add a link to where this can be purchased"
+                                            aria-label="purchase URl" aria-describedby="affialiate_link" value="">
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="row card-body">
+                                            <div class="col-md-6 mb-1">
+                                                <!--rating input-->
+                                                <label for="bean_rating"><strong>Rating:
+                                                    </strong></label>
+                                                <input type="text" id="bean_rating" name="bean_rating"
+                                                    class="form-control-plaintext disabled d-none"
+                                                    placeholder="Coffee Rating" aria-label="Rate the coffee"
+                                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Out of 5"
+                                                    value="">
+                                                <p id="icon-rating"></p>
+                                            </div>
+                                            <div class="col-md-6 mb-1">
+                                                <!--roast type input-->
+                                                <label for="bean-roast">Roast Type</label>
+                                                <select class="form-select form-select-md" id="bean_roast"
+                                                    name="bean_roast" aria-label="bean roast selection"
+                                                    data-bs-toggle="tooltip" data-bs-placement="left"
+                                                    title="Light/Medium/Dark" required>
+                                                    {% for roast in roasts %}
+                                                    <option value="{{ roast.bean_roast }}">
+                                                        {{ roast.bean_roast }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6 mb-1">
+                                                <!--brew type input-->
+                                                <label for="brew_type"><strong>Brew Type:
+                                                    </strong></label>
+                                                <input type="text" id="brew_type" name="brew_type"
+                                                    class="form-control-plaintext" placeholder="Brew Type"
+                                                    aria-label="How this coffee is brewed" data-bs-toggle="tooltip"
+                                                    data-bs-placement="left"
+                                                    title="Filter? Espresso Machine? Cafetiere?" value="">
+                                            </div>
+                                            <!--coffee type input-->
+                                            <div class="col-md-6 mb-1"><strong>Type:
+                                                </strong>
 
-                                                            <select class="form-select form-select-md" id="origin_type"
-                                                                name="origin_type" aria-label="origin type selection"
-                                                                required>
-                                                                {% for origin in origins %}
-                                                                <option value="{{ origin.origin_type }}">
-                                                                    {{ origin.origin_type }}</option>
-                                                                {% endfor %}
-                                                            </select>
-
-                                                        </div>
-                                                        <!--coffee origin input-->
-                                                        <div class="col-md-6"><label for="bean_origin"><strong>Coffee
-                                                                    Origin:
-                                                                </strong></label>
-                                                            <input type="text" id="bean_origin" name="bean_origin"
-                                                                class="form-control-plaintext"
-                                                                placeholder="Coffee Origin" data-bs-toggle="tooltip"
-                                                                data-bs-placement="left"
-                                                                title="The magical land this coffee hails from"
-                                                                value="">
-                                                        </div>
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <!--coffee description input-->
-                                                        <label for="bean_description">
-                                                            <strong class="h6">Description</strong>
-                                                        </label>
-                                                        <textarea class="form-control-plaintext" id="bean_description"
-                                                            name="bean_description"
-                                                            placeholder="Your Review of your chosen coffee"
-                                                            data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                            title="Resize this box from the bottom right"
-                                                            required></textarea>
-                                                    </div>
-                                                </div>
+                                                <select class="form-select form-select-md" id="origin_type"
+                                                    name="origin_type" aria-label="origin type selection" required>
+                                                    {% for origin in origins %}
+                                                    <option value="{{ origin.origin_type }}">
+                                                        {{ origin.origin_type }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                            <!--coffee origin input-->
+                                            <div class="col-md-6"><label for="bean_origin"><strong>Coffee
+                                                        Origin:
+                                                    </strong></label>
+                                                <input type="text" id="bean_origin" name="bean_origin"
+                                                    class="form-control-plaintext" placeholder="Coffee Origin"
+                                                    data-bs-toggle="tooltip" data-bs-placement="left"
+                                                    title="The magical land this coffee hails from" value="">
                                             </div>
                                         </div>
+                                        <div class="card-body">
+                                            <!--coffee description input-->
+                                            <label for="bean_description">
+                                                <strong class="h6">Description</strong>
+                                            </label>
+                                            <textarea class="form-control-plaintext" id="bean_description"
+                                                name="bean_description" placeholder="Your Review of your chosen coffee"
+                                                data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                                title="Resize this box from the bottom right" required></textarea>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-12 modal-footer">
-                                    <!--Submit review. Add's form to the DB.-->
-                                    <button type="submit" class="btn btn-primary">Submit Review</button>
                                 </div>
                             </div>
                         </div>
                     </div>
-
+                    <div class="col-12 modal-footer">
+                        <!--Submit review. Add's form to the DB.-->
+                        <button type="submit" class="btn btn-primary">Submit Review</button>
+                    </div>
                 </div>
             </div>
+        </div>
+
+    </div>
+</div>

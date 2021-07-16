@@ -1,76 +1,75 @@
 {% extends "base.html" %}
 {% set active_page = "signup" %}
 {% block content %}
-
-    <div class="row g-0">
-        <div class="col-sm-10 offset-sm-1 mt-5">
-            <div class="card text-center card-border">
-                <div class="card-header">
-                    <h5>Sign-Up Below!</h5>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-sm-10 offset-sm-1">
-                            <!--Sign-Up Form-->
-                            <form method="POST" action="{{ url_for('signup') }}">
-                                <div class="mb-3">
-                                    <!--Email address input-->
-                                    <label for="email" class="form-label">Email address</label>
-                                    <input type="email" class="form-control" id="email" name="email"
-                                        aria-describedby="emailHelp" required>
-                                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
-                                    </div>
-                                </div>
-                                <div class="mb3">
-                                    <!--Username input-->
-                                    <label for="new_username" class="form-label">Create a Username</label>
-                                    <input type="text" class="form-control" minlength="5" maxlength="15" id="new_username"
-                                        pattern="^[a-zA-Z0-9]{5,15}$" name="new_username" title="Minimum 5 characters" aria-describedby="usernameHelp"
-                                        required>
-                                </div>
-                                <div class="mb-3">
-                                    <!--Password input-->
-                                    <label for="new_password" class="form-label">Create a Password</label>
-                                    <input type="password" class="form-control" minlength="8" maxlength="15"
-                                        id="new_password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$"
-                                        title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters"
-                                        name="new_password" aria-describedby="passwordHelp" required>
-                                </div>
-                                <div class="mb-3">
-                                    <!--Password input-->
-                                    <label for="confirm_password" class="form-label">Confirm Password</label>
-                                    <input type="password" class="form-control" minlength="8" maxlength="15"
-                                        id="confirm_password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$"
-                                        title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters"
-                                        name="confirm_password" aria-describedby="passwordHelp" required>
-                                        <p class="text-danger">Passwords Dont Match</p>
-                                </div>
-                                <div class="mb-3 form-check text-start">
-                                    <!--Terms & Conditions check box-->
-                                    <input type="checkbox" class="form-check-input" id="tandc" name="tandc" required>
-                                    <label class="form-check-label" for="tandc">Check here to agree to our <a
-                                            href="">Privacy Policy.</a> </label>
-                                </div>
-                                <!--Submit form button-->
-                                <button type="submit" class="btn btn-primary" id="submit">Submit</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-footer text-muted">
-                    <div class="mb-3 form-check text-start">
-                        <!--Subscribe checkbox-->
-                        <input type="checkbox" class="form-check-input" id="newsletter_check" name="newsletter_check"
-                            checked>
-                        <label class="form-check-label" for="newsletter_check">Subscribe me to The Trusted
-                            Barista Newsletter!</label>
-                    </div>
-                </div>
-                </form>
-                            <!--End Sign-up Form-->
+<div class="row g-0">
+    <div class="col-sm-10 offset-sm-1 mt-5">
+        <div class="card text-center card-border">
+            <div class="card-header">
+                <h5>Sign-Up Below!</h5>
             </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-10 offset-sm-1">
+                        <!--Sign-Up Form-->
+                        <form method="POST" action="{{ url_for('signup') }}">
+                            <div class="mb-3">
+                                <!--Email address input-->
+                                <label for="email" class="form-label">Email address</label>
+                                <input type="email" class="form-control" id="email" name="email"
+                                    aria-describedby="emailHelp" required>
+                                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
+                                </div>
+                            </div>
+                            <div class="mb3">
+                                <!--Username input-->
+                                <label for="new_username" class="form-label">Create a Username</label>
+                                <input type="text" class="form-control" minlength="5" maxlength="15" id="new_username"
+                                    pattern="^[a-zA-Z0-9]{5,15}$" name="new_username" title="Minimum 5 characters"
+                                    aria-describedby="usernameHelp" required>
+                            </div>
+                            <div class="mb-3">
+                                <!--Password input-->
+                                <label for="new_password" class="form-label">Create a Password</label>
+                                <input type="password" class="form-control" minlength="8" maxlength="15"
+                                    id="new_password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$"
+                                    title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters"
+                                    name="new_password" aria-describedby="passwordHelp" required>
+                            </div>
+                            <div class="mb-3">
+                                <!--Password input-->
+                                <label for="confirm_password" class="form-label">Confirm Password</label>
+                                <input type="password" class="form-control" minlength="8" maxlength="15"
+                                    id="confirm_password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$"
+                                    title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters"
+                                    name="confirm_password" aria-describedby="passwordHelp" required>
+                                <p class="text-danger">Passwords Dont Match</p>
+                            </div>
+                            <div class="mb-3 form-check text-start">
+                                <!--Terms & Conditions check box-->
+                                <input type="checkbox" class="form-check-input" id="tandc" name="tandc" required>
+                                <label class="form-check-label" for="tandc">Check here to agree to our <a
+                                        href="">Privacy Policy.</a> </label>
+                            </div>
+                            <!--Submit form button-->
+                            <button type="submit" class="btn btn-primary" id="submit">Submit</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer text-muted">
+                <div class="mb-3 form-check text-start">
+                    <!--Subscribe checkbox-->
+                    <input type="checkbox" class="form-check-input" id="newsletter_check" name="newsletter_check"
+                        checked>
+                    <label class="form-check-label" for="newsletter_check">Subscribe me to The Trusted
+                        Barista Newsletter!</label>
+                </div>
+            </div>
+            </form>
+            <!--End Sign-up Form-->
         </div>
     </div>
-    {% block scripts %}
-    <script src="{{ url_for('static', filename='js/signup.js') }}"></script>
-    {% endblock %}
-    {% endblock %}
+</div>
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/signup.js') }}"></script>
+{% endblock %}
+{% endblock %}

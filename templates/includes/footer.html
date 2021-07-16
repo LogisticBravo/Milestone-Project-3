@@ -4,7 +4,8 @@
         <a class="d-block px-1 fs-6 ps-0 text-light" href="{{ url_for('home') }}#about">About</a>
         <a class="d-block px-1 fs-6 ps-0 text-light" href="{{ url_for('reviews') }}">Reviews</a>
         {% if session.user %}
-        <a class="d-block px-1 fs-6 ps-0 text-light" href="{{ url_for('profile', username=session['user']) }}">My Account</a>
+        <a class="d-block px-1 fs-6 ps-0 text-light" href="{{ url_for('profile', username=session['user']) }}">My
+            Account</a>
         {% else %}
         <a class="d-block px-1 fs-6 ps-0 text-light" href="{{ url_for('signup') }}">Sign-Up</a>
         {% endif %}
@@ -12,21 +13,22 @@
     <div class="col-sm-8 col-md-2 text-start">
         <h6 class="h5 mt-2">More</h6>
         <a class="d-block px-1 fs-6 ps-0 text-light" href="{{ url_for('privacy') }}">Privacy policy</a>
-        <a class="d-block px-1 fs-6 ps-0 text-light {{ 'active' if active_page == 'contact' else '' }}" href="{{ url_for('contact') }}">Contact Us</a>
+        <a class="d-block px-1 fs-6 ps-0 text-light {{ 'active' if active_page == 'contact' else '' }}"
+            href="{{ url_for('contact') }}">Contact Us</a>
     </div>
     <div class="col-sm-8 col-md-6 text-center">
         <h6 class="h5 cutout my-2">The Trusted Barista</h6>
-        <a class="text-light px-2" href="https://www.facebook.com/"
-                            target="_blank" aria-label="facebook page icon" rel="noreferrer"><i class="fab fa-facebook-square fs-2"></i></a>
-                        <a class="text-light px-2" href="https://www.instagram.com/"
-                            target="_blank" aria-label="instagram page icon" rel="noreferrer"><i class="fab fa-instagram-square fs-2"></i></a>
-                        <a class="text-light px-2" href="https://www.pinterest.com/"
-                            target="_blank" aria-label="pinterest page icon" rel="noreferrer"><i class="fab fa-pinterest-square fs-2"></i></a>
-                        <a class="text-light px-2" href="https://www.twitter.com/"
-                            target="_blank" aria-label="twitter page icon" rel="noreferrer"><i class="fab fa-twitter-square fs-2"></i></a>
-                        <a class="text-light px-2" href="https://www.youtube.com/"
-                            target="_blank" aria-label="youtube page icon" rel="noreferrer"><i class="fab fa-youtube-square fs-2"></i></a>
-    </div>   
+        <a class="text-light px-2" href="https://www.facebook.com/" target="_blank" aria-label="facebook page icon"
+            rel="noreferrer"><i class="fab fa-facebook-square fs-2"></i></a>
+        <a class="text-light px-2" href="https://www.instagram.com/" target="_blank" aria-label="instagram page icon"
+            rel="noreferrer"><i class="fab fa-instagram-square fs-2"></i></a>
+        <a class="text-light px-2" href="https://www.pinterest.com/" target="_blank" aria-label="pinterest page icon"
+            rel="noreferrer"><i class="fab fa-pinterest-square fs-2"></i></a>
+        <a class="text-light px-2" href="https://www.twitter.com/" target="_blank" aria-label="twitter page icon"
+            rel="noreferrer"><i class="fab fa-twitter-square fs-2"></i></a>
+        <a class="text-light px-2" href="https://www.youtube.com/" target="_blank" aria-label="youtube page icon"
+            rel="noreferrer"><i class="fab fa-youtube-square fs-2"></i></a>
+    </div>
 </div>
 <div class="row py-2">
     <div class="col-12 text-center">

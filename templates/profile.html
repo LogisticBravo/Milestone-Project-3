@@ -10,9 +10,7 @@
             <a class="btn btn-orange" href="{{ url_for('logout') }}" role="button">Logout</a>
         </div>
     </div>
-
     <div class="row mt-5">
-
         <div class="col-md-5 col-sm-12 offset-md-1 mb-3 py-2">
             <div class="card">
                 <img src="{{ url_for('static', filename='assets/img/defaultuser.png') }}"
@@ -22,9 +20,12 @@
                         <h5 class="card-title">{{ username.username }}'s Profile</h5>
                     </div>
                     <div class="col-md-6 col-sm-6">
-                        <p class="mb-0"><small class="text-muted">Sign-up: {{ username.signup_date.strftime("%d %B, %Y") }}</small></p>
-                        <p><small class="text-muted">Last Login: {{ username.last_login.strftime("%d %B, %Y") }}</small></p>
+                        <p class="mb-0"><small class="text-muted">Sign-up:
+                                {{ username.signup_date.strftime("%d %B, %Y") }}</small></p>
+                        <p><small class="text-muted">Last Login: {{ username.last_login.strftime("%d %B, %Y") }}</small>
+                        </p>
                     </div>
+                    <!--Change username form-->
                     <form method="POST" action="{{ url_for('update') }}">
                         <div class="input-group mb-3">
                             <input type="text" id="current_username" name="current_username" class="form-control"
@@ -33,6 +34,7 @@
                             <button class="btn btn-outline-secondary" type="button" id="edit-current-username"
                                 data-bs-toggle="modal" data-bs-target="#confirmPassword">Update</button>
                         </div>
+                        <!--Confirm Password Modal for changing username-->
                         <div class="modal fade" id="confirmPassword" tabindex="-1"
                             aria-labelledby="confirmPasswordLabel" aria-hidden="true">
                             <div class="modal-dialog">
@@ -59,25 +61,30 @@
                             </div>
                         </div>
                     </form>
+                    <!--End change username form-->
+                    <!--Update password form-->
                     <form method="POST" action="{{ url_for('update_pw') }}">
                         <div class="input-group mb-3">
                             <input type="password" id="new_password" name="new_password" class="form-control"
-                                placeholder="New Password" aria-label="New Password"
-                                aria-describedby="set-new-password" minlength="8" maxlength="15" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$" title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+                                placeholder="New Password" aria-label="New Password" aria-describedby="set-new-password"
+                                minlength="8" maxlength="15" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$"
+                                title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters"
+                                required>
                             <button class="btn btn-outline-secondary" type="submit" id="submit">Update</button>
                         </div>
                     </form>
+                    <!--End update password form-->
+                    <!--Update newsletter subscription form-->
                     <form method="POST" action="{{ url_for('newsletter_sub') }}">
                         <div class="form-check form-switch row mb-2">
                             <div class="col-md-8 offset-md-2">
                                 <label class="form-check-label pe-3" for="subscription">Newsletter Subscription:
                                 </label>
                                 <input class="form-check-input float-end" type="checkbox" id="subscription"
-                                    name="subscription" data-bs-toggle="modal" data-bs-target="#unsubscribe"
-                                    {{ username.newsletter_check }}>
+                                    name="subscription" data-bs-toggle="modal" data-bs-target="#unsubscribe" {{
+                                    username.newsletter_check }}>
                             </div>
                         </div>
-
                         <div class="modal fade" id="unsubscribe" data-bs-backdrop="static" tabindex="-1"
                             aria-labelledby="confirmUnsubscribeLabel" aria-hidden="true">
                             <div class="modal-dialog">
@@ -103,7 +110,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="modal fade" id="subscribe" data-bs-backdrop="static" tabindex="-1"
                             aria-labelledby="confirmSubscribeLabel" aria-hidden="true">
                             <div class="modal-dialog">
@@ -126,6 +132,7 @@
                                 </div>
                             </div>
                         </div>
+                        <!--End newsletter subscription form-->
                     </form>
                 </div>
             </div>
@@ -138,8 +145,8 @@
                 {% if my_reviews|length > 0 %}
                 {% for reviews in my_reviews %}
                 <div class="card-body">
-                    <p class="card-text"><a
-                            href="{{ url_for('reviews') }}#nav-home-{{ reviews._id }}">{{ reviews.bean_name }}</a></p>
+                    <p class="card-text"><a href="{{ url_for('reviews') }}#nav-home-{{ reviews._id }}">{{
+                            reviews.bean_name }}</a></p>
                 </div>
                 {% endfor %}
                 {% else %}
@@ -149,7 +156,6 @@
                 </div>
                 {% endif %}
             </div>
-
             <div class="col-md-12">
                 <div class="card mb-3 mh">
                     <div class="card-header sticky-top">
@@ -158,8 +164,8 @@
                     {% if username.favourites|length > 1 %}
                     {% for favourite in favourites %}
                     <div class="card-body">
-                        <p class="card-text"><a
-                                href="{{ url_for('reviews') }}#nav-home-{{ favourite._id }}">{{ favourite.bean_name }}</a>
+                        <p class="card-text"><a href="{{ url_for('reviews') }}#nav-home-{{ favourite._id }}">{{
+                                favourite.bean_name }}</a>
                         </p>
                     </div>
                     {% endfor %}
@@ -171,7 +177,6 @@
                     {% endif %}
                 </div>
             </div>
-
         </div>
     </div>
 </div>
