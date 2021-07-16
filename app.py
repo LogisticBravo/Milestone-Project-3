@@ -213,9 +213,13 @@ def newsletter_form():
 
 @app.route("/logout")
 def logout():
-    flash("Successfully logged out")
-    session.pop("user")
-    return home()
+    try:
+        if session["user"]:
+            flash("Successfully logged out")
+            session.pop("user")
+        return home()
+    except Exception:
+        return home()
 
 
 @app.route("/reviews", methods=["GET", "POST"])
