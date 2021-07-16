@@ -8,7 +8,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <form id="newsletter-form" method="POST" action="{{ url_for('newsletter_form') }}" onsubmit="emailjs.sendForm('service_ldfr7wv', 'newsletter', this)">
+            <form id="newsletter-form" method="POST" action="{{ url_for('newsletter_form') }}" onsubmit="emailjs.sendForm('service_ldfr7wv', 'newsletter', this); return true">
             <p class="fs-6 text-light">Signing up to our Newsletter keeps you up to date with the latest grinds and promotions with our partners!</p>
             <div class="mb-3">
                 <label for="nameInput" class="form-label">Name:</label>

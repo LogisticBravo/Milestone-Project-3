@@ -11,10 +11,13 @@ function newsletter() {
     if ((document.body.scrollTop > 1000 || document.documentElement.scrollTop > 1000) && window.localStorage.getItem("newsletterCount") != 1) {
         newsletterModal.show();
         window.localStorage.setItem("newsletterCount", 1);
-        var submitnewsletterButton = document.getElementById("submitnewsletter");
-        submitnewsletterButton.onclick = function () {
-            var useremail = document.getElementById("emailInput").value;
-            window.localStorage.setItem("usermail", useremail); 
+        var newsletterButton = document.getElementById("newsletterSub");
+        newsletterButton.onclick = function () {
+            var newmail = document.getElementById("emailInput").value;
+            window.localStorage.setItem("usermail", newmail);
+            window.localStorage.getItem("usermail"); 
+        var submitButton = document.getElementById("submitnewsletter")
+        submitButton.onsubmit = function(){emailjs.sendForm('service_ldfr7wv', 'newsletter', this);return true} 
         }
       }
 }
