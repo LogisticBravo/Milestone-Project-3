@@ -1,3 +1,4 @@
+// Hides the form and adds a message to the user notifying them that they have submitted the form susccesfully
 var button = document.getElementById("contact-submit")
 
 button.onclick = function(){

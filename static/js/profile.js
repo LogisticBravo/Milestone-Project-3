@@ -1,3 +1,5 @@
+/* Sets the newletter toggle on the profile page on or off dependant on if the user confirms their subscription or backs out.
+e.g. The user is already subscribed and toggle it off, changes their mind before submission and backs out. The toggle resets to on and vice versa. */
 $(document).ready(function () {
     function checked(state) {
             $("#subscription").prop("checked", state)

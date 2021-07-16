@@ -101,6 +101,7 @@ document.getElementById("disableContinue").onmouseover = function () {
     validate()
 };
 
+// Sets up a fallback image for the coffe being reviewed if the user does not have an image. Equally, reverts if the user changes their mind. 
 var imgFallback = document.getElementById("imageLinkCheck")
 var checkCount = 0;
 imgFallback.onclick = function () {
@@ -216,7 +217,7 @@ function checkOther(nextCheckId, nextIconId, thisCheckId, thisIconid) {
     }
 }
 
-//click functions for each text box
+//click functions for each check box
 $("#one-rating").click(function () {
     $(this).toggleClass('rating')
     rating("rating-1")
