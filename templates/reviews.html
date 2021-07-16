@@ -174,7 +174,7 @@
                                                     <footer class="blockquote-footer text-end">Added by: <cite
                                                             title="Source Title" class="pe-3">{{ comment.username
                                                             }}</cite>
-                                                        {% if session.user|lower == comment.username|lower %}
+                                                        {% if session.user|lower == comment.username|lower or username.is_admin == True %}
                                                         <a class="btn btn-danger"
                                                             href="{{ url_for('delete_comment', comment_id=comment.comment_id, bean_id=bean._id) }}"
                                                             role="button"><i class="fa-trash-alt fa-lg fas"></i></a>
