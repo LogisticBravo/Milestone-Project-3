@@ -90,20 +90,20 @@ def login():
 
 @app.route("/profile/<username>", methods=["GET", "POST"])
 def profile(username):
-    username = mongo.db.users.find_one(
-        {"username": session["user"]})["username"]
-    if session["user"]:
-        username = mongo.db.users.find_one({"username": session["user"]})
-        my_reviews = list(mongo.db.beans.find(
-            {"created_by_id": username["_id"]}))
-        favourites = list(mongo.db.beans.find(
-            {"favoured_by": {"$elemMatch": {"username": username["username"]}}}
-        ))
-        return render_template(
-            "profile.html", username=username,
-            my_reviews=my_reviews, favourites=favourites)
-
-    return redirect(url_for("home"))
+    try:
+        if session["user"]:
+            username = mongo.db.users.find_one({"username": session["user"]})
+            my_reviews = list(mongo.db.beans.find(
+                {"created_by_id": username["_id"]}))
+            favourites = list(mongo.db.beans.find(
+                {"favoured_by": {"$elemMatch": {
+                    "username": username["username"]}}}
+            ))
+            return render_template(
+                "profile.html", username=username,
+                my_reviews=my_reviews, favourites=favourites)
+    except Exception:
+        return redirect(url_for("home"))
 
 
 @app.route("/update", methods=["GET", "POST"])
