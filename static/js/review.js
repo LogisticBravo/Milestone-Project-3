@@ -34,7 +34,7 @@ $("button[id*='scrollUp-']").on("click", function () {
     $(document).scrollTop(0)
 })
 
-if ((window.sessionStorage.getItem("session") !== null) == true){
+if (window.sessionStorage.getItem("session") !== null){
 var preview = [];
 //Sets up an array called Preview that input fields are pushed to.
 var clearButton = document.getElementById("write-review")
