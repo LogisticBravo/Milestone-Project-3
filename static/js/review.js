@@ -1,6 +1,5 @@
-var newsletterModal = new bootstrap.Modal(document.getElementById('newsletter'), {
-    keyboard: false
-})
+window.onload = function(){
+
 
 /* triggers newsletter modal. Code partially from: https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_onscroll3
 local storage code partially from https://stackoverflow.com/questions/8123032/how-do-i-make-a-count-variable-persistent-across-sessions
@@ -11,6 +10,9 @@ window.onscroll = function () {
 
 function newsletter() {
     if ((document.body.scrollTop > 1000 || document.documentElement.scrollTop > 1000) && window.localStorage.getItem("newsletterCount") != 1) {
+        var newsletterModal = new bootstrap.Modal(document.getElementById('newsletter'), {
+            keyboard: false
+        })
         newsletterModal.show();
         window.localStorage.setItem("newsletterCount", 1);
         var newsletterButton = document.getElementById("newsletterSub");
@@ -32,6 +34,7 @@ $("button[id*='scrollUp-']").on("click", function () {
     $(document).scrollTop(0)
 })
 
+if ((window.sessionStorage.getItem("session") !== null) == true){
 var preview = [];
 //Sets up an array called Preview that input fields are pushed to.
 var clearButton = document.getElementById("write-review")
@@ -261,4 +264,4 @@ $("#five-rating").click(function () {
     prevCheck("rating-4", "rating-3", "three-rating")
     prevCheck("rating-3", "rating-2", "two-rating")
     prevCheck("rating-2", "rating-1", "one-rating")
-})
+})}}

@@ -1,3 +1,4 @@
+window.onload = function(){
 /* Sets the newletter toggle on the profile page on or off dependant on if the user confirms their subscription or backs out.
 e.g. The user is already subscribed and toggle it off, changes their mind before submission and backs out. The toggle resets to on and vice versa. */
 $(document).ready(function () {
@@ -17,4 +18,9 @@ $(document).ready(function () {
         subCloseButton.onclick = function(){checked(false);}
         subCancelButton.onclick = function(){checked(false);}
     }
-})
+    let d = new Date();
+    let uid = Math.floor(Math.random() * d.getTime());
+    if (window.sessionStorage.length != 1){
+    window.sessionStorage.setItem("session","user" + uid)
+    }
+})}
