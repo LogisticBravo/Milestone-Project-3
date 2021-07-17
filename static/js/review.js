@@ -1,3 +1,6 @@
+window.onload = function(){
+
+
 /* triggers newsletter modal. Code partially from: https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_onscroll3
 local storage code partially from https://stackoverflow.com/questions/8123032/how-do-i-make-a-count-variable-persistent-across-sessions
 takes the users email address and stores it to local storage to be poulated on the signup page if it's triggered. i.e if they are not signed in. */
@@ -31,6 +34,7 @@ $("button[id*='scrollUp-']").on("click", function () {
     $(document).scrollTop(0)
 })
 
+if ((window.sessionStorage.getItem("session") !== null) == true){
 var preview = [];
 //Sets up an array called Preview that input fields are pushed to.
 var clearButton = document.getElementById("write-review")
@@ -260,4 +264,4 @@ $("#five-rating").click(function () {
     prevCheck("rating-4", "rating-3", "three-rating")
     prevCheck("rating-3", "rating-2", "two-rating")
     prevCheck("rating-2", "rating-1", "one-rating")
-})
+})}}
