@@ -29,8 +29,8 @@
                     <form method="POST" action="{{ url_for('update') }}">
                         <div class="input-group mb-3">
                             <input type="text" id="current_username" name="current_username" class="form-control"
-                                placeholder="Existing username" aria-label="current username"
-                                aria-describedby="edit-current-username" value="{{ username.username }}">
+                                placeholder="Update username from {{ username.username }}" aria-label="current username"
+                                aria-describedby="edit-current-username" value="">
                             <button class="btn btn-outline-secondary" type="button" id="edit-current-username"
                                 data-bs-toggle="modal" data-bs-target="#confirmPassword">Update</button>
                         </div>
