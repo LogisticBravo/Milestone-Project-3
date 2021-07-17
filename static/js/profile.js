@@ -18,9 +18,4 @@ $(document).ready(function () {
         subCloseButton.onclick = function(){checked(false);}
         subCancelButton.onclick = function(){checked(false);}
     }
-    let d = new Date();
-    let uid = Math.floor(Math.random() * d.getTime());
-    if (window.sessionStorage.length != 1){
-    window.sessionStorage.setItem("session","user" + uid)
-    }
 })}

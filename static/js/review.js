@@ -31,7 +31,6 @@ $("button[id*='scrollUp-']").on("click", function () {
     $(document).scrollTop(0)
 })
 
-if (window.sessionStorage.getItem("session") !== null){
 var preview = [];
 //Sets up an array called Preview that input fields are pushed to.
 var clearButton = document.getElementById("write-review")
@@ -261,4 +260,4 @@ $("#five-rating").click(function () {
     prevCheck("rating-4", "rating-3", "three-rating")
     prevCheck("rating-3", "rating-2", "two-rating")
     prevCheck("rating-2", "rating-1", "one-rating")
-})}
+})
