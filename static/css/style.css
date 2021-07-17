@@ -243,6 +243,17 @@ div.row>.col-sm-12,
     margin-top: 1rem;
     margin-right: 0.75rem;
   }
+
+  a.navbar-brand{
+    width: 46%;
+    position: relative;
+    transform: translate(-50%, 0%);
+  }
+
+  .navbar {
+    background-size: cover;
+  }
+
 }
 
 @media only screen and (min-width:1737px) {
