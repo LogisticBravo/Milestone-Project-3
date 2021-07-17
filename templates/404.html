@@ -1,20 +1,21 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="row mt-5 align-items-center">
-    <div class="col-md-4">
+    <div class="col-md-12 text-center">
+        <span class="fs-1">404</span>
+        <p>Looks Like Something Went Wrong!</p>
+    </div>
+    <div class="col-md-6 offset-md-3">
         <div class="card">
             <iframe src="https://gifer.com/embed/2ii7" width=480 height=433.083 frameBorder="0" allowFullScreen
                 class="card-img-top"></iframe>
             <p><a href="https://gifer.com">via GIFER</a></p>
-            <div class="card-body">
+            <div class="card-body text-center">
                 <h5 class="card-title">Whoops!</h5>
                 <p class="card-text">Well this is awkward. . .</p>
                 <a href="{{ url_for('home') }}" class="btn btn-primary">Go Home</a>
             </div>
         </div>
-    </div>
-    <div class="col-md-6 text-center">
-        <span class="fs-1">404</span>
     </div>
 </div>
 {% endblock %}
