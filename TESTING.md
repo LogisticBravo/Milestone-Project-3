@@ -30,7 +30,7 @@
 > As a First Time Visitor, I want to understand the purpose of the site.
 
 **Description**
-Verify that the site's purpose is clear to a user when they land on the landing page of the site. Verify that the site's purpose is clear to a user when they land on the landing page of the site.Verify that the site's purpose is clear to a user when they land on the landing page of the site.
+Verify that the site's purpose is clear to a user when they land on the landing page of the site.
 
 **Steps**
 1. Open your browser of choice.
@@ -48,8 +48,8 @@ A 'callout-text' div is present which outlines the purpose of the site.
 **Pass/Fail:**
 Pass
 
-**Image of Test Result:** 
-
+**Image of Test Result:**  
+![image](mdassets/mdimages/callout.png "Image of the callout")
 #### Test Case 2
 
 > As a First Time Visitor, I want to easily navigate through the site.
@@ -83,8 +83,10 @@ Verify that the site contains an intuitive navigation menu and sitemap.
 **Pass/Fail:**
 Pass
 
-**Image of Test Result:** 
-
+**Image of Test Result:**  
+![image](mdassets/mdimages/navbar.png "Image of the navbar")
+![image](mdassets/mdimages/hamburgernav.png "Image of the hamburger nav")
+![image](mdassets/mdimages/hamburgernavopen.png "Image of the hamburger nav extended")
 #### Test Case 3
 
 > As a First Time Visitor, I want to be redirected to the landing page if I navigate to a wrong or broken link.
@@ -117,8 +119,8 @@ Verify that the site contains a 404 page that is evident to the user they have n
 **Pass/Fail:**
 Pass
 
-**Image of Test Result:** 
-
+**Image of Test Result:**  
+![image](mdassets/mdimages/404.png "Image of the 404 page")
 #### Test Case 4
 
 > As a First Time Visitor, I want to find the site owners social media channels.
@@ -147,8 +149,8 @@ Verify that the site contains 5 established social media icons in the footer. Ve
 **Pass/Fail:**
 Pass
 
-**Image of Test Result:** 
-
+**Image of Test Result:**  
+![image](mdassets/mdimages/socialmediaicons.png "Image of the socialmediaicons")
 ### Returning Visitor Goals
 #### Test Case 5
 
@@ -213,8 +215,11 @@ The following should be visible to a user only when they are logged in:
 **Pass/Fail:**
 Pass
 
-**Image of Test Result:** 
-
+**Image of Test Result:**  
+![image](mdassets/mdimages/reviewsloggedin.png "Image of the reviewspage logged in")
+![image](mdassets/mdimages/reviewsloggedout.png "Image of the reviewspage logged out")  
+![image](mdassets/mdimages/commentsloggedin.png "Image of the comments logged in")
+![image](mdassets/mdimages/commentsloggedout.png "Image of the comments logged out")
 #### Test Case 7
 
 > As a Returning Visitor, I want to engage and be engaged with by the site owners.
@@ -258,8 +263,10 @@ Verify that for the first time scrolling the reviews page, whether logged in or 
 **Pass/Fail:**
 Pass
 
-**Image of Test Result:** 
-
+**Image of Test Result:**  
+![image](mdassets/mdimages/newslettermodal.png "Image of the newsletter modal")
+![image](mdassets/mdimages/prepopsignup.png "Image of the pre populated signup form")
+![image](mdassets/mdimages/newsletterthankstoast.png "Image of the subscription update toast from newsletter")
 #### Test Case 8
 
 > As a Returning Visitor, I want to find where I can purchase coffee of reviews that I like.
@@ -288,8 +295,8 @@ Verify that each review has an **Affiliate link attached to it. Confirm that cli
 **Pass/Fail:**
 Pass
 
-**Image of Test Result:** 
-
+**Image of Test Result:**  
+![image](mdassets/mdimages/affialiatelink.png "Image of affialiate link on a review")
 ### Frequent Visitor Goals
 #### Test Case 9
 
@@ -317,7 +324,7 @@ Verify that the site is responsive across a range of media devices. Confirm that
 Pass
 
 **Image of Test Result:** 
-
+![image](mdassets/mdimages/affialiatelink.png "Image of affialiate link on a review")
 #### Test Case 10
 
 > As a Frequent user, I want to manage my profile and reviews that I have left.
@@ -363,8 +370,10 @@ Verify that on the profile page the user is displayed a list of reviews that the
 **Pass/Fail:**
 Pass
 
-**Image of Test Result:**
-
+**Image of Test Result:**  
+![image](mdassets/mdimages/profilepage.png "Image of profile page")
+![image](mdassets/mdimages/pwauth.png "Image of password authentication on username change")
+![image](mdassets/mdimages/wrongpwtoast.png "Image of incorrect password toast message")
 #### Test Case 11
 
 > As a Frequent user, I want to update my preferences.
@@ -378,7 +387,7 @@ Verify that on the profile page the user is displayed a 'Subscription' toggle sw
 3. Using the login option - log into your account. 
 4. On the profile page, confirm that there is a "Subscription" toggle beaneath the password update field. 
 5. Toggle this switch and confirm a modal pop up asking to confirm your change to subscription status. 
-6. Verify that when this change is submitted the toggle is set correctly and that the user receives a toast confirming the change to their subscription. 
+6. Verify that when this change is submitted the toggle is set correctly. 
 7. Do this again and confirm that the modal pop up differs to the last. 
 8. Verify that when backing out or cancelling the confirmation of changing the subscription status that the toggle reverts to it's original state. 
 
@@ -388,8 +397,8 @@ Verify that on the profile page the user is displayed a 'Subscription' toggle sw
 - The subscription status should be set to their current prefences based on their original sign up. i.e if they selected the checkbox to subscribe to the newsletter then the subscription toggle should be in the 'on' position. 
 - Toggling this should fire a modal pop up to confirm their change to their subscription. 
 - The content of this modal should vary dependant on the current status of their subscription. 
-- Backing out of this modal, i.e. not confirming the change to their subscription should rever the toggle to it's original state.
-- Confirming the modal should update their preferences and the user should receive a toast confirming the change. The toggle should be in the position that reflects their current subscription preference status.
+- Backing out of this modal, i.e. not confirming the change to their subscription should revert the toggle to it's original state.
+- Confirming the modal should update their preferences. The toggle should be in the position that reflects their current subscription preference status.
 
 
 **Actual Result:**
@@ -398,14 +407,16 @@ Verify that on the profile page the user is displayed a 'Subscription' toggle sw
 - Toggling the toggle presents the user with a modal to confirm the change to their preference. 
 - The content of the modal is differnet dependant on their current subscription preference. 
 - Backing out or cancelling the confirmation modal reverts the toggle to it's original state. 
-- Confirming the change to their preference is reflected with a toast to the user to confirm the change and the toggle is switched to reflect their current subscription preference.
+- Confirming the change to their preference is reflected as the toggle is switched to reflect their current subscription preference.
 - Navigating away from the profile page and returning to it displayes their correct subscription preference. 
 
 **Pass/Fail:**
 Pass
 
-**Image of Test Result:**
-
+**Image of Test Result:**  
+![image](mdassets/mdimages/subtoggle.png "Image of subscription toggle")
+![image](mdassets/mdimages/subchange1.png "Image of subscription update modal")
+![image](mdassets/mdimages/subchange2.png "Image of subscription update modal")
 #### Test Case 12
 
 > As a Frequent user, I want to favourite reviews that I like so as to easily find in the future.
@@ -448,8 +459,12 @@ Verify that on the reviews page there is a star icon assocaited with each review
 **Pass/Fail:**
 Pass
 
-**Image of Test Result:**
-
+**Image of Test Result:**  
+![image](mdassets/mdimages/favstar.png "Image of the favourite review star")
+![image](mdassets/mdimages/unfavstar.png "Image of the unfavourite review star")
+![image](mdassets/mdimages/favstar.png "Image of the favourite review star")
+![image](mdassets/mdimages/favlistpopulated.png "Image of the users favourites list populated")
+![image](mdassets/mdimages/favlistempty.png "Image of the users favourites list empty")
 #### Test Case 13
 
 > As a Frequent user, I want to ensure that my data is being used accordingly.
@@ -487,7 +502,7 @@ Verify that there is a link to a "privacy policy" in the footer of the site. Con
 Pass
 
 **Image of Test Result:**
-
+![image](mdassets/mdimages/privacy.png "Image of the sites privacy policy")
 ### Admin User Goals
 #### Test Case 14
 
@@ -539,8 +554,9 @@ Confirm that if an account is "Enabled" as an admin that the "Enabled" button is
 **Pass/Fail:**
 Pass
 
-**Image of Test Result:** 
-
+**Image of Test Result:**  
+![image](mdassets/mdimages/adminpanel.png "Image of the link to the admin panel")
+![image](mdassets/mdimages/adminbuttons.png "Image of the view of users for admins including the relvant buttons")
 #### Test Case 15
 
 > As an Admin, I want to moderate site content of reviews and comments.
@@ -578,7 +594,8 @@ As an aside, this is best tested with two accounts, one of which does not have a
 Pass
 
 **Image of Test Result:** 
-
+![image](mdassets/mdimages/admincomments.png "Image of the admin view of comments")
+![image](mdassets/mdimages/adminreview.png "Image of the admin view of reviews regardless of who wrote them")
 #### Test Case 16
 
 > As an Admin, I want to remove users if necessary.
@@ -622,8 +639,8 @@ As an aside, this is best tested with two accounts, one of which can be deleted 
 **Pass/Fail:**
 Pass
 
-**Image of Test Result:** 
-
+**Image of Test Result:**  
+![image](mdassets/mdimages/deleteusertoast.png "Image of the account deleted toast")
 #### Test Case 17
 
 > As an Admin, I want to see statistics on the number of users and reviews on the site. 
@@ -669,5 +686,5 @@ Verify that admins have access to an "Admin Panel" page. Confirm that on the adm
 **Pass/Fail:**
 Pass
 
-**Image of Test Result:**
----
+**Image of Test Result:**  
+![image](mdassets/mdimages/stats.png "Image of the admin view of site statistics")
