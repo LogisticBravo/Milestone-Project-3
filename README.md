@@ -419,6 +419,7 @@ review.js:
             ... }
 
 
+* The clearButton.onclick does not clear the modal fields of Write-Review. Targeting the validate ID was causing validation issues and time did not permit further investigation. 
 ## Deployment
 
 The website was created using Gitpod IDE. GitHub was used for hosting the repository and the environment is then deployed to Heroku for hosting. The following are the steps needed to set up your IDE, clone the repository and deploy to Heroku. In addition to those listed, MongoDB is used for storing the data and is also required for successful deployment. 
