@@ -234,6 +234,11 @@ def newsletter_form():
 def logout():
     try:
         if session["user"]:
+            username = mongo.db.users.find_one(
+                    {"username": session["user"]})
+            mongo.db.users.update_one(
+                    {"_id": username["_id"]},
+                    {"$set": {"last_login": datetime.datetime.utcnow()}})
             flash("Successfully logged out")
             session.pop("user")
         return home()
@@ -364,13 +369,16 @@ def delete_comment(bean_id, comment_id):
 def search():
     query = request.form.get("query")
     beans = list(mongo.db.beans.find({"$text": {"$search": query}}))
+    username = "user"
     try:
         if session["user"]:
             username = mongo.db.users.find_one({"username": session["user"]})
             return render_template(
                 "reviews.html", username=username, beans=beans)
+        else:
+            return render_template("reviews.html", beans=beans)
     except Exception:
-        return render_template("reviews.html", beans=beans)
+        return render_template("reviews.html", beans=beans, username=username)
 
 
 # Allows for a user to favourite a review. Updates both the review (beans)
@@ -510,4 +518,4 @@ def page_not_found(e):
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
-            debug=True)
+            debug=False)
