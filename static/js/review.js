@@ -42,7 +42,7 @@ window.onload = function () {
         //Resets preview array and clears residual in the input form. .each(function()) inspired by https://www.codegrepper.com/code-examples/javascript/jquery+clear+all+input+fields
         clearButton.onclick = function () {
             preview = [];
-            $("#validate").find('input:text, textarea').each(function () {
+            $("#clear").find('input:text, textarea').each(function () {
                 $(this).val(" ");
                 $(this).removeClass("is-invalid").removeClass("is-valid");
             });
